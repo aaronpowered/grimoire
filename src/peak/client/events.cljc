@@ -1,0 +1,15 @@
+(ns peak.client.events
+  (:require [dat.reactor :as reactor]
+            [datascript.core :as d]))
+
+
+;; This is where you would handle custom message ids, perhaps something like this
+
+
+(reactor/register-handler	:figwheel/reload
+;; Simple example that logs figwheel events
+  (fn [app db event]
+    (reactor/resolve-to app db
+      [[:dat.reactor/local-tx
+        [{:db/id -1 :event/id :figwheel/reload}]]])))
+

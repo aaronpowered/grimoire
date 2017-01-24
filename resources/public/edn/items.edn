@@ -1,0 +1,22 @@
+{
+:gear {
+  :head [
+    {:name "Sovány sisak" :stat {:ktr 3 :sze -1}}
+    ]
+  :body {}
+  :legs {}
+  :boots {}
+  :gloves {}
+  :shoulders {}
+  :weapon {}
+  :special {}
+  }
+
+:quest {
+  :key []
+  :
+  }
+
+:resources {}
+
+}
