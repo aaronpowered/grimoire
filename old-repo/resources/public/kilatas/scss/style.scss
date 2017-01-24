@@ -1,0 +1,98 @@
+*, *:before, *:after {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+html, 
+body,
+.stage {
+  width:100%;
+  height:100%;
+}
+.stage {
+  position:relative;
+  transform:translateZ(0);
+  
+  .blind {
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:4%;
+    z-index:9;
+  }
+}
+
+$disleft: 4%;
+@for $i from 1 through 25 {
+	.stage .blind:nth-child(#{$i}) {
+	  $eachdis: $i - 1;
+    left: $eachdis * $disleft;
+	}
+}
+
+.casper {
+  position:relative;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  z-index:1;
+  background:url(https://dl.dropboxusercontent.com/u/330966/static/casper/casper03.jpg);
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:50% 50%;
+  
+    &:before,
+    &:after {
+      content:'';
+      position:absolute;
+      top:0;
+      right:-2rem;
+      bottom:0;
+      left:-2rem;
+      transform:translateX(0);
+      transition:all 0.5s;
+    }
+  
+    &:before {
+      z-index:3;
+      background:url(https://dl.dropboxusercontent.com/u/330966/static/casper/casper02.png);
+    }
+    
+    &:after {
+      z-index:4;
+      background:url(https://dl.dropboxusercontent.com/u/330966/static/casper/casper01.png);
+    }
+
+    &:before,
+    &:after {
+      background-repeat:no-repeat;
+      background-size:cover;
+      background-position:50% 50%;
+    }
+}
+
+$middleleft: 0.083333rem;
+$frontleft: 0.16666rem;
+@for $i from 1 through 12 {
+	.stage .blind:nth-child(#{$i}):hover ~ .casper:before {
+	  $eachdis: 1 - $i  * $middleleft;
+    transform:translateX($eachdis);
+	}
+  .stage .blind:nth-child(#{$i}):hover ~ .casper:after {
+	  $eachdis: 2 - $i * $frontleft;
+    transform:translateX($eachdis);
+	}
+}
+
+$middleright: -0.04rem;
+$frontright: -0.08rem;
+@for $i from 14 through 25 {
+	.stage .blind:nth-child(#{$i}):hover ~ .casper:before {
+	  $eachdis: $i * $middleright;
+    transform:translateX($eachdis);
+	}
+  .stage .blind:nth-child(#{$i}):hover ~ .casper:after {
+	  $eachdis: $i * $frontright;
+    transform:translateX($eachdis);
+	}
+}

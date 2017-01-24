@@ -1,0 +1,78 @@
+//- The inline SVG graph is generated dynamically in Jade, based on JSON-formatted data. This makes it possible to generate a static illustration (as opposed to using a JS library that modifies the DOM on the client), while preserving the original data in the source.
+
+// originally developed for: https://explosion.ai/blog/spacy-user-survey
+
+// inspired by: https://css-tricks.com/how-to-make-charts-with-svg/
+
+
+//- Graph data as JSON
+
+- var graph = { title: "Do you use spaCy at work?", data: [ { label: "Yes, we use it in production.", value: 0.20, segment: 0.18 }, { label: "Yes, we use it in development.", value: 0.13, segment: 0.12 }, { label: "Yes, we use it for research.", value: 0.31, segment: 0.18 }, { label: "No, but we're planning to.", value: 0.17, segment: 0.14 }, { label: "No, and we're currently not planning to.", value: 0.14, segment: 0.14 } ], segments: { value: "everyone", segment: "non-researchers" } }
+
+
+//- Settings
+
+- bar_height = 30
+- label_height = 40
+- legend_height = 20
+- spacing = 10
+- bars = graph.data.length
+
+- width = 800
+- height = bars * (bar_height + label_height + spacing) + (legend_height + 4 * spacing) * (graph.segments ? 2 : 0)
+
+- fill_value = "#1e1935"
+- fill_segment = "url(#pattern)"
+
+
+//- Markup
+
+figure.c-graph
+    figcaption.c-graph__title=graph.title
+
+    svg(version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="chart" width=width height=height role="img" viewBox="0 0 #{width} #{height}" preserveAspectRatio="xMinYMin meet")
+
+        defs
+            pattern#pattern(patternUnits="userSpaceOnUse" width="10" height="10")
+                image(xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCI+ICA8cmVjdCB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIGZpbGw9IiMxRTE5MzUiLz4gIDxwYXRoIGQ9Ik0tMSwxIGwyLC0yICAgICAgICAgICBNMCwxMCBsMTAsLTEwICAgICAgICAgICBNOSwxMSBsMiwtMiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEuNSIvPjwvc3ZnPg==" x="0" y="0" width="10" height="10")
+
+        each bar, i in graph.data
+            - y = (bar_height + spacing) * i + label_height * (i + 1) + spacing
+
+            text.c-graph__label(x="0" y=(y - spacing))=bar.label
+
+            g.c-graph__value
+                - value = Math.round(bar.value * 100)
+                - dy = bar_height / 1.35
+
+                rect.c-graph__bar(width=(width / 100 * value) height=bar_height y=y fill=fill_value)
+                text.c-graph__number.c-graph__number--value(x=(width * value / 100 + spacing) y=y dy=dy)
+                    if bar.value_label
+                        |  #{bar.value_label}
+
+                    else
+                        |  #{value}%
+
+            if bar.segment && graph.segments
+                - segment = Math.round(bar.segment * 100)
+
+                g.c-graph__segment
+                    rect.c-graph__bar(width=(width / 100 * segment) height=bar_height y=y fill=fill_segment)
+                    text.c-graph__number(x=spacing y=y dy=dy)
+                        if bar.segment_label
+                            |  #{bar.segment_label}
+
+                        else
+                            |  #{segment}%
+
+        if graph.segments
+            g.c-graph__footer(x="0" y=(height - legend_height) height=legend_height dy=spacing)
+
+                - y_value = height - 2 * (legend_height + spacing)
+                - y_segment = height - legend_height - spacing
+
+                rect.c-graph__legend-value(y=y_value width=legend_height height=legend_height fill=fill_value)
+                text(x=(legend_height + spacing) y=y_value dy="1em")=graph.segments.value
+
+                rect.c-graph__legend-segment(y=y_segment width=legend_height height=legend_height fill=fill_segment)
+                text(x=(legend_height + spacing) y=y_segment dy="1em")=graph.segments.segment

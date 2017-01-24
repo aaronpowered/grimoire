@@ -1,0 +1,84 @@
+// set times
+$t1 = 6s
+$t2 = 3s
+
+// basics 
+html, body,.avatar
+  position: absolute
+  width: 100%
+  height: 100%
+
+// pretty blue background
+body
+  background: linear-gradient(115deg, darkturquoise, midnightblue) no-repeat fixed
+
+// svg and paths properties
+.avatar
+  z-index: 800
+  path
+    stroke: rgba(225,175,255,1)
+    stroke-width: .15
+    transform-origin: center center
+    transition: all $t1 ease
+    transform: translate(0)
+
+// animate paths in
+.avatar path:nth-of-type(4n+1)
+  animation: p1 $t2 ease 1
+.avatar path:nth-of-type(4n+2)
+  animation: p2 $t2 ease 1
+.avatar path:nth-of-type(4n+3)
+  animation: p3 $t2 ease 1
+.avatar path:nth-of-type(4n+4)
+  animation: p4 $t2 ease 1
+@keyframes p1
+  0%
+    transform: translate(-300%, -700%) rotate(520deg) translateZ(0)
+  100%
+    transform: translate(0)
+@keyframes p2
+  0%
+    transform: translate(400%, -900%) rotate(850deg) translateZ(0)
+  100%
+    transform: translate(0)
+@keyframes p3
+  0%
+    transform: translate(500%, 900%) rotate(325deg) translateZ(0)
+  100%
+    transform: translate(0)
+@keyframes p4
+  0%
+    transform: translate(-500%, 900%) rotate(748deg) translateZ(0)
+  100%
+    transform: translate(0)
+
+// add invisible hover element
+.hover
+  position: absolute
+  width: 40%
+  height: 40%vw
+  top: 50%
+  left: 30%
+  margin-top: -20%vw
+  border-radius: 50%
+  cursor: pointer
+  z-index: 1000
+  background rgba(0,0,0,0)
+  animation:waitforit 0 ease-in $t2 1 forwards
+
+// wait for animation then add hover element
+@keyframes waitforit
+  0%
+    display: none
+  100%
+    display: block
+
+// animate paths out
+.hover:hover + .avatar path:nth-of-type(4n+1)
+  transform: translate(800%, 400%) rotate(-690deg) translateZ(0)
+.hover:hover + .avatar path:nth-of-type(4n+2) 
+  transform: translate(-700%, 600%) rotate(-720deg) translateZ(0)
+.hover:hover + .avatar path:nth-of-type(4n+3)
+  transform: translate(-900%, -500%) rotate(-820deg) translateZ(0)
+.hover:hover + .avatar path:nth-of-type(4n+4)
+  transform: translate(700%, -800%) rotate(-950deg) translateZ(0)

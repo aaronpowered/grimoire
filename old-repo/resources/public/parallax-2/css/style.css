@@ -1,0 +1,26 @@
+body {
+  background-color: #eceff1;
+}
+#align {
+  margin: 15% auto 0;
+  text-align: center;
+  position: relative;
+}
+
+#one { 
+  -webkit-transform: translate(30px, 30px);
+  -moz-transform: translate(30px, 30px); 
+  transform: translate(30px, 30px);
+}
+
+#two { 
+  -webkit-transform: translate(80px, 55px);
+  -moz-transform: translate(80px, 55px); 
+  transform: translate(80px, 55px);
+}
+
+#thr { 
+  -webkit-transform: translate(30px, 80px);
+  -moz-transform: translate(30px, 80px); 
+  transform: translate(30px, 80px);
+}

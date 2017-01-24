@@ -1,0 +1,58 @@
+body {
+	background: #000;
+}
+
+.wrap {
+		background: -webkit-linear-gradient(#ED4264, #FFEDBC);
+		background: linear-gradient(#ED4264, #FFEDBC);
+	width: 600px;
+	height: 600px;
+	margin: auto;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+	-webkit-animation: changeColor 5s linear infinite;
+	        animation: changeColor 5s linear infinite;
+}
+
+#myCanvas{
+	-webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+	        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+	display: block;
+	margin: auto;
+}
+
+@-webkit-keyframes changeColor {
+	0% {background: -webkit-linear-gradient(#64B3F4, #ED4264);background: linear-gradient(#64B3F4, #ED4264);}
+	10% {background: -webkit-linear-gradient(#ED4264, #FFEDBC);background: linear-gradient(#ED4264, #FFEDBC);}
+	20% {background: -webkit-linear-gradient(#FFEDBC, #2C3E50);background: linear-gradient(#FFEDBC, #2C3E50);}
+	30% {background: -webkit-linear-gradient(#2C3E50, #FD746C);background: linear-gradient(#2C3E50, #FD746C);}
+	40% {background: -webkit-linear-gradient(#FD746C, #E96443);background: linear-gradient(#FD746C, #E96443);}
+	50% {background: -webkit-linear-gradient(#E96443, #904E95);background: linear-gradient(#E96443, #904E95);}
+	60% {background: -webkit-linear-gradient(#904E95, #2196f3);background: linear-gradient(#904E95, #2196f3);}
+	70% {background: -webkit-linear-gradient(#2196f3, #F44336);background: linear-gradient(#2196f3, #F44336);}
+	80% {background: -webkit-linear-gradient(#F44336, #C2E59C);background: linear-gradient(#F44336, #C2E59C);}
+	90% {background: -webkit-linear-gradient(#C2E59C, #64B3F4);background: linear-gradient(#C2E59C, #64B3F4);}
+	100% {background: -webkit-linear-gradient(#64B3F4, #ED4264);background: linear-gradient(#64B3F4, #ED4264);}
+}
+
+@keyframes changeColor {
+	0% {background: -webkit-linear-gradient(#64B3F4, #ED4264);background: linear-gradient(#64B3F4, #ED4264);}
+	10% {background: -webkit-linear-gradient(#ED4264, #FFEDBC);background: linear-gradient(#ED4264, #FFEDBC);}
+	20% {background: -webkit-linear-gradient(#FFEDBC, #2C3E50);background: linear-gradient(#FFEDBC, #2C3E50);}
+	30% {background: -webkit-linear-gradient(#2C3E50, #FD746C);background: linear-gradient(#2C3E50, #FD746C);}
+	40% {background: -webkit-linear-gradient(#FD746C, #E96443);background: linear-gradient(#FD746C, #E96443);}
+	50% {background: -webkit-linear-gradient(#E96443, #904E95);background: linear-gradient(#E96443, #904E95);}
+	60% {background: -webkit-linear-gradient(#904E95, #2196f3);background: linear-gradient(#904E95, #2196f3);}
+	70% {background: -webkit-linear-gradient(#2196f3, #F44336);background: linear-gradient(#2196f3, #F44336);}
+	80% {background: -webkit-linear-gradient(#F44336, #C2E59C);background: linear-gradient(#F44336, #C2E59C);}
+	90% {background: -webkit-linear-gradient(#C2E59C, #64B3F4);background: linear-gradient(#C2E59C, #64B3F4);}
+	100% {background: -webkit-linear-gradient(#64B3F4, #ED4264);background: linear-gradient(#64B3F4, #ED4264);}
+}
+        
+
+
+

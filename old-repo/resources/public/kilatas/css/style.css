@@ -1,0 +1,402 @@
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+.stage {
+  width: 100%;
+  height: 100%;
+}
+
+.stage {
+  position: relative;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+}
+.stage .blind {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4%;
+  z-index: 9;
+}
+
+.stage .blind:nth-child(1) {
+  left: 0%;
+}
+
+.stage .blind:nth-child(2) {
+  left: 4%;
+}
+
+.stage .blind:nth-child(3) {
+  left: 8%;
+}
+
+.stage .blind:nth-child(4) {
+  left: 12%;
+}
+
+.stage .blind:nth-child(5) {
+  left: 16%;
+}
+
+.stage .blind:nth-child(6) {
+  left: 20%;
+}
+
+.stage .blind:nth-child(7) {
+  left: 24%;
+}
+
+.stage .blind:nth-child(8) {
+  left: 28%;
+}
+
+.stage .blind:nth-child(9) {
+  left: 32%;
+}
+
+.stage .blind:nth-child(10) {
+  left: 36%;
+}
+
+.stage .blind:nth-child(11) {
+  left: 40%;
+}
+
+.stage .blind:nth-child(12) {
+  left: 44%;
+}
+
+.stage .blind:nth-child(13) {
+  left: 48%;
+}
+
+.stage .blind:nth-child(14) {
+  left: 52%;
+}
+
+.stage .blind:nth-child(15) {
+  left: 56%;
+}
+
+.stage .blind:nth-child(16) {
+  left: 60%;
+}
+
+.stage .blind:nth-child(17) {
+  left: 64%;
+}
+
+.stage .blind:nth-child(18) {
+  left: 68%;
+}
+
+.stage .blind:nth-child(19) {
+  left: 72%;
+}
+
+.stage .blind:nth-child(20) {
+  left: 76%;
+}
+
+.stage .blind:nth-child(21) {
+  left: 80%;
+}
+
+.stage .blind:nth-child(22) {
+  left: 84%;
+}
+
+.stage .blind:nth-child(23) {
+  left: 88%;
+}
+
+.stage .blind:nth-child(24) {
+  left: 92%;
+}
+
+.stage .blind:nth-child(25) {
+  left: 96%;
+}
+
+.casper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  background: url(https://dl.dropboxusercontent.com/u/330966/static/casper/casper03.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+.casper:before, .casper:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -2rem;
+  bottom: 0;
+  left: -2rem;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.casper:before {
+  z-index: 3;
+  background: url(https://dl.dropboxusercontent.com/u/330966/static/casper/casper02.png);
+}
+.casper:after {
+  z-index: 4;
+  background: url(https://dl.dropboxusercontent.com/u/330966/static/casper/casper01.png);
+}
+.casper:before, .casper:after {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.stage .blind:nth-child(1):hover ~ .casper:before {
+  -webkit-transform: translateX(0.91667rem);
+          transform: translateX(0.91667rem);
+}
+
+.stage .blind:nth-child(1):hover ~ .casper:after {
+  -webkit-transform: translateX(1.83334rem);
+          transform: translateX(1.83334rem);
+}
+
+.stage .blind:nth-child(2):hover ~ .casper:before {
+  -webkit-transform: translateX(0.83333rem);
+          transform: translateX(0.83333rem);
+}
+
+.stage .blind:nth-child(2):hover ~ .casper:after {
+  -webkit-transform: translateX(1.66668rem);
+          transform: translateX(1.66668rem);
+}
+
+.stage .blind:nth-child(3):hover ~ .casper:before {
+  -webkit-transform: translateX(0.75rem);
+          transform: translateX(0.75rem);
+}
+
+.stage .blind:nth-child(3):hover ~ .casper:after {
+  -webkit-transform: translateX(1.50002rem);
+          transform: translateX(1.50002rem);
+}
+
+.stage .blind:nth-child(4):hover ~ .casper:before {
+  -webkit-transform: translateX(0.66667rem);
+          transform: translateX(0.66667rem);
+}
+
+.stage .blind:nth-child(4):hover ~ .casper:after {
+  -webkit-transform: translateX(1.33336rem);
+          transform: translateX(1.33336rem);
+}
+
+.stage .blind:nth-child(5):hover ~ .casper:before {
+  -webkit-transform: translateX(0.58333rem);
+          transform: translateX(0.58333rem);
+}
+
+.stage .blind:nth-child(5):hover ~ .casper:after {
+  -webkit-transform: translateX(1.1667rem);
+          transform: translateX(1.1667rem);
+}
+
+.stage .blind:nth-child(6):hover ~ .casper:before {
+  -webkit-transform: translateX(0.5rem);
+          transform: translateX(0.5rem);
+}
+
+.stage .blind:nth-child(6):hover ~ .casper:after {
+  -webkit-transform: translateX(1.00004rem);
+          transform: translateX(1.00004rem);
+}
+
+.stage .blind:nth-child(7):hover ~ .casper:before {
+  -webkit-transform: translateX(0.41667rem);
+          transform: translateX(0.41667rem);
+}
+
+.stage .blind:nth-child(7):hover ~ .casper:after {
+  -webkit-transform: translateX(0.83338rem);
+          transform: translateX(0.83338rem);
+}
+
+.stage .blind:nth-child(8):hover ~ .casper:before {
+  -webkit-transform: translateX(0.33334rem);
+          transform: translateX(0.33334rem);
+}
+
+.stage .blind:nth-child(8):hover ~ .casper:after {
+  -webkit-transform: translateX(0.66672rem);
+          transform: translateX(0.66672rem);
+}
+
+.stage .blind:nth-child(9):hover ~ .casper:before {
+  -webkit-transform: translateX(0.25rem);
+          transform: translateX(0.25rem);
+}
+
+.stage .blind:nth-child(9):hover ~ .casper:after {
+  -webkit-transform: translateX(0.50006rem);
+          transform: translateX(0.50006rem);
+}
+
+.stage .blind:nth-child(10):hover ~ .casper:before {
+  -webkit-transform: translateX(0.16667rem);
+          transform: translateX(0.16667rem);
+}
+
+.stage .blind:nth-child(10):hover ~ .casper:after {
+  -webkit-transform: translateX(0.3334rem);
+          transform: translateX(0.3334rem);
+}
+
+.stage .blind:nth-child(11):hover ~ .casper:before {
+  -webkit-transform: translateX(0.08334rem);
+          transform: translateX(0.08334rem);
+}
+
+.stage .blind:nth-child(11):hover ~ .casper:after {
+  -webkit-transform: translateX(0.16674rem);
+          transform: translateX(0.16674rem);
+}
+
+.stage .blind:nth-child(12):hover ~ .casper:before {
+  -webkit-transform: translateX(0rem);
+          transform: translateX(0rem);
+}
+
+.stage .blind:nth-child(12):hover ~ .casper:after {
+  -webkit-transform: translateX(0.00008rem);
+          transform: translateX(0.00008rem);
+}
+
+.stage .blind:nth-child(14):hover ~ .casper:before {
+  -webkit-transform: translateX(-0.56rem);
+          transform: translateX(-0.56rem);
+}
+
+.stage .blind:nth-child(14):hover ~ .casper:after {
+  -webkit-transform: translateX(-1.12rem);
+          transform: translateX(-1.12rem);
+}
+
+.stage .blind:nth-child(15):hover ~ .casper:before {
+  -webkit-transform: translateX(-0.6rem);
+          transform: translateX(-0.6rem);
+}
+
+.stage .blind:nth-child(15):hover ~ .casper:after {
+  -webkit-transform: translateX(-1.2rem);
+          transform: translateX(-1.2rem);
+}
+
+.stage .blind:nth-child(16):hover ~ .casper:before {
+  -webkit-transform: translateX(-0.64rem);
+          transform: translateX(-0.64rem);
+}
+
+.stage .blind:nth-child(16):hover ~ .casper:after {
+  -webkit-transform: translateX(-1.28rem);
+          transform: translateX(-1.28rem);
+}
+
+.stage .blind:nth-child(17):hover ~ .casper:before {
+  -webkit-transform: translateX(-0.68rem);
+          transform: translateX(-0.68rem);
+}
+
+.stage .blind:nth-child(17):hover ~ .casper:after {
+  -webkit-transform: translateX(-1.36rem);
+          transform: translateX(-1.36rem);
+}
+
+.stage .blind:nth-child(18):hover ~ .casper:before {
+  -webkit-transform: translateX(-0.72rem);
+          transform: translateX(-0.72rem);
+}
+
+.stage .blind:nth-child(18):hover ~ .casper:after {
+  -webkit-transform: translateX(-1.44rem);
+          transform: translateX(-1.44rem);
+}
+
+.stage .blind:nth-child(19):hover ~ .casper:before {
+  -webkit-transform: translateX(-0.76rem);
+          transform: translateX(-0.76rem);
+}
+
+.stage .blind:nth-child(19):hover ~ .casper:after {
+  -webkit-transform: translateX(-1.52rem);
+          transform: translateX(-1.52rem);
+}
+
+.stage .blind:nth-child(20):hover ~ .casper:before {
+  -webkit-transform: translateX(-0.8rem);
+          transform: translateX(-0.8rem);
+}
+
+.stage .blind:nth-child(20):hover ~ .casper:after {
+  -webkit-transform: translateX(-1.6rem);
+          transform: translateX(-1.6rem);
+}
+
+.stage .blind:nth-child(21):hover ~ .casper:before {
+  -webkit-transform: translateX(-0.84rem);
+          transform: translateX(-0.84rem);
+}
+
+.stage .blind:nth-child(21):hover ~ .casper:after {
+  -webkit-transform: translateX(-1.68rem);
+          transform: translateX(-1.68rem);
+}
+
+.stage .blind:nth-child(22):hover ~ .casper:before {
+  -webkit-transform: translateX(-0.88rem);
+          transform: translateX(-0.88rem);
+}
+
+.stage .blind:nth-child(22):hover ~ .casper:after {
+  -webkit-transform: translateX(-1.76rem);
+          transform: translateX(-1.76rem);
+}
+
+.stage .blind:nth-child(23):hover ~ .casper:before {
+  -webkit-transform: translateX(-0.92rem);
+          transform: translateX(-0.92rem);
+}
+
+.stage .blind:nth-child(23):hover ~ .casper:after {
+  -webkit-transform: translateX(-1.84rem);
+          transform: translateX(-1.84rem);
+}
+
+.stage .blind:nth-child(24):hover ~ .casper:before {
+  -webkit-transform: translateX(-0.96rem);
+          transform: translateX(-0.96rem);
+}
+
+.stage .blind:nth-child(24):hover ~ .casper:after {
+  -webkit-transform: translateX(-1.92rem);
+          transform: translateX(-1.92rem);
+}
+
+.stage .blind:nth-child(25):hover ~ .casper:before {
+  -webkit-transform: translateX(-1rem);
+          transform: translateX(-1rem);
+}
+
+.stage .blind:nth-child(25):hover ~ .casper:after {
+  -webkit-transform: translateX(-2rem);
+          transform: translateX(-2rem);
+}

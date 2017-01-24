@@ -1,0 +1,136 @@
+body {
+  background: #1d1e20;
+  box-sizing: border-box;
+  padding-top: 150px;
+  padding-bottom: 50px;
+  font-family: arial;
+  min-width: 960px;
+}
+
+.intro {
+  font-size: 30px;
+  position: absolute;
+  top: 60px;
+  left: 140px;
+  color: #fff;
+}
+.intro span {
+  font-size: 15px;
+  color: #00ffd4;
+}
+
+ul {
+  user-select: none;
+}
+ul .name {
+  width: 85px;
+  height: 20px;
+  line-height: 20px;
+  text-align: right;
+  padding-right: 5px;
+  margin-right: 5px;
+  margin-left: 10px;
+  box-sizing: border-box;
+  color: #ffffff;
+  float: left;
+  cursor: default;
+  font-size: 12px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  transition: .3s;
+  border-radius: 2px;
+}
+ul input:hover {
+  background: #333333 !important;
+  cursor: auto !important;
+}
+
+.timeline {
+  width: 100%;
+  height: 20px;
+  margin-bottom: 14px;
+}
+.timeline li {
+  display: block;
+  float: left;
+  width: 27px;
+  height: 20px;
+  background: #fd3e81;
+  color: #ffffff;
+  font-size: 12px;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 3px;
+  user-select: none;
+  cursor: default;
+  border-radius: 2px;
+}
+
+.thing {
+  width: 100%;
+  height: 20px;
+  margin-bottom: 4px;
+  animation: load .5s ease-in;
+}
+.thing li {
+  display: block;
+  float: left;
+  width: 7px;
+  height: 20px;
+  background: #333333;
+  text-align: center;
+  margin-right: 0px;
+  border-right: 3px solid #1d1e20;
+  cursor: pointer;
+  border-radius: 0px;
+  transition: .3s;
+}
+.thing li:hover {
+  opacity: .5;
+}
+.thing .remove {
+  color: #ffffff;
+  font-size: 12px;
+  height: 20px;
+  line-height: 20px;
+  cursor: pointer;
+  padding: 0 10px;
+  margin-left: 5px;
+  background: #fd3e81;
+  display: block;
+  float: left;
+  border-radius: 2px;
+  opacity: .2;
+  transition: .3s;
+  user-select: none;
+}
+.thing .remove:hover {
+  opacity: 1;
+}
+
+@keyframes load {
+  from {
+    opacity: 0;
+  }
+}
+.template {
+  display: none;
+}
+
+.addThing {
+  color: #ffffff;
+  font-size: 12px;
+  width: 716px;
+  transition: .3s;
+  margin-left: 100px;
+  text-align: center;
+  border-radius: 2px;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+.addThing:hover {
+  background: #333333;
+}

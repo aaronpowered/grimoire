@@ -1,0 +1,78 @@
+.c-graph {
+  max-width: 100%;
+  padding: 25px;
+}
+
+.c-graph__bar {
+  cursor: pointer;
+  -webkit-transition: fill 0.15s ease;
+  transition: fill 0.15s ease;
+}
+.c-graph__value:hover .c-graph__bar, .c-graph__segment:hover .c-graph__bar {
+  fill: #3e3565;
+}
+
+.c-graph__value:hover .c-graph__number, .c-graph__value:hover + .c-graph__segment .c-graph__bar {
+  fill: #3e3565;
+}
+
+.c-graph__number {
+  cursor: pointer;
+  font-weight: bold;
+  -webkit-transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease;
+}
+.c-graph__value .c-graph__number {
+  fill: #1e1935;
+}
+.c-graph__segment .c-graph__number {
+  fill: #fff;
+  opacity: 0;
+}
+.c-graph__segment:hover .c-graph__number {
+  opacity: 1;
+}
+
+.c-graph__value .c-graph__bar,
+.c-graph__legend-value {
+  fill: #1e1935;
+}
+
+.c-graph__title {
+  font: bold 22px/1.375 "Poppins", Arial, sans-serif;
+}
+
+.c-graph__label {
+  font: 16px "Poppins", Arial, sans-serif;
+}
+
+.c-graph__footer {
+  font: 14px "Poppins", Arial, sans-serif;
+}
+
+.c-graph__number {
+  font: bold 18px "Poppins", Arial, sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}

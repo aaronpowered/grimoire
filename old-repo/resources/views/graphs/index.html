@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>💥 Interactive SVG & CSS graph with segments, legend and hover effect</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Poppins:400,700'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+  
+<!-- originally developed for: https://explosion.ai/blog/spacy-user-survey-->
+<!-- inspired by: https://css-tricks.com/how-to-make-charts-with-svg/-->
+<figure class="c-graph">
+  <figcaption class="c-graph__title">Do you use spaCy at work?</figcaption>
+  <svg class="chart" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800" height="520" role="img" viewBox="0 0 #{width} #{height}" preserveAspectRatio="xMinYMin meet">
+    <defs>
+      <pattern id="pattern" patternUnits="userSpaceOnUse" width="10" height="10">
+        <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCI+ICA8cmVjdCB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIGZpbGw9IiMxRTE5MzUiLz4gIDxwYXRoIGQ9Ik0tMSwxIGwyLC0yICAgICAgICAgICBNMCwxMCBsMTAsLTEwICAgICAgICAgICBNOSwxMSBsMiwtMiIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEuNSIvPjwvc3ZnPg==" x="0" y="0" width="10" height="10"></image>
+      </pattern>
+    </defs>
+    <text class="c-graph__label" x="0" y="40">Yes, we use it in production.</text>
+    <g class="c-graph__value">
+      <rect class="c-graph__bar" width="160" height="30" y="50" fill="#1e1935"></rect>
+      <text class="c-graph__number c-graph__number--value" x="170" y="50" dy="22.22222222222222"> 20%
+      </text>
+    </g>
+    <g class="c-graph__segment">
+      <rect class="c-graph__bar" width="144" height="30" y="50" fill="url(#pattern)"></rect>
+      <text class="c-graph__number" x="10" y="50" dy="22.22222222222222"> 18%
+      </text>
+    </g>
+    <text class="c-graph__label" x="0" y="120">Yes, we use it in development.</text>
+    <g class="c-graph__value">
+      <rect class="c-graph__bar" width="104" height="30" y="130" fill="#1e1935"></rect>
+      <text class="c-graph__number c-graph__number--value" x="114" y="130" dy="22.22222222222222"> 13%
+      </text>
+    </g>
+    <g class="c-graph__segment">
+      <rect class="c-graph__bar" width="96" height="30" y="130" fill="url(#pattern)"></rect>
+      <text class="c-graph__number" x="10" y="130" dy="22.22222222222222"> 12%
+      </text>
+    </g>
+    <text class="c-graph__label" x="0" y="200">Yes, we use it for research.</text>
+    <g class="c-graph__value">
+      <rect class="c-graph__bar" width="248" height="30" y="210" fill="#1e1935"></rect>
+      <text class="c-graph__number c-graph__number--value" x="258" y="210" dy="22.22222222222222"> 31%
+      </text>
+    </g>
+    <g class="c-graph__segment">
+      <rect class="c-graph__bar" width="144" height="30" y="210" fill="url(#pattern)"></rect>
+      <text class="c-graph__number" x="10" y="210" dy="22.22222222222222"> 18%
+      </text>
+    </g>
+    <text class="c-graph__label" x="0" y="280">No, but we're planning to.</text>
+    <g class="c-graph__value">
+      <rect class="c-graph__bar" width="136" height="30" y="290" fill="#1e1935"></rect>
+      <text class="c-graph__number c-graph__number--value" x="146" y="290" dy="22.22222222222222"> 17%
+      </text>
+    </g>
+    <g class="c-graph__segment">
+      <rect class="c-graph__bar" width="112" height="30" y="290" fill="url(#pattern)"></rect>
+      <text class="c-graph__number" x="10" y="290" dy="22.22222222222222"> 14%
+      </text>
+    </g>
+    <text class="c-graph__label" x="0" y="360">No, and we're currently not planning to.</text>
+    <g class="c-graph__value">
+      <rect class="c-graph__bar" width="112" height="30" y="370" fill="#1e1935"></rect>
+      <text class="c-graph__number c-graph__number--value" x="122" y="370" dy="22.22222222222222"> 14%
+      </text>
+    </g>
+    <g class="c-graph__segment">
+      <rect class="c-graph__bar" width="112" height="30" y="370" fill="url(#pattern)"></rect>
+      <text class="c-graph__number" x="10" y="370" dy="22.22222222222222"> 14%
+      </text>
+    </g>
+    <g class="c-graph__footer" x="0" y="500" height="20" dy="10">
+      <rect class="c-graph__legend-value" y="460" width="20" height="20" fill="#1e1935"></rect>
+      <text x="30" y="460" dy="1em">everyone</text>
+      <rect class="c-graph__legend-segment" y="490" width="20" height="20" fill="url(#pattern)"></rect>
+      <text x="30" y="490" dy="1em">non-researchers</text>
+    </g>
+  </svg>
+</figure>
+  
+  
+</body>
+</html>

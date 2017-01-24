@@ -1,0 +1,475 @@
+
+
+$border: #a7a7ad;
+$bg: rgba(10,0,5,0.8);
+$shadow: transparentize( $bg , 0.3 );
+
+$gap: 3px;
+
+$crafting: #f4d403;
+$trash: #999;
+$common: white;
+$uncommon: #24ee10;
+$rare: #0070DD;
+$epic: #ad23ed;
+$legendary: #fa7c18;
+$heirloom: #e5d9c5;
+$flavour: #FFD100;
+
+@mixin socket( $color: "meta" ) {
+  
+  $srcUrl: "http://wowimg.zamimg.com/images/";
+  $socket: $srcUrl + "icons/socket-#{$color}.gif";
+  
+  background-image: url( $socket );
+  background-repeat: no-repeat;
+  background-position: left top;
+    
+}
+
+
+
+.wow-icon {
+  
+  width: 27px;
+  height: 27px; 
+  display: inline-block;
+  background-image: url( http://wow.zamimg.com/images/wow/icons/medium/inv_misc_questionmark.jpg );
+  background-repeat: no-repeat;
+  background-position: center;
+  border-width: 4px;
+  
+  position: relative;
+  margin: 2px 2px;
+
+  box-shadow:
+    -1px -1px 1px $shadow,
+    -1px 1px 1px $shadow,
+    1px 1px 1px $shadow,
+    1px -1px 1px $shadow;
+  
+  .stack {
+    
+    color: white;
+    font-size: 13px;
+    font-style: normal;
+    text-align: right;
+    
+    text-shadow: 
+      0 0 2px black, 
+      0 0 2px black, 
+      0 0 3px black,
+      0 0 3px black, 
+      0 0 1px black,
+      0 0 1px black;
+    
+    position: absolute;
+    right: -1px;
+    bottom: -4px;
+    
+  }
+  
+  &:after {
+    
+    content: "";
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    left: -4px;
+    top: -4px;
+    
+    border-radius: 4px;
+    box-shadow: inset 0 0 5px black;
+    
+    transition: all 0.1s ease;
+    
+  }
+  
+  &:hover {
+    
+   &:after {
+     
+     box-shadow: 
+       inset 0 0 9px rgba(30,180,230,0.9),
+       inset 0 0 5px rgba(30,180,230,0.6);
+     
+   } 
+    
+  }
+  
+}
+
+
+.wow-icon,
+.wow-item {
+  
+
+  border-style: solid;
+  border-width: 5px;
+  border-image: url(http://files.simey.me/wow-tooltip-border-2.png) 5 repeat;
+  border-radius: 4px;
+  
+}
+
+
+
+.wow-item {
+  
+  position: absolute;
+  
+  color: white;
+  background-color: $bg;
+  
+  font-family: "friz", serif;
+  font-size: 12px;
+  font-weight: normal;
+  padding: 0.5em 0.6em;
+  text-shadow: 0 1px 0 rgba(0,0,0,1);
+  
+  box-shadow:
+    -1px -1px 1px $shadow,
+    -1px 1px 1px $shadow,
+    1px 1px 1px $shadow,
+    1px -1px 1px $shadow;
+  
+  max-width: 24em;
+  
+  transition: 
+    opacity 0.05s ease-out 0.05s,
+    transform 0.1s ease-out 0.05s;
+  
+  &.hidden {
+    
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.95);
+
+    transition: 
+      opacity 0.05s ease-out 0.05s,
+      transform 0.1s ease-out 0.05s,
+      visibility 0.01s linear 0.15s;
+    
+  }
+  
+  p {
+    padding: 0;
+    margin: 0;
+  }
+  
+  &[data-quality=crafting] {
+    .header__title {
+      color: $crafting;
+    }
+  }
+  &[data-quality=heirloom] {
+    .header__title {
+      color: $heirloom;
+    }
+  }
+  &[data-quality=trash] {
+    .header__title {
+      color: $trash;
+    }
+  }
+  &[data-quality=common] {
+    .header__title {
+      color: $common;
+    }
+  }
+  &[data-quality=uncommon] {
+    .header__title {
+      color: $uncommon;
+    }
+  }
+  &[data-quality=rare] {
+    .header__title {
+      color: $rare;
+    }
+  }
+  &[data-quality=epic] {
+    .header__title {
+      color: $epic;
+    }
+  }
+  &[data-quality=legendary] {
+    .header__title {
+      color: $legendary;
+    }
+  }
+  
+}
+
+
+  
+.wow-item__header {
+
+  .header__title {
+
+    margin-bottom: $gap;
+    font-size: 1.12em;
+    margin-right: 1em;
+
+  }
+
+}
+
+.wow-item__type {
+   
+  overflow: hidden;
+  margin-top: $gap;
+  
+  .type {
+
+    &__slot,
+    &__item {
+
+      float: left;
+
+    }
+    
+    &__item {
+
+      float: right;
+      text-align: right;
+
+    }
+
+  }
+    
+}
+
+.wow-item__stats {
+   
+  overflow: hidden;
+  
+  .stats {
+    
+    &__damage-armor {
+      float: left;
+      margin-right: 5em;
+    }
+
+    &__speed {
+      float: right;
+      text-align: right;
+    }
+    
+    &__list-item:first-child {
+      margin-top: $gap;
+    }
+
+    &__dps {
+      float: none;
+      clear: both;
+    }
+
+    &__secondary {
+      color: $uncommon;
+    }
+    
+  }
+
+}
+
+.wow-item__enchantments {
+  
+  margin: $gap*2 0;
+  
+  .enchantments {
+     
+    &__enchant {
+      
+      color: $uncommon;
+      
+    }
+    
+    &__socket {
+      
+      @include socket();
+      text-indent: 1.8em;
+      text-transform: capitalize;
+      
+      &.socket--meta {
+        @include socket( "meta" );
+      }
+      
+      &.socket--blue {
+        @include socket( "blue" );
+      }
+      
+      &.socket--red {
+        @include socket( "red" );
+      }
+      
+      &.socket--yellow {
+        @include socket( "yellow" );
+      }
+      
+      &.socket--prismatic {
+        @include socket( "prismatic" );
+      }
+      
+    }
+    
+    &__sockets {
+      
+      margin: $gap 0;
+      
+    }
+    
+    &__socket,
+    &__socket-bonus {
+      
+      color: $trash;
+      
+    }
+    
+  }
+  
+}
+
+
+.wow-item__info {
+  
+  .info {
+    
+    &__chance-on-hit {
+      
+      color: $uncommon;
+      
+    }
+    
+    &__flavour-text {
+      
+      color: $flavour;
+      margin-top: $gap;
+      
+    }
+    
+  }
+  
+}
+
+
+.wow-item__bonuses {
+  
+  margin-top: $gap;
+  
+  .bonuses {
+    
+    &__bonus {
+      
+      color: $uncommon;
+      margin: $gap 0 0;
+      
+    }
+    
+  }
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body,html {
+  
+  padding: 20px;
+  background: url(http://1.bp.blogspot.com/_oda7QrZey8U/S-xfS7KHf_I/AAAAAAAAANo/Lr2dkZN6dpM/s1600/2010.05.13+Azuremyst+Isle.jpg);
+  background-size: cover;
+  background-position: center;
+  cursor: url(http://files.simey.me/wow-cursor.png), auto;
+
+}
+
+
+.page {
+  
+  font-family: "friz", serif;
+  font-size: 1.8em;
+  font-weight: normal;
+  text-align: center;
+  color: white;
+  text-shadow: 
+     0 0 1px black,
+     0 0 1px black,
+     0 0 2px black,
+     0 0 2px black,
+     0 3px 3px black;
+  margin: 0;
+  
+  h2 {
+    margin: 0;
+  }
+  
+  h3 {
+    font-size: 0.9em;
+    margin: 0 0 2em;
+    opacity: 0.7;
+  }
+  
+}
+
+
+.bag {
+  
+  background: url(http://files.simey.me/wow-backpack.png);
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 62px 17px #000;
+  
+  width: 196px;
+  height: 246px; 
+  background-position: 0 0;
+  
+  box-sizing: border-box;
+  padding: 12px 5px 5px 20px;
+  margin: auto;
+  
+  user-select: none;
+  
+  header {
+    
+    font-family: "friz", serif;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    margin: 0 0 25px;
+    
+  }
+  
+  .wow-icon {
+    
+    display: inline-block;
+    margin: 0px 2px 1px 0px;
+    user-select: none;
+    
+    &:first-child {
+      margin-left: 84px;
+    }
+    
+  }
+  
+}
+$font: "//files.simey.me/fonts/";
+@font-face {
+    font-family: 'friz';
+    src: url('#{$font}friz_quadrata_regular-webfont.eot');
+    src: url('#{$font}friz_quadrata_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('#{$font}friz_quadrata_regular-webfont.woff') format('woff'),
+         url('#{$font}friz_quadrata_regular-webfont.ttf') format('truetype'),
+         url('#{$font}friz_quadrata_regular-webfont.svg#friz_quadrataregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+

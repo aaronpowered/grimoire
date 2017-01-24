@@ -1,0 +1,1 @@
+{"version":3,"file":"\/home\/masik\/ENVIRONMENT\/BitBucket\/table-dice\/target\/cljsbuild\/public\/js\/out\/rpg\/dev.js","sources":["dev.cljs"],"lineCount":10,"mappings":";AAAA;;;;AAIA,AAACA;AAED,2CAAA,uEAAA,kCAAA,pJAACC,gOAEkBC;AAEnB,AAACC","names":["cljs.core\/enable-console-print!","figwheel.client\/watch-and-reload","rpg.core\/mount-root","rpg.core\/init!"]}

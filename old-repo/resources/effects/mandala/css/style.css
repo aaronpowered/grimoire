@@ -1,0 +1,122 @@
+html, body {
+	background-color: #000;
+	font-family: Roboto;
+}
+
+a {
+	color: #fd084a;
+	text-decoration: none;
+}
+
+p {
+	color: #fff;
+}
+
+svg {
+	transform: translatez(0);
+}
+
+.description {
+	margin-top: 50px;
+}
+
+.wrapper {
+	display: flex;
+	justify-content: center;
+	margin: 5vh auto 10vh;
+}
+
+.circle {
+	animation: draw 4s 1s ease-in infinite alternate;
+	animation-fill-mode: forwards;
+	opacity: 0;
+	stroke-dasharray: 480;
+	transform: rotate(90deg);
+	transform-origin: 50% 50%;
+}
+
+#group-4 .circle, #group-6 .circle {
+	animation-delay: 1.3s;	
+}
+
+#group-6 .circle {
+	animation-name: draw-reverse;
+}
+
+#group-3 .circle, #group-7 .circle {
+	animation-delay: 1.6s;
+}
+
+#group-7 .circle {
+	animation-name: draw-reverse;
+}
+
+#group-2 .circle, #group-8 .circle {
+	animation-delay: 1.9s;
+}
+
+#group-8 .circle {
+	animation-name: draw-reverse;
+}
+
+#group-1 .circle, #group-9 .circle {
+	animation-delay: 2.2s;
+}
+
+#group-9 .circle {
+	animation-name: draw-reverse;
+}
+
+.big-circle {
+	animation: draw-big 4s 2s ease-in infinite alternate;
+	animation-fill-mode: forwards;
+	opacity: 0;
+	stroke: #743f20;
+	stroke-dasharray: 2673;
+	transform: rotate(90deg);
+	transform-origin: 50% 50%;
+}
+
+.big-circle:last-child {
+	animation-name: draw-reverse-big;
+}
+
+@keyframes draw {
+	0% {
+		stroke-dashoffset: 480;
+	}
+	50%, 100% {
+		stroke-dashoffset: 0;
+		opacity: 1;
+	}
+}
+
+@keyframes draw-reverse {
+	0% {
+		stroke-dashoffset: 480;
+	}
+	50%, 100% {
+		stroke-dashoffset: 960;
+		opacity: 1;
+	}
+}
+
+@keyframes draw-big {
+	0% {
+		stroke-dashoffset: 2673;
+	}
+	50%, 100% {
+		stroke-dashoffset: 0;
+		opacity: 1;
+	}
+}
+
+@keyframes draw-reverse-big {
+	0% {
+		stroke-dashoffset: 2673;
+	}
+	50%, 100% {
+		stroke-dashoffset: 5346;
+		opacity: 1;
+	}
+}

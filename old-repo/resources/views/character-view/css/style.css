@@ -1,0 +1,315 @@
+body {
+  margin: 0;
+  background: #5a4969;
+  background: radial-gradient(ellipse at center, #5a4969 12%, #5a4969 41%, #834958 76%, #71475a 99%, #f02f17 100%);
+  overflow: hidden;
+}
+
+#world {
+  height: 100vh;
+  position: relative;
+}
+#world .clouds {
+  transform: translateZ(0);
+  position: absolute;
+  z-index: -1;
+  opacity: 0.7;
+}
+#world #clouds-long {
+  animation: clouds-long 20s linear infinite;
+}
+#world #clouds1 {
+  animation: clouds1 6s linear infinite;
+}
+#world #clouds2 {
+  animation: clouds2 9s linear infinite;
+  z-index: 2;
+}
+
+@keyframes clouds-long {
+  0% {
+    transform: translate(100vw, -20%);
+  }
+  100% {
+    transform: translate(-8300px, -70%);
+  }
+}
+@keyframes clouds1 {
+  0% {
+    transform: translate(110vw, -20%);
+  }
+  100% {
+    transform: translate(-3000px, -70%);
+  }
+}
+@keyframes clouds2 {
+  0% {
+    transform: translate(110vw, -20%);
+  }
+  100% {
+    transform: translate(-3000px, -70%);
+  }
+}
+@keyframes wind-frame1 {
+  0% {
+    visibility: visible;
+  }
+  8.3% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes wind-frame2 {
+  0% {
+    visibility: hidden;
+  }
+  8.3% {
+    visibility: visible;
+  }
+  16.6% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes wind-frame3 {
+  0% {
+    visibility: hidden;
+  }
+  8.3% {
+    visibility: hidden;
+  }
+  16.6% {
+    visibility: visible;
+  }
+  25% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes wind-frame4 {
+  0% {
+    visibility: hidden;
+  }
+  16.6% {
+    visibility: hidden;
+  }
+  25% {
+    visibility: visible;
+  }
+  33.3% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes wind-frame5 {
+  0% {
+    visibility: hidden;
+  }
+  25% {
+    visibility: hidden;
+  }
+  33.3% {
+    visibility: visible;
+  }
+  41.6% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes wind-frame6 {
+  0% {
+    visibility: hidden;
+  }
+  33.3% {
+    visibility: hidden;
+  }
+  41.6% {
+    visibility: visible;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes wind-frame7 {
+  0% {
+    visibility: hidden;
+  }
+  41.6% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: visible;
+  }
+  58.3% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes wind-frame8 {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  58.3% {
+    visibility: visible;
+  }
+  66.6% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes wind-frame9 {
+  0% {
+    visibility: hidden;
+  }
+  58.3% {
+    visibility: hidden;
+  }
+  66.6% {
+    visibility: visible;
+  }
+  75% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes wind-frame10 {
+  0% {
+    visibility: hidden;
+  }
+  66.6% {
+    visibility: hidden;
+  }
+  75% {
+    visibility: visible;
+  }
+  83.3% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes wind-frame11 {
+  0% {
+    visibility: hidden;
+  }
+  75% {
+    visibility: hidden;
+  }
+  83.3% {
+    visibility: visible;
+  }
+  91.6% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+@keyframes wind-frame12 {
+  0% {
+    visibility: hidden;
+  }
+  83.3% {
+    visibility: hidden;
+  }
+  91.6% {
+    visibility: visible;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+.start #frame1 {
+  transform: translateZ(0);
+  animation: wind-frame1 1.3s linear infinite;
+  z-index: 1;
+}
+
+.start #frame2 {
+  transform: translateZ(0);
+  animation: wind-frame2 1.3s linear infinite;
+  z-index: 1;
+}
+
+.start #frame3 {
+  transform: translateZ(0);
+  animation: wind-frame3 1.3s linear infinite;
+  z-index: 1;
+}
+
+.start #frame4 {
+  transform: translateZ(0);
+  animation: wind-frame4 1.3s linear infinite;
+  z-index: 1;
+}
+
+.start #frame5 {
+  transform: translateZ(0);
+  animation: wind-frame5 1.3s linear infinite;
+  z-index: 1;
+}
+
+.start #frame6 {
+  transform: translateZ(0);
+  animation: wind-frame6 1.3s linear infinite;
+  z-index: 1;
+}
+
+.start #frame7 {
+  transform: translateZ(0);
+  animation: wind-frame7 1.3s linear infinite;
+  z-index: 1;
+}
+
+.start #frame8 {
+  transform: translateZ(0);
+  animation: wind-frame8 1.3s linear infinite;
+  z-index: 1;
+}
+
+.start #frame9 {
+  transform: translateZ(0);
+  animation: wind-frame9 1.3s linear infinite;
+  z-index: 1;
+}
+
+.start #frame10 {
+  transform: translateZ(0);
+  animation: wind-frame10 1.3s linear infinite;
+  z-index: 1;
+}
+
+.start #frame11 {
+  transform: translateZ(0);
+  animation: wind-frame11 1.3s linear infinite;
+  z-index: 1;
+}
+
+.start #frame12 {
+  transform: translateZ(0);
+  animation: wind-frame12 1.3s linear infinite;
+  z-index: 1;
+}

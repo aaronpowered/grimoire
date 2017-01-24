@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Secret Society of Scranton</title>
+  
+  
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+  <!-- This pen uses the CSS radio/checkbox strategy for making tabs/accordions. I've separated the input/labels from their content areas using absolute positioning. A little js enhances the interactions. -->
+
+<!-- The images and font were created by Zach and Beth (https://creativemarket.com/zachandbeth/302257-Secret-Society-Font-Bonus) -->
+
+<!-- The messages are quotes from The Office -->
+
+
+<div class="container">
+	
+	<!-- The key. --> <div class="eye"></div>
+	
+		<h1 class="title">The Secret Society<br/><span>of</span> Scranton
+			<div class="branch branch-left"></div>
+			<div class="branch branch-right"></div>
+		</h1>
+		
+		<!-- Where the secrets are. -->
+		<div class="secret-book">
+			
+			<!-- Each secret contains an amulet and a message -->
+			
+			<div>
+				<label for="candle">Candle</label>
+				<input type="radio" id="candle" name="omnibus"/>
+				<div class="ghostly-message">
+					<h2>You remember last week when that girl went missing?</h2>
+					<p>Guess whose candles they used for the vigil?</p>
+				</div>
+			</div>
+			
+			<div>
+				<label for="birb">Birb</label>
+				<input type="radio" id="birb" name="omnibus"/>
+				<div class="ghostly-message">
+					<h2>We had a funeral for a bird.</h2>
+					<p>You're not real, man.</p>
+				</div>
+			</div>
+			
+			<div>
+				<label for="toof">Toof</label>
+				<input type="radio" id="toof" name="omnibus"/>
+				<div class="ghostly-message">
+					<h2>Your dentist's name is Crentist?</h2>
+					<p>He's far.</p>
+				</div>
+			</div>
+			
+			<div>
+				<label for="knife">Knife</label>
+				<input type="radio" id="knife" name="omnibus"/>
+				<div class="ghostly-message">
+					<h2>You're making a knife with a knife?</h2>
+					<p>You know a better way?</p>
+				</div>
+			</div>
+			
+			<div>
+				<label for="knot">Knot</label>
+				<input type="radio" id="knot" name="omnibus"/>
+				<div class="ghostly-message">
+					<h2>I can untie any knot. I'm serious.</h2>
+					<p>Name a knot. Any knot.</p>
+				</div>
+			</div>
+			
+		</div>
+		
+</div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script src="js/index.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,207 @@
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+
+
+$colorA :#ef03fc;
+$colorB :#0edfb5;
+$colorC :#0d0de9;
+$colorD :#21ccff;
+$colorE :#f6e570;
+
+* { box-sizing: border-box }
+
+body{
+  background: linear-gradient(left, #fff5ab, #f4e182);
+}
+
+.phone{
+  width:400px;
+  height:640px;
+  background:#221c37;
+  margin:30px auto;
+  position:relative;
+  overflow:hidden;
+  .header {
+    width:100%;
+    height:70px;
+    background:#9f1cfb;
+    top:0;
+    padding:20px;
+    position:relative;
+    .search{
+      margin:0 auto;
+      width:140px;
+      border-radius:20px;
+      height:35px;
+      background:#b552ff ;
+    }
+    .like{
+      position:absolute;
+      height:16px;
+      width:16px;
+      right:20px;
+      top:30px;
+      svg{
+        width:100%;
+        position:relative;
+        left:0;
+        height:16px;
+        fill:#E8D1F9;
+      }
+    }
+  }
+  .footer{
+    position:absolute;
+    bottom:0;
+    padding:25px;
+    width:100%;
+    left:0;
+    text-align:center;
+    i {position:relative; width:100%}
+    .button{
+      width:70px;
+      height:70px;
+      border-radius:100%;
+      display:inline-block;
+      margin:0 10px;
+      cursor:pointer;
+    }
+    .delete{
+      cursor:pointer;
+      background-color:#4a4559;
+      background-repeat:no-repeat;
+      background-position:center;
+      position:relative;
+      svg{
+          position: absolute;
+          fill: white;
+          left: 50%;
+          margin-left: -15px;
+          width: 30px;
+          height: 30px;
+          display: inline-block;
+          top: 50%;
+          margin-top: -15px;
+      }
+    }
+    .like{
+      cursor:pointer;
+      background-color:#ff2a64 ;
+      background-repeat:no-repeat;
+      background-position:center;
+      position:relative;
+      svg{
+          position: absolute;
+          fill: white;
+          left: 50%;
+          margin-left: -15px;
+          width: 30px;
+          height: 30px;
+          display: inline-block;
+          top: 50%;
+          margin-top: -15px;
+      }
+    }
+  }
+}
+
+.cards-wrapper{
+  position:absolute;
+  top:110px;
+  perspective:1500px;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
+  width:300px;
+  z-index:50;
+  li {
+    background:white;
+    width:300px;
+    height:330px;
+    position:absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    cursor:pointer;
+    &.open{
+      cursor:default;
+    }
+    
+  }
+  li:nth-child(1){
+    transform:scale(0.6) translateY(-115px) ;
+  }
+  li:nth-child(2){
+     transform:scale(0.7) translateY(-60px);
+  }
+  li:nth-child(3){
+     transform:scale(0.8) translateY(-15px);
+  }
+  li:nth-child(4){
+     transform:scale(0.9) translateY(25px);
+  }
+  li:nth-child(5){
+     transform:scale(1) translateY(60px);
+  }
+  .card-header {
+    top:0;
+    width:100%;
+    height:95px;
+    display:table;
+    padding:10px 20px;
+    .menu {
+       display:table-cell;
+      vertical-align:middle;
+      color:white;
+      opacity:0;
+      visibility:hidden;
+    }
+    .close {
+      display:table-cell;
+      color:white;
+      text-align:right;
+      vertical-align:middle;
+      opacity:0;
+      svg {
+        position:relative;
+        width:16px;
+        height:16px;
+        fill:white;
+        cursor:pointer;
+      }
+      
+    }
+    
+  }
+  
+  .card-content {
+    text-align:center;
+    .circle{
+      width:100px;
+      height:100px;
+      background:#d2d2d2;
+      border-radius:100%;
+      margin-bottom:35px;
+      margin:0 auto;
+      margin-top:25px;
+      margin-bottom:35px;
+    }
+    .text{
+      height:18px;
+      border-radius:50px;
+      background:#d2d2d2;
+      margin:15px auto;
+      max-width:140px;
+      &:last-child{max-width:85px;}
+    }
+  }
+  
+  .yellow .card-header{background:$colorE;}
+  .sky .card-header{background:$colorD;}
+  .blue .card-header{background:$colorC;}
+  .green .card-header{background:$colorB;}
+  .pink .card-header{background:$colorA;}
+  
+}

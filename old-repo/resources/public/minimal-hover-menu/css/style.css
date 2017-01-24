@@ -1,0 +1,53 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100);
+ 
+body {
+  font-family:'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', Roboto, Arial, Sans-serif;
+  background:#ecf0f1;
+}
+ 
+nav {
+  width:400px;
+  height:60px;
+  margin:125px auto 0;
+  text-align:center;
+  background:#fff;
+  box-shadow:0 1px 2px #ddd;
+  backface-visibility:hidden;
+}
+ 
+nav ul {
+  position:relative;
+}
+ 
+nav ul li {
+  display:inline-block;
+  line-height:60px;
+  width:100px;
+  margin-right:-4px;
+}
+ 
+nav ul li:first-child {
+  margin-left:-4px;
+}
+ 
+li:nth-child(4):after {
+  content:"";
+  width:100px;
+  height:3px;
+  position:absolute;
+  background:#3498db;
+  top:0;
+  left:0;
+  transform:translateX(0);
+  transition:.5s;
+}
+ 
+nav ul li:nth-child(2):hover ~ li:nth-child(4):after { transform:translateX(100px); }
+nav ul li:nth-child(3):hover ~ li:nth-child(4):after { transform:translateX(200px); }
+nav ul li:nth-child(4):hover:after { transform:translateX(300px); }
+ 
+nav ul li a {
+  text-decoration:none;
+  color:#2c3e50;
+  cursor:pointer;
+}

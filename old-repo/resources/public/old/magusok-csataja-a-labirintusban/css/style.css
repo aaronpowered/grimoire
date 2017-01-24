@@ -1,0 +1,36 @@
+html { background: brown; }
+body {
+  margin:0; padding:0; 
+  font-family: monospace;
+}
+canvas#board {
+  float: left; margin-left: 10%;
+  transform: perspective( 2040px ) rotateX( 49deg ) translateZ(217px);
+  -webkit-animation-name: boardinit;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-duration: 3.5s;
+}
+.side {
+  background: coral;
+  position: absolute;
+  right: 5px;
+  width: 180px;
+  padding: 20px;
+  text-align: center;
+  display: none;
+}
+#log { white-space: pre-line; }
+
+@-webkit-keyframes boardinit {
+  from {
+    transform: perspective( 240px ) rotateZ( 200deg ) rotateY(0deg);
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+}
+.hidden {
+  display: none;
+}

@@ -1,0 +1,119 @@
+body {
+    background:url(http://onlineaccelerator.com.au/content/oa/assets/images/accelerator-bg.jpg); 
+    background-position:50% 0;    
+}
+.circle-big {
+    position: relative;
+    height:600px;
+    width:600px;
+    background: #c02026;
+    border-radius: 50% 50%;
+    margin: 20px auto;
+    border: 4px solid white;
+}
+.circle-inner {
+    border-radius: 50%;
+    width: 370px;
+    height: 370px;
+    border: 4px solid white;
+    background-color: black;
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    text-align:center;
+    top: 50%;
+    left: 50%;
+    margin-top:-185px;
+    margin-left:-185px
+}
+.circle, .cloned-circle {
+    border-radius: 50%;
+    width: 84px;
+    height: 84px;
+    background-color: white;
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    margin-top:-42px;
+    margin-left:-42px;
+    transition: all .3s linear;
+    background-repeat:no-repeat;
+    background-position:center;
+    z-index:2;
+}
+
+.circle:hover { cursor: not-allowed; }
+
+#container { width:100%; height:100%; }
+
+#pointer {
+    position:absolute;
+    left:50%;
+    margin-left:-55px;
+    height:135px;
+    width:100px;
+    background:#6d0000;
+    border: 5px solid white; 
+    border-radius: 0 0 50px 50px;
+    z-index:1;
+}
+
+#pointer:after {
+    content: ' ';
+	height: 0;
+	position: absolute;
+	width: 0;
+	border: 20px solid transparent;
+	border-top-color: white;
+	top: 100%;
+	left: 50%;
+	margin-left: -20px;
+}
+
+.circle-inner h4 {
+    color:white;
+    font-weight: normal;
+    font-style: normal;
+    width:262px;
+    line-height: 1.1;
+    font-family: "museo-sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    margin: 80px auto;
+    text-align: center;
+    font-size: 23px;
+}
+
+.circle-inner a {
+    display: inline-block;
+    color:white;
+    font-weight: bold;
+    text-decoration:none;
+    font-family: "museo-sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: #a6ce38;
+    font-size:15px;
+    border: none;
+    position:absolute;
+    bottom:60px;
+    width: 76px;
+    padding:10px 0;
+}
+.circle-inner a.yes { margin-left: -86px; }
+
+.spin-one    { background-image: url(http://onlineaccelerator.com.au/content/oa/assets/images/icon1.png);  }
+.spin-two    { background-image: url(http://onlineaccelerator.com.au/content/oa/assets/images/icon2.png);  }
+.spin-three  { background-image: url(http://onlineaccelerator.com.au/content/oa/assets/images/icon3.png);  }
+.spin-four   { background-image: url(http://onlineaccelerator.com.au/content/oa/assets/images/icon4.png);  }
+.spin-five   { background-image: url(http://onlineaccelerator.com.au/content/oa/assets/images/icon5.png);  }
+.spin-six    { background-image: url(http://onlineaccelerator.com.au/content/oa/assets/images/icon6.png);  }
+.spin-seven  { background-image: url(http://onlineaccelerator.com.au/content/oa/assets/images/icon7.png);  }
+.spin-eight  { background-image: url(http://onlineaccelerator.com.au/content/oa/assets/images/icon8.png);  }
+.spin-nine   { background-image: url(http://onlineaccelerator.com.au/content/oa/assets/images/icon9.png);  }
+.spin-ten    { background-image: url(http://onlineaccelerator.com.au/content/oa/assets/images/icon10.png); }
+.spin-eleven { background-image: url(http://onlineaccelerator.com.au/content/oa/assets/images/icon11.png); }
+.spin-twelve { background-image: url(http://onlineaccelerator.com.au/content/oa/assets/images/icon12.png); }
+*:not(body){
+  backface-visibility: hidden;
+}

@@ -1,0 +1,130 @@
+/* VAIRABLES TO CUSTOMIZE */
+/*
+* @boxes-per-row
+* Customise this + your layout to achieve 
+- the board layout you want
+*/
+@boxes-per-row: 5;
+@size-arrow: 20px;
+@primary: #9363C2;
+@background-board: #a6a3a3;
+@background-default: #fff; 
+@background-active: dodgerblue; 
+@background-start: #ECBF41;
+@background-end: @primary;
+@background-danger: #FD7474;
+
+/* AND ITS OVER TO LESS/CSS3! */
+
+// Define @size - to convert into percentage
+@size: (100/@boxes-per-row)+0%;
+
+body {
+	background: #424242;
+  font-family: 'Montserrat', sans-serif;
+  
+  h1,h2 {
+    color:#fff;
+    text-align:center;
+  }
+  a{
+    color:@primary;
+  }
+}
+#board {
+	position: relative;
+	margin: 2em;
+	padding: 20px;
+	background-color: @background-board;
+	border: .4375em solid #383838;
+  
+  section {
+    background:@background-default;
+    width:@size;
+    padding: 10px 0;
+    min-width:120px;
+    height:100px;
+    display:inline-block;
+    margin-left: -5px;
+    text-align:center;
+    cursor:pointer;
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -ms-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+    
+    span {
+      font-size:12px;
+      display:block;
+      position: relative;
+      top: 5px;
+      
+      &.price {
+        text-align:center;
+        width:100%;
+        margin-bottom:2px;
+      }
+    }
+    i {
+      font-size:40px;
+      margin: 16px 0 13px 0;
+    }
+    &:nth-child(odd) {
+      background:darken(@background-default, 5%);
+    }
+    &:hover {
+      background:darken(@background-default, 15%);
+    }
+    &.right:after {
+      left: 10px;
+      float:right;
+    }
+    &.left:after {
+      right: 10px;
+      float:left;
+    }
+    &.up:after {
+      top:-115px;
+      left: 60px;
+      float:left;
+    }
+    &:not(.no-dir):after {
+      position: relative;
+      display: block;
+      bottom: (@size-arrow / 2)+50px;
+      height: @size-arrow;
+      width: @size-arrow;
+      content: '';
+      background:inherit;
+      -moz-transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+      z-index: 10;
+    }
+    &.active {
+      background:@background-active !important;
+      &:hover {
+        background:darken(@background-active, 5%) !important;
+      }
+    }
+    &.start {
+      background:@background-start !important;
+      &:hover {
+        background:darken(@background-start, 5%) !important;
+      }
+    }
+    &.end {
+      background:@background-end !important;
+      &:hover {
+        background:darken(@background-end, 5%) !important;
+      }
+    }
+    &.danger {
+      background:@background-danger !important;
+      &:hover {
+        background:darken(@background-danger, 5%) !important;
+      }
+    }
+  }
+}

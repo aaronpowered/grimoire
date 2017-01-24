@@ -1,0 +1,212 @@
+@keyframes cloudAnim {
+  from {
+    transform: translateX(0px) translateY(0px);
+  }
+  to {
+    transform: translateX(3000px) translateY(0px);
+  }
+}
+
+body {
+  filter: saturate(0.8);
+  filter: brightness(1) contrast(1) grayscale(0) hue-rotate(0deg) invert(0) saturate(0.8) sepia(0);
+
+  
+background: #333030; /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  #333030 0%, #000000 100%); /* FF3.6-15 */
+background: -webkit-radial-gradient(center, ellipse cover,  #333030 0%,#000000 100%); /* Chrome10-25,Safari5.1-6 */
+background: radial-gradient(ellipse at center,  #333030 0%,#000000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333030', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+  -webkit-transition: all 5s ease;
+-moz-transition: all 5s ease;
+-ms-transition: all 5s ease;
+-o-transition: all 5s ease;
+transition: all 5s ease;
+  
+}
+
+.navigation {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+}
+.navigation a {
+  background-color: #ccc;
+  color: #666;
+  font-family: sans-serif;
+  padding: 8px;
+  cursor: pointer;
+  -webkit-box-shadow:inset 0 0 0 0 #000;
+box-shadow:inset 0 0 0 0 #000;
+  
+}
+
+.navigation a:hover {
+  background-color: #fafafa;
+  -webkit-transition: all 100ms ease-in;
+  -moz-transition: all 100ms ease-in;
+  -ms-transition: all 100ms ease-in;
+  -o-transition: all 100ms ease-in;
+  transition: all 100ms ease-in;
+}
+.navigation a:active {
+  color: white;
+  background: white;
+  -webkit-box-shadow:inset 500px 0 0 0 #000;
+box-shadow:inset 500px 0 0 0 #000;
+}
+
+#map {
+  margin: 0 auto;
+  width: 1000px;
+  height: 1000px;
+  flex-wrap: wrap;
+    display: flex;
+ -webkit-transform: perspective(670px) rotateX(45deg) translate3d(0px, -280px, 0px);
+-moz-transform: perspective(670px) rotateX(45deg) translate3d(0px, -280px, 0px);
+-o-transform: perspective(670px) rotateX(45deg) translate3d(0px, -280px, 0px);
+-ms-transform: perspective(670px) rotateX(45deg) translate3d(0px, -280px, 0px);
+transform: perspective(670px) rotateX(45deg) translate3d(0px, -280px, 0px);
+  transform-style: preserve-3d;
+}
+
+#map:after {
+  content:'';
+  width: 100%;
+  position:absolute;
+  bottom: -15px;
+  left: 0px;
+  height: 15px;
+  background-color: #666;
+  -webkit-transform: rotateX(-45deg);
+-moz-transform: rotateX(-45deg);
+-o-transform: rotateX(-45deg);
+-ms-transform: rotateX(-45deg);
+transform: rotateX(-45deg);
+  
+  transform-origin: 50% 0%;
+
+}
+
+br {
+  margin: 0;
+  padding: 0;
+}
+
+.chunk {
+  width: 100px;
+  height: 100px;  
+  flex-wrap: wrap;
+    display: flex;
+  /*outline: 1px inset #111;*/
+}
+
+.tile {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+.tileElevation0 {
+  /*deep water*/
+  background-color: #133D7F;
+  opacity: 0.75;
+  transform: translateY(0px);  
+}
+
+.tileElevation1 {
+  /*water*/
+  background-color: #1D5BBF;
+  transform: translateY(0px);
+
+}
+
+
+
+.tileElevation2 {
+  /*shallow water*/
+  background-color: #2779FF;
+
+}
+
+
+.tileElevation3 {
+  /*coast */
+  background-color: #FFFB3E;
+  transform: translateY(-1px);
+}
+
+.tileElevation4 {
+  /*lowground */
+  background-color: #3AE516;
+  transform: translateY(-2px);
+}
+
+.tileElevation5 {
+  /*meadow */
+  background-color: #30BF12;
+  transform: translateY(-3px);
+}
+
+.tileElevation6 {
+  /*forest */
+  background-color: #207F0C;
+  transform: translateY(-6px);
+}
+
+.tileElevation7 {
+  /*dense forest */
+  background-color: #207F0C;
+  transform: translateY(-8px);
+}
+
+.tileElevation8 {
+  /*low forrest */
+  background-color: #407F32;
+  transform: translateY(-11px);
+}
+
+.tileElevation9 {
+  /*cliffs */
+  background-color: #BFC9CC;
+  transform: translateY(-15px);
+}
+
+.tileElevation10 {
+  /*snow */
+  background-color: #EFFBFF;
+  transform: translateY(-19px);
+}
+
+
+#clouds {
+  margin: 0 auto;
+   -webkit-transform: perspective(670px) rotateX(45deg) translate3d(0px, -280px, 0px);
+-moz-transform: perspective(670px) rotateX(45deg) translate3d(0px, -280px, 0px);
+-o-transform: perspective(670px) rotateX(45deg) translate3d(0px, -280px, 0px);
+-ms-transform: perspective(670px) rotateX(45deg) translate3d(0px, -280px, 0px);
+transform: perspective(670px) rotateX(45deg) translate3d(0px, -280px, 0px);
+     width: 1000px;
+    height: 1000px;
+}
+
+.cloud {
+  animation: cloudAnim linear;
+  background-color: #ccc;
+  opacity: 0.66;
+  position: absolute;
+  z-index: 100;
+  box-shadow: 27px 60px 7px 0 rgba(0,0,0,0.43);
+}
+
+.night {
+  filter: brightness(0.5) contrast(1.7) grayscale(0) hue-rotate(0deg) invert(0.13) saturate(0.1) sepia(0.2);
+  
+  -webkit-transition: all 5s ease;
+-moz-transition: all 5s ease;
+-ms-transition: all 5s ease;
+-o-transition: all 5s ease;
+transition: all 5s ease;
+}

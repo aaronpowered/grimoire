@@ -1,0 +1,325 @@
+@import "compass/css3";
+
+$dark: #152;
+$light: #afa;
+
+@include keyframes(pulse) {
+  0% { @include transform(scale(1)); }
+  100% { @include transform(scale(0.85)); }
+}
+
+@include keyframes(bounce) {
+  0% { margin-top: 0; }
+  100% { margin-top: -30px; }
+}
+
+@include keyframes(blink) {
+  0% { margin-top: 10px; }
+  3% { margin-top: 0; }
+  6% { margin-top: 10px; }
+}
+
+@include keyframes(dash) {
+  0% {
+    left: 400px;
+  }
+  100% {
+    left: 100px;
+  }
+}
+
+* {
+  @include box-sizing(border-box);
+}
+
+html, 
+body {
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+p {
+  font-size: 11pt;
+  margin: 0;  
+}
+
+h1 {
+  color: $dark;
+  font-size: 300%;
+  margin: 40 0 0;
+  line-height: 1.5;
+  padding: 0 40px;
+  text-align: center;
+  width: 238px;
+  
+  @include text-shadow(1px 1px 1px #000, -1px -1px 1px #fff);
+}
+
+#wall {
+  background-color: #ffd;
+  height: inherit;
+  position: absolute;
+  width: 100%;
+  
+  @include perspective(400px);
+}
+
+#table {
+  background: url("http://subtlepatterns.com/patterns/retina_wood.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  width: inherit;
+  @include transform(rotateX(45deg));
+}
+
+.quote {
+  font-size: 9pt;
+  font-style: italic;
+  padding-top: 20px;
+}
+
+.name {
+  float: right;
+}
+
+#image {
+  left: calc(50% - 150px);
+  height: inherit;
+  position: relative;
+  width: 300px;
+  perspective: 2500;
+  
+  &:hover #wrapper {
+    transform: rotateY(180deg);
+  }
+}
+
+#wrapper {
+  left: calc(50% - 150px);
+  height: 450px;
+  position: absolute;
+  top: calc(50% - 225px);
+  transform-style: preserve-3d;
+  width: 300px;
+  
+  @include animation(bounce 2s ease-in-out alternate infinite);
+  @include transition(all 1.0s linear);
+}
+
+#front {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  
+  @include border-radius(20px);
+  @include transform(translate3d(0,0,0));
+}
+
+#back {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background-color: #000;
+  border: 1px solid #aaa;
+  display: block;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  
+  @include border-radius(20px);
+  @include transform(rotateY(180deg));
+}
+
+#emblem {
+  background-color: $light;
+  height: 86%;
+  left: 10%;
+  position: absolute;
+  top: 7%;
+  width: 80%;
+  z-index: 10;
+  
+  @include border-radius(50%);
+  @include box-shadow(inset 0 0 1px 1px #000, 0 0 5px 1px rgba(255, 255, 255, 0.25));
+}
+
+.inner {
+  background-color: $dark;
+  border: 10px solid #ddd;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+
+  @include border-radius(20px);
+}
+
+#window {
+  background-color: #fff;
+  height: 40%;
+  margin: 1% auto 0;
+  overflow: hidden;
+  position: relative;
+  width: 90%;
+}
+
+#name {
+  color: #fff;
+  position: relative;
+  padding-left: 15px;
+  margin-top: 2px;
+}
+
+#type {
+  color: #000;
+  height: 4%;
+  margin: 1% auto 0;
+  width: 90%;
+}
+
+.num {
+  color: #fff;
+}
+
+.sand {
+  background-color: $light;
+  float: right;
+  height: 18px;
+  margin-left: 5px;
+  text-align: center;
+  width: 18px;
+  
+  @include border-radius(50%);
+}
+
+#info {
+  background-color: $light;
+  border-bottom: 4px solid lighten($dark, 10);
+  border-left: 4px solid lighten($dark, 30);
+  border-right: 4px solid lighten($dark, 15);
+  border-top: 4px solid lighten($dark, 20);
+  height: 43%;
+  line-height: 1.5;
+  margin: 2% auto 0;
+  padding: 10px;
+  text-align: justify;
+  width: 90%;
+}
+
+#stats {
+  background-color: $light;
+  float: right;
+  height: 18px;
+  margin: 3px 13px 0 0;
+  padding: 0 0;
+  text-align: center;
+  width: 30px;
+  
+  @include border-radius(3px);
+}
+
+#shadow-wrapper {
+  height: 50px;
+  left: calc(50% - 110px);
+  position: absolute;
+  top: calc(50% + 275px);
+  width: 220px;
+  
+  
+  @include transform(rotateX(70deg));
+}
+
+#shadow {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  
+  @include box-shadow(0 0 50px 50px rgba(0, 0, 0, 0.5));
+  @include animation(pulse 2s ease-in-out alternate infinite);
+}
+
+#sky {
+  background-color: #1b5784;
+  height: 220px;
+  margin-top: -10px;
+  position: absolute;
+  width: 260px;
+  
+  @include filter-gradient(#104060, #072d59, vertical);
+  @include background-image(linear-gradient(top, #104060 0%, #005 100%));
+}
+
+#head {
+  background-color: #000;
+  height: 200px;
+  left: 100px;
+  overflow: hidden;
+  position: absolute;
+  width: 200px;
+  
+  @include animation(dash 1s linear);
+  @include border-radius(50%);
+  @include transform(rotateZ(-20deg));
+}
+
+#mask {
+  background-color: #eb5;
+  height: 35px;
+  margin-top: 5px;
+  position: relative;
+  width: 100%;
+}
+
+#wrap {
+  background-color: #f00;
+  height: 20px;
+  position: relative;
+  margin-top: 30%;
+  width: 100%;
+}
+
+.eye {
+  background-color: #fff;
+  display: inline-block;
+  height: 35px;
+  margin-left: 20px;
+  overflow: hidden;
+  position: relative;
+  width: 35px;
+  
+  @include border-radius(50%);
+}
+
+.lid {
+  background-color: #eb5;
+  border: 1px solid #630;
+  height: 15px;
+  position: relative;
+  width: 40px;
+  z-index: 10;
+}
+
+.lid-bottom {
+  height: 30px;
+  margin-top: 10px;
+  
+  @include animation(blink 6s linear 1s infinite);
+}
+
+.pupil {
+  background-color: #962;
+  display: inline-block;
+  height: 20px;
+  left: calc(50% - 10px);
+  position: absolute;
+  top: calc(50% - 10px);
+  width: 20px;
+  
+  @include border-radius(50%);
+}

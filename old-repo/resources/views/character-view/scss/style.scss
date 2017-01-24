@@ -1,0 +1,269 @@
+body {
+  margin: 0;
+  background: rgba(90, 73, 105, 1);
+  background: radial-gradient(ellipse at center, rgba(90, 73, 105, 1) 12%, rgba(90, 73, 105, 1) 41%, rgba(131, 73, 88, 1) 76%, rgba(113, 71, 90, 1) 99%, rgba(240, 47, 23, 1) 100%);
+  overflow: hidden;
+}
+
+#world {
+  height: 100vh;
+  position: relative;
+  .clouds {
+    //initiate GPU acceleration for better performance
+    transform: translateZ(0);
+    position: absolute;
+    z-index: -1;
+    opacity: 0.7;
+  }
+  #clouds-long {
+    animation: clouds-long 20s linear infinite;
+  }
+  #clouds1 {
+    animation: clouds1 6s linear infinite;
+  }
+  #clouds2 {
+    animation: clouds2 9s linear infinite;
+    z-index: 2;
+  }
+}
+
+@keyframes clouds-long {
+  0% {
+    transform: translate(100vw, -20%);
+  }
+  100% {
+    transform: translate(-8300px, -70%)
+  }
+}
+
+@keyframes clouds1 {
+  0% {
+    transform: translate(110vw, -20%);
+  }
+  100% {
+    transform: translate(-3000px, -70%)
+  }
+}
+
+@keyframes clouds2 {
+  0% {
+    transform: translate(110vw, -20%);
+  }
+  100% {
+    transform: translate(-3000px, -70%)
+  }
+}
+
+@keyframes wind-frame1 {
+  0% {
+    visibility: visible;
+  }
+  8.3% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes wind-frame2 {
+  0% {
+    visibility: hidden;
+  }
+  8.3% {
+    visibility: visible;
+  }
+  16.6% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes wind-frame3 {
+  0% {
+    visibility: hidden;
+  }
+  8.3% {
+    visibility: hidden;
+  }
+  16.6% {
+    visibility: visible;
+  }
+  25% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes wind-frame4 {
+  0% {
+    visibility: hidden;
+  }
+  16.6% {
+    visibility: hidden;
+  }
+  25% {
+    visibility: visible;
+  }
+  33.3% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes wind-frame5 {
+  0% {
+    visibility: hidden;
+  }
+  25% {
+    visibility: hidden;
+  }
+  33.3% {
+    visibility: visible;
+  }
+  41.6% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes wind-frame6 {
+  0% {
+    visibility: hidden;
+  }
+  33.3% {
+    visibility: hidden;
+  }
+  41.6% {
+    visibility: visible;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes wind-frame7 {
+  0% {
+    visibility: hidden;
+  }
+  41.6% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: visible;
+  }
+  58.3% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes wind-frame8 {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  58.3% {
+    visibility: visible;
+  }
+  66.6% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes wind-frame9 {
+  0% {
+    visibility: hidden;
+  }
+  58.3% {
+    visibility: hidden;
+  }
+  66.6% {
+    visibility: visible;
+  }
+  75% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes wind-frame10 {
+  0% {
+    visibility: hidden;
+  }
+  66.6% {
+    visibility: hidden;
+  }
+  75% {
+    visibility: visible;
+  }
+  83.3% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes wind-frame11 {
+  0% {
+    visibility: hidden;
+  }
+  75% {
+    visibility: hidden;
+  }
+  83.3% {
+    visibility: visible;
+  }
+  91.6% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes wind-frame12 {
+  0% {
+    visibility: hidden;
+  }
+  83.3% {
+    visibility: hidden;
+  }
+  91.6% {
+    visibility: visible;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+
+@for $i from 1 through 12 {
+  #frame#{$i} {
+    .start & {
+      transform: translateZ(0);
+      animation: wind-frame#{$i} 1.3s linear infinite;
+      z-index: 1;
+    }
+  }
+}

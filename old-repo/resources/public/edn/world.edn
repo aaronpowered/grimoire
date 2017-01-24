@@ -1,0 +1,112 @@
+{
+:region "Magorország"
+:time "1400"
+:world1 {:name "Belváros"
+         :tiles [
+					{:name "Zenélő szökőkút"
+             :action "Dobhatsz egy érmét a szökőkútba, hogy kívánhass valamit, ezt egy szövegdobozba kell beírnod."
+             :description ""}
+					{:name "Halandók temploma"
+             :action "Bemehetsz a templomba"
+             :description "Ide járnak akik az elmúlásban hisznek"}
+					{:name "Szent Szilveszter termálfürdő"
+             :action "Vehetsz egy fürdőt, hogy regenerálódj."
+             :description ""}
+					{:name "Birodalmi színház"
+             :action "Megnézhetsz egy darabot, hogy növeld az intelligenciád"
+             :description ""}
+					{:name "Várkert"
+             :action "Megpróbálhatsz becsajozni"
+             :description ""}
+					{:name "Sötét sikátorok"
+             :action ""
+             :path-to "Koldus negyed"
+             :description "Itt zajlanak az illegális cserbereék és a késes balhék"}
+					{:name "Fogadó a holt nyúlhoz"
+             :action "Leihatod magad sztorikért vagy, hogy bunyóba keveredj."
+             :description ""}
+					{:name "Furmány kereskedőház"
+             :action ""
+             :description ""}
+					{:name "Városháza"
+             :action "Bekopoghatsz"
+             :description ""}
+					{:name "Városi börtön"
+             :action ""
+             :description ""}
+
+					{:name "Vár északi fal"
+             :action "Gyakorlatozhatsz az itt állomásozó katonákkal"
+             :description ""}
+					{:name "Tulipános iskola"
+             :action "Megpróbálhatsz belógni egy órára"
+             :path-to "Polgári negyed"
+             :description ""}
+					{:name "Bíróság"
+             :action ""
+             :description ""}
+					{:name "Verbuválók tere"
+             :action ""
+             :description ""}
+					{:name "Kovács utca"
+             :action "Kovácsok céhe"
+             :description ""}
+					{:name "Cipész köz"
+             :action ""
+             :description ""}
+
+					{:name "Belvárosi Piac"
+             :action ""
+             :description "A keményen dolgozó kisemberek piaca"}
+					{:name "Szabó utca"
+             :action ""
+             :description ""}
+					{:name "Őrtorony"
+             :action ""
+             :description ""}
+					{:name "Aréna"
+             :action "Megküzdhetsz az arénában"
+             :description ""}
+					{:name "Gyanakvó italozó"
+             :action ""
+             :description ""}
+					{:name "Bérházak"
+             :action ""
+             :description ""}
+					{:name "Mély kút"
+             :action ""
+             :description ""}
+					{:name "Bíbor bordély"
+             :action ""
+             :description ""}
+					{:name "Arzenál"
+             :action ""
+             :description ""}
+					{:name "Parancsnoki épület"
+             :action ""
+             :description ""}
+					{:name "Urak házai"
+             :action ""
+             :description ""}
+
+					{:name "Orvosdoktor köz"
+             :action ""
+             :description ""}
+					{:name "Szeretők hídja"
+             :action ""
+             :description ""}
+					{:name "Bársony fogadó"
+             :action ""
+             :path-to "Ke negyed"
+             :description ""}
+					{:name "Halhatatlanok temploma"
+             :action "Bekopoghatsz a templomba"
+             :description "Ide járnak akik az örök életben hisznek"}
+					{:name "Kalandozók csarnoka"
+             :action ""
+             :description ""}
+					{:name ""
+             :action ""
+             :description ""}
+                ]}
+}

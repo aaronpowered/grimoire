@@ -1,0 +1,75 @@
+html, body, h1
+  
+  height: 100%
+  width: 100%
+
+body
+  transition: background-color 0.3s ease-in
+  font-family: 'Open Sans', sans-serif
+  background-color: hsl(350, 100%, 50%)
+  
+  // in firefox, a transformed element causes a scroll when it extends beyond the element's size, so we'll disable it
+  overflow: hidden
+  
+  font-size: 12px
+  
+  @media (min-width: 480px)
+    font-size: 14px
+  
+  @media (min-width: 640px)
+    font-size: 16px
+  
+.word
+  font-family: 'Bangers', cursive
+  
+svg
+  height: 100%
+  width: 100%
+  position: relative
+  top: -1rem
+  animation: pop-out 2s ease-in-out infinite
+    
+.word
+  font-family: 'Bangers', cursive
+  letter-spacing: 0.05em
+  color: white
+  padding: 0.5em
+
+  font-size: 28px
+
+  @media (min-width: 480px)
+    font-size: 36px
+
+  @media (min-width: 640px)
+    font-size: 48px
+
+  @media (min-width: 960px)
+    font-size: 64px
+
+  @media (min-width: 1280px)
+    font-size: 84px
+  
+p
+  position: fixed
+  bottom: 0
+  left: 0
+  right: 0
+  line-height: 2rem
+    
+  text-align: center
+  color: transparentize(white, 0.25)
+  background-color: transparentize(#222, 0.0)
+
+@keyframes pop-out
+  0%
+    transform: scale3d(0, 0, 1)
+    opacity: 1
+  25%
+    transform: scale3d(1, 1, 1)
+    opacity: 1
+  100%
+    transform: scale3d(1.5, 1.5, 1)
+    opacity: 0
+  
+a, a:visited
+  color: inherit
