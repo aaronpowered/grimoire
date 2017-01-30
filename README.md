@@ -1,6 +1,6 @@
-# [](http://.org) - Közösségi/tábla alapú szerepjáték
+# [Grimoire](https://aaronpowered.github.io/grimoire/) - Közösségi, táblás online szerepjáték
 
-XXXX ([XXXXX.org](http://.org)) földje ma még titokzatos új világ. Évekkel ezelőtt fedezte fel [Senkiur](http://.org/users/senkiur) aki a feljegyzések alapján egy komplett, addig elzárt városra lelt Óperencia északi partjainál.
+Üdv kalandor ([Tükörföldén](https://aaronpowered.github.io/grimoire/)), a titokzatos szép új világban! 1370-ben fedezte fel [Senkiur](http://.org/users/senkiur) aki a feljegyzések alapján egy komplett, addig elzárt városra lelt Óperencia északi túlpartján.
 
 **Figyelem**: A **játékhoz csatlakozni** az alfa időszak alatt kizárólag személyes meghívás útján lehetséges. **Béta útlevelet** kaphatsz azonban, ha ellátogatsz az itteni kikötőbe: [Az új világba tartó hajók](https://.org/beta-keys) Egy hajón legfeljebb 50 ember fér el biztonságosan, 2017 nyarán előreláthatólag 3 hajónyi ember nyerhet bebocsátást.
 
