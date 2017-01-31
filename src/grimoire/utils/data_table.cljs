@@ -1,4 +1,4 @@
-(ns grimoire.client.utils.data-table
+(ns grimoire.utils.data-table
   (:require [reagent.core   :as reagent]
             [clojure.string :as s]))
 

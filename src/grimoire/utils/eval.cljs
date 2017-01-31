@@ -1,4 +1,4 @@
-(ns grimoire.client.utils.eval
+(ns grimoire.utils.eval
   (:require [reagent.core :as reagent :refer [atom]]
             [cljs.tools.reader :refer [read-string]]
             [cljs.js :refer [empty-state eval js-eval]]

@@ -1,6 +1,6 @@
-(ns grimoire.client.db
+(ns grimoire.admin.db
   (:require [datascript.core :as d]
-            [grimoire.client.tools :as util :refer [tempid]]))
+            [grimoire.utils.tools :as util :refer [tempid]]))
 
 (def schema {:task/category         {:db/valueType :db.type/ref}
              :category/todo         {:db/valueType :db.type/ref}

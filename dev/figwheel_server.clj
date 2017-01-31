@@ -1,7 +1,7 @@
 (ns figwheel-server
   (:require [com.stuartsierra.component :as component]
             [figwheel-sidecar.system :as figwheel]
-            [peak.shared.utils :refer [deep-merge]]
+            [grimoire.shared.utils :refer [deep-merge]]
             [taoensso.timbre :as log :include-macros true]))
 
 

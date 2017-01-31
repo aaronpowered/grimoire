@@ -1,4 +1,4 @@
-(ns grimoire.client.tools
+(ns grimoire.utils.tools
     (:require [reagent.core :as reagent :refer [atom]]
               [reagent.session :as session]
               [ajax.core :refer [GET POST DELETE]]

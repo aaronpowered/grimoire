@@ -1,4 +1,4 @@
-(ns grimoire.client.utils.svg-anim
+(ns grimoire.utils.svg-anim
   (:require 
     [reagent.core :as reagent]
     [reagent.ratom :as ratom]

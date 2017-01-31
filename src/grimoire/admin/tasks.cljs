@@ -1,8 +1,8 @@
-(ns grimoire.client.tasks
+(ns grimoire.admin.tasks
   (:require [posh.reagent :as p]
-            [grimoire.client.db :as db :refer [conn]]
-            [grimoire.client.tools :as util]
-            [grimoire.client.components :as comp]))
+            [grimoire.admin.db :as db :refer [conn]]
+            [grimoire.utils.tools :as util]
+            [grimoire.admin.components :as comp]))
 
 (defn task [conn task-id]
   (let [task @(p/pull conn '[:task/done :task/pinned] task-id)]

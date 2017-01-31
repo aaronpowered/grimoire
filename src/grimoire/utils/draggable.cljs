@@ -1,4 +1,4 @@
-(ns grimoire.client.utils.draggable
+(ns grimoire.utils.draggable
   (:require-macros [cljs.core.async.macros :refer (go)])
   (:require
     [reagent.core :as reagent :refer [atom]]

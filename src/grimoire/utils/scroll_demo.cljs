@@ -1,12 +1,12 @@
-(ns grimoire.client.scroll-demo
+(ns grimoire.utils.scroll-demo
   (:require-macros [cljs.core.async.macros :refer [go-loop]])
   (:require [reagent.core :as r]
             [cljs.core.async :refer [<!]]
             [goog.events :as events]
             [cljsjs.react :as react]
-            [grimoire.client.utils.fps :refer [fps]]
-            [grimoire.client.utils.scroll-chan :refer [scroll-chan-events scroll-chan-test]]
-            [grimoire.client.utils.scroll-engine :refer [animation-container]]))
+            [grimoire.utils.fps :refer [fps]]
+            [grimoire.utils.scroll-chan :refer [scroll-chan-events scroll-chan-test]]
+            [grimoire.utils.scroll-engine :refer [animation-container]]))
 
 
 (def cur-scroll-y (r/atom 0))

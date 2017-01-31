@@ -1,4 +1,4 @@
-(ns grimoire.client.utils.markdown-editor
+(ns grimoire.utils.markdown-editor
     (:require [reagent.core :as reagent]))
 
 (defn highlight-code [html-node]

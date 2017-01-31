@@ -1,8 +1,8 @@
-(ns grimoire.client.components
+(ns grimoire.admin.components
   (:require [posh.reagent :as p]
-            [grimoire.client.db :as db :refer [conn]]
+            [grimoire.admin.db :as db :refer [conn]]
             [reagent.core :as r]
-            [grimoire.client.tools :as util]))
+            [grimoire.utils.tools :as util]))
 
 ;;; General Purpose Components
 

@@ -2,7 +2,7 @@
     (:require-macros
               [cljs.core.async.macros :as asyncm :refer (go go-loop)])
     (:require [reagent.core :as reagent :refer [atom]]
-              [grimoire.client.tools :refer [getValueById getElementById changeValueById on-key-press on-click]]
+              [grimoire.utils.tools :refer [getValueById getElementById changeValueById on-key-press on-click]]
               [grimoire.client.ws :as ws]
               [cljs.core.async :as async :refer (<! >! put! chan)]
               [taoensso.timbre :as log] 

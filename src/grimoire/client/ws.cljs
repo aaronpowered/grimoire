@@ -3,7 +3,7 @@
               [cljs.core.async.macros :as asyncm :refer (go go-loop)])
     (:require [reagent.core :as reagent :refer [atom]]
               [reagent.session :as session]
-              [grimoire.client.tools :refer [round container getValueById getElementById changeValueById on-key-press on-click]]
+              [grimoire.utils.tools :refer [round container getValueById getElementById changeValueById on-key-press on-click]]
               [cljs.core.async :as async :refer (<! >! put! chan)] 
               [cljs.core.match :refer-macros [match]]
               [cljs.reader :refer [read-string]]

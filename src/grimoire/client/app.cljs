@@ -19,14 +19,15 @@
             [grimoire.client.views :as views]
 ;            [grimoire.client.transition :as transition]
             [grimoire.shared.sente :as sente]
+            [grimoire.admin.dashboard :as dashboard]
             [grimoire.client.scroll-demo :refer [scroll-demo-page]]
             [grimoire.client.game :refer [gametable]]
-            [grimoire.client.utils.draggable :refer [draggable-button]]
-            [grimoire.client.utils.data-table :refer [data-table]]
-            [grimoire.client.utils.svg-anim :refer [svg-page]]
+            [grimoire.utils.draggable :refer [draggable-button]]
+            [grimoire.utils.data-table :refer [data-table]]
+            [grimoire.utils.svg-anim :refer [svg-page]]
             [grimoire.client.registration :refer [create-character]]
             [grimoire.client.db :as db :refer [conn]]
-            [grimoire.client.tools :as util :refer [tempid]]
+            [grimoire.utils.tools :as util :refer [tempid]]
             [grimoire.client.components :as comp]
             ))
 
@@ -57,7 +58,7 @@
 (defn admin-panel [] 
   (let [todo-id (d/q '[:find ?todo .
                        :where [?todo :todo/name _]] @conn)]
-  (views/admin conn todo-id)))
+  (dashboard/admin conn todo-id)))
 
 (defn registration [] (create-character profile data))
 (defn tabletop [] (gametable data profile))

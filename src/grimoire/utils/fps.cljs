@@ -1,4 +1,4 @@
-(ns grimoire.client.utils.fps
+(ns grimoire.utils.fps
   "a simple frames-per-second calculator. Helpful when developing."
   (:require [reagent.core :as r]))
 

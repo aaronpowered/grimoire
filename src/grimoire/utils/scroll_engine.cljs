@@ -1,4 +1,4 @@
-(ns grimoire.client.utils.scroll-engine
+(ns grimoire.utils.scroll-engine
   (:require [reagent.core :as r]))
 
 (defn- length [[from to]]

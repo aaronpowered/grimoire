@@ -1,9 +1,9 @@
-(ns grimoire.client.categories
+(ns grimoire.admin.categories
   (:require [posh.reagent :as p]
-            [grimoire.client.tools :as util]
-            [grimoire.client.tasks :as tasks]
-            [grimoire.client.components :as comp]
-            [grimoire.client.dashboard :as dash]))
+            [grimoire.utils.tools :as util]
+            [grimoire.admin.tasks :as tasks]
+            [grimoire.admin.components :as comp]
+            [grimoire.admin.dashboard :as dash]))
 
 ;; todo components
 

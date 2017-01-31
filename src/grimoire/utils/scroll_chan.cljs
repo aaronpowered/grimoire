@@ -1,4 +1,4 @@
-(ns grimoire.client.utils.scroll-chan
+(ns grimoire.utils.scroll-chan
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [cljs.core.async :refer [<! put! chan timeout]]
             [goog.events :as events]

@@ -2,10 +2,8 @@
   (:require [reagent.core :as reagent]
             [reagent.session :as session]
 ;            [grimoire.client.ws :refer [online-players]]
-            [grimoire.client.categories :as cats]
-            [grimoire.client.dashboard :as dash]
             [posh.reagent :as p]
-            [grimoire.client.tools :refer [container]]
+            [grimoire.utils.tools :refer [container]]
   ))
 
 (defonce online-players (reagent/atom 0))
@@ -48,32 +46,6 @@
 ;             (str "(" (count @online-players) "/50 játékos)")]]
 ;   [:ul (map #(do [:li %]) @online-players)]
  ])
-
-
-
-;;Admin Panel
-;(p/pull conn '[*] [:task/name "Mop Floors"])
-(defn testdog [conn]
-  (let [floors @(p/pull conn '[*] [:task/name "Mop Floors"])]
-    [:div
-     {:on-click
-      #(p/transact! conn [[:db/add (:db/id floors) :task/done (not (:task/done floors))]])}
-     "Test: "
-     (pr-str floors)
-     ]))
-
-(defn admin [conn todo-id]
-  (let [todo @(p/pull conn '[:todo/name] [:todo/name "Matt's List"])]
-    [:div
-     [testdog conn]
-     [:a {:href "/"} "Vissza"]
-     [:h1 (:todo/name todo)]
-     [dash/dashboard-button conn todo-id]
-     [cats/category-menu conn todo-id]
-     [cats/add-new-category conn todo-id]
-     [cats/category-panel conn todo-id]
-     ]))
-
 
 
 (defn info-page [profile data]

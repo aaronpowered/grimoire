@@ -1,7 +1,7 @@
 (ns grimoire.client.registration
     (:require [reagent.core :as reagent :refer [atom]]
               [reagent.session :as session]
-              [grimoire.client.tools :refer [round timer atom-input]]
+              [grimoire.utils.tools :refer [round timer atom-input]]
               [ajax.core :refer [GET POST DELETE]]
               [cljs.reader :refer [read-string]]))
 
