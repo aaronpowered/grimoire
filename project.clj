@@ -90,16 +90,6 @@
 
   :plugins [[lein-cljsbuild "1.1.1" :exclusions [org.clojure/clojure]]]
 
-  ;; For Datomic Pro uncomment the following and set the DATOMIC_USERNAME and DATAOMIC_PASSWORD environment
-  ;; variables of the process in which you run this program to those matching your Datomic Pro account. You'll
-  ;; have to start your own transactor separately from this process as well. More instructions on how to do
-  ;; that in the Wiki (I think... bug us if you can't find them).
-  ;:repositories {"my.datomic.com" {:url
-  ;                               "https://my.datomic.com/repo"
-  ;                                 :username
-  ;                                [:env/datomic_username]
-  ;                                 :password
-  ;                                 [:env/datomic_password]}}
   :source-paths ["src"]
   :resource-paths ["resources"]
   :target-path "target/%s"
@@ -138,7 +128,7 @@
                     :repl-options {:nrepl-middleware
                               [cemerick.piggieback/wrap-cljs-repl]}
                     :cljsbuild {:builds {:client {:figwheel {
-                                :on-jsload "start/on-js-reload"}}}}
+                                :on-jsload "peak.client.start/on-js-reload"}}}}
                     :plugins [[lein-figwheel "0.5.8"]
                               [com.palletops/lein-shorthand "0.4.0"]
                               [lein-environ "1.0.1"]]
