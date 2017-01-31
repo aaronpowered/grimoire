@@ -7,8 +7,8 @@
     [com.stuartsierra.component :as component]
     [taoensso.timbre :as log :include-macros true]
     [clojure.tools.namespace.repl :refer [refresh refresh-all]]
-    [peak.server :as system]
-    [peak.config :refer [web-server-port]]
+    [grimoire.server :as system]
+    [grimoire.config :refer [web-server-port]]
     [figwheel-server :as fserver]))
 
 (def system nil)

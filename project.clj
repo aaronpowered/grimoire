@@ -1,4 +1,4 @@
-(defproject peak "0.0.1-alpha1"
+(defproject grimoire "0.0.1-alpha1"
   :description ""
   :url ""
   :license {:name "Eclipse Public License"
@@ -97,13 +97,13 @@
   :clean-targets ^{:protect false}
      [:target-path :compile-path "resources/public/js/compiled"]
 
-  :main ^:skip-aot peak.run
+  :main ^:skip-aot grimoire.run
   :cljsbuild {:builds
               {:client
-               {:source-paths ["src/peak/client"
+               {:source-paths ["src/grimoire/client"
                                "dev"]
 
-                :compiler {:main peak.client.start-prod
+                :compiler {:main grimoire.client.start-prod
                            :asset-path "js/compiled/out"
                        :output-to "resources/public/js/compiled/app.js"
                        :output-dir "resources/public/js/compiled/out"
@@ -128,7 +128,7 @@
                     :repl-options {:nrepl-middleware
                               [cemerick.piggieback/wrap-cljs-repl]}
                     :cljsbuild {:builds {:client {:figwheel {
-                                :on-jsload "peak.client.start/on-js-reload"}}}}
+                                :on-jsload "grimoire.client.start/on-js-reload"}}}}
                     :plugins [[lein-figwheel "0.5.8"]
                               [com.palletops/lein-shorthand "0.4.0"]
                               [lein-environ "1.0.1"]]
@@ -142,7 +142,7 @@
              :prod {:cljsbuild
                     {:builds
                      {:client {:source-paths ^:replace
-                                             ["src/peak/client"]
+                                             ["src/grimoire/client"]
                                :compiler {:optimizations :advanced
                                           :pretty-print false}}}}}
 
