@@ -65,3 +65,20 @@ help
 (rpg.server/run)
 :init-ns rpg.server
 exit
+(defn random-numbers
+  "Ez a funkció véletelen számokat ad vissza egy n elemű vektorban."
+  [n]
+  (vec (take n (repeatedly #(rand-int n)))))
+(random-numbers 10)
+(defn random-numbers
+  "Ez a funkció véletelen számokat ad vissza egy n elemű vektorban."
+  [n]
+(defn random-numbers
+  "Ez a funkció véletelen számokat ad vissza egy n elemű vektorban."
+  [n k]
+  (vec (take n (repeatedly #(rand-int k)))))
+(random-numbers 10 4)
+(random-numbers 6 4)
+(random-numbers 10 4)
+(random-numbers 6 4)
+exit

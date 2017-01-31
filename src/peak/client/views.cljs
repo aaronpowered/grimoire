@@ -34,6 +34,7 @@
  [:div
   [:h2 "Welcome to RPG"]
    [:div [:a {:href "/new"} "Regisztráció"]]
+   [:div [:a {:href "/world"} "Világ"]][:br]
    [:div [:a {:href "/admin"} "Admin felület TODO"]]
    [:div [:a {:href "/scroll-demo"} "Görgetés demo"]]
    [:div [:a {:href "/svg-demo"} "SVG demo"]]

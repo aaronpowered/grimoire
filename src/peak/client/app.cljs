@@ -20,6 +20,7 @@
 ;            [peak.client.transition :as transition]
             [peak.shared.sente :as sente]
             [peak.client.scroll-demo :refer [scroll-demo-page]]
+            [peak.client.game :refer [gametable]]
             [peak.client.utils.draggable :refer [draggable-button]]
             [peak.client.utils.data-table :refer [data-table]]
             [peak.client.utils.svg-anim :refer [svg-page]]
@@ -59,6 +60,7 @@
   (views/admin conn todo-id)))
 
 (defn registration [] (create-character profile data))
+(defn tabletop [] (gametable data profile))
 
 (secretary/defroute "/" []
   (session/put! :current-page #'views/home-page))
@@ -69,6 +71,9 @@
 
 (secretary/defroute "/new" []
   (session/put! :current-page #'registration))
+
+(secretary/defroute "/world" []
+  (session/put! :current-page #'tabletop))
 
 (secretary/defroute "/admin" []
   (session/put! :current-page #'admin-panel))
