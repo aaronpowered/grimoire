@@ -17,18 +17,16 @@
             [secretary.core :as secretary :include-macros true]
             [accountant.core :as accountant]
             [grimoire.client.views :as views]
-;            [grimoire.client.transition :as transition]
-            [grimoire.shared.sente :as sente]
-            [grimoire.admin.dashboard :as dashboard]
-            [grimoire.client.scroll-demo :refer [scroll-demo-page]]
             [grimoire.client.game :refer [gametable]]
+            [grimoire.client.registration :refer [create-character]]
+            [grimoire.shared.sente :as sente]
+            [grimoire.utils.scroll-demo :refer [scroll-demo-page]]
             [grimoire.utils.draggable :refer [draggable-button]]
             [grimoire.utils.data-table :refer [data-table]]
             [grimoire.utils.svg-anim :refer [svg-page]]
-            [grimoire.client.registration :refer [create-character]]
-            [grimoire.client.db :as db :refer [conn]]
             [grimoire.utils.tools :as util :refer [tempid]]
-            [grimoire.client.components :as comp]
+            [grimoire.admin.core :as admin]
+            [grimoire.admin.db :as db :refer [conn]]
             ))
 
 
@@ -58,7 +56,7 @@
 (defn admin-panel [] 
   (let [todo-id (d/q '[:find ?todo .
                        :where [?todo :todo/name _]] @conn)]
-  (dashboard/admin conn todo-id)))
+  (admin/admin conn todo-id)))
 
 (defn registration [] (create-character profile data))
 (defn tabletop [] (gametable data profile))

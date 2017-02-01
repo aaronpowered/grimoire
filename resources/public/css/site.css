@@ -124,7 +124,7 @@ button:focus {
 	background:white;
 	border-radius:10px;
 	overflow-y:scroll;
-  right:-325px;
+  right:-300px;
 transition:All 1.7s ease;
 -webkit-transition:All 1.7s ease;
 -moz-transition:All 1.7s ease;

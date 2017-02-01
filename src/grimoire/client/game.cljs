@@ -13,22 +13,26 @@
 (defn rgba [r g b a] (str "rgba(" r "," g "," b "," a ")"))
 
 (defn gametable [data profile]
-(let [x-view (reagent/atom 7)
+(let [landscape (reagent/atom {:width 100 :height 100 :left 0 :top 0})
+      x-view (reagent/atom 7)
       y-view (reagent/atom 7)
-      ux-view (reagent/atom {:padding "2"
-                             :transition "All 0.7s ease"})
+      ux-view (reagent/atom {:padding "0"
+                             :transition "All 0.7s ease 1s"})
       ]
   (fn []
-  [:div.gametable-view {:style {:width "calc(100% - 20px)" :height "calc(100vh - 20px)"
+  [:div.gametable-view {:style {:width (str (:width @landscape) "%") :height (str (:height @landscape) "vh")
                         :background "rgba(170,225,200,1)"
-                        :position "absolute"
-                        :left 0 :top 0
+                        :position "relative"
+                        :-webkit-transition (:transition @ux-view)
+                        :-moz-transition (:transition @ux-view)
+                        :-o-transition (:transition @ux-view)
+                        :left (:left @landscape) :top (:top @landscape)
                         :margin (str (:padding @ux-view) "vh")}}
-  [:style (str ".card-state:hover {
-                              width: "(- 100 (/ 200 @x-view))"% !important;
-                              height: "(- 100 (/ 200 @y-view))"vh !important;
-                              left: "(/ 100 @x-view)"% !important;
-                              top: "(/ 100 @y-view)"vh !important;
+;  [:style (str ".card-state:hover {
+;                              width: "(- 100 (/ 200 @x-view))"% !important;
+;                              height: "(- 100 (/ 200 @y-view))"vh !important;
+;                              left: "(/ 100 @x-view)"% !important;
+;                              top: "(/ 100 @y-view)"vh !important;
                               ;}")]
     [:div.gametable
       (map (fn [data] [:div.card-state
@@ -36,12 +40,14 @@
                                :height (str (/ (- 100 (:padding @ux-view)) @y-view) "%")
                                :left (str (* (:x data) (/ (- 100 (:padding @ux-view)) @x-view)) "%")
                                :top (str (* (:y data) (/ (- 100 (:padding @ux-view)) @y-view)) "%")
-                               :position "fixed"
+                               :position "absolute"
                                :z-index (:z data)
                                :-webkit-transition (:transition @ux-view)
                                :-moz-transition (:transition @ux-view)
                                :-o-transition (:transition @ux-view)
                                        }}
+                        [:a {:on-click (fn [] (do (swap! landscape assoc :width (* @x-view (:width @landscape))
+                                                                         :height (* @y-view (:height @landscape)))))}
                         [:div.card {:style {
                                :background (:c data)
                                :border "1px solid grey"
@@ -60,7 +66,7 @@
                                         :font-size "2vh"
                                         :border-bottom "1px solid black;"
                                         :margin-top "5px"}} (:title data)]
-                        ]])
+                        ]]])
                                          [ {:x "0" :y "0" :z 1 :c (rgba 255 255 255 0.9) :id 0 :title "Zenélő szökőkút"}
                                            {:x "1" :y "0" :z 1 :c (rgba 255 255 255 0.9) :id 1 :title "Halandók temploma"}
                                            {:x "2" :y "0" :z 1 :c (rgba 255 255 255 0.9) :id 2 :title "Szent Szilveszter termálfürdő"}
