@@ -20,20 +20,21 @@
                              :transition "All 0.7s ease 1s"})
       ]
   (fn []
+  [:div.landscape {:style {:width "100%" :height "100vh" :overflow "hidden"}}
   [:div.gametable-view {:style {:width (str (:width @landscape) "%") :height (str (:height @landscape) "vh")
                         :background "rgba(170,225,200,1)"
                         :position "relative"
                         :-webkit-transition (:transition @ux-view)
                         :-moz-transition (:transition @ux-view)
                         :-o-transition (:transition @ux-view)
-                        :left (:left @landscape) :top (:top @landscape)
+                        :left (str (:left @landscape) "%") :top (str (:top @landscape) "vh")
                         :margin (str (:padding @ux-view) "vh")}}
-;  [:style (str ".card-state:hover {
-;                              width: "(- 100 (/ 200 @x-view))"% !important;
-;                              height: "(- 100 (/ 200 @y-view))"vh !important;
-;                              left: "(/ 100 @x-view)"% !important;
-;                              top: "(/ 100 @y-view)"vh !important;
-                              ;}")]
+  [:style (str ".card-state:hover {
+                              width: "(- 100 (/ 200 @x-view))"% !important;
+                              height: "(- 100 (/ 200 @y-view))"vh !important;
+                              left: "(/ 100 @x-view)"% !important;
+                              top: "(/ 100 @y-view)"vh !important;
+                              }")]
     [:div.gametable
       (map (fn [data] [:div.card-state
                       {:style {:width (str (/ (- 100 (:padding @ux-view)) @x-view) "%")
@@ -46,8 +47,14 @@
                                :-moz-transition (:transition @ux-view)
                                :-o-transition (:transition @ux-view)
                                        }}
-                        [:a {:on-click (fn [] (do (swap! landscape assoc :width (* @x-view (:width @landscape))
-                                                                         :height (* @y-view (:height @landscape)))))}
+                        [:a {:on-click (fn [] (do (if (= (:width @landscape) 100)
+                                                  (swap! landscape assoc :width (* @x-view (:width @landscape))
+                                                                         :height (* @y-view (:height @landscape))
+                                                                         :left (* (/ (* @x-view (:width @landscape)) (/ @x-view (:x data))) -1)
+                                                                         :top (* (/ (* @y-view (:height @landscape)) (/ @y-view (:y data))) -1)
+                                                                         )
+                                                  (reset! landscape {:width 100 :height 100 :left 0 :top 0}))
+                                                  (js/console.log (str @landscape))))}
                         [:div.card {:style {
                                :background (:c data)
                                :border "1px solid grey"
@@ -99,7 +106,7 @@
 
   ]
 
-
+]
   ))
 
 )
