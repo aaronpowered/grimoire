@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>3D Grid with Filters</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+  <header class="header">
+	<h1 class="title">3D Grid Filter Demo</h1>
+</header>
+
+<div class="container">
+	<aside class="topbar">
+
+		<div class="filter-group">
+			<h3 class="filter-group__heading">Color</h3>
+			<ul id="color-filters" class="filters filters--color">
+				<li class="filter">
+						<a href="#" data-filter="*">All</a>
+				</li>
+				<li class="filter">
+					<a href="#" data-filter=".grid-item--red">Red</a>
+				</li>
+				<li class="filter">
+					<a href="#" data-filter=".grid-item--blue">Blue</a>
+				</li>
+				<li class="filter">
+					<a href="#" data-filter=".grid-item--green">Green</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="filter-group">
+			<h3 class="filter-group__heading">Shape</h3>
+			<ul id="shape-filters" class="filters filters--shape">
+				<li class="filter">
+						<label>
+							<input type="checkbox" name="shape-filter" value=".grid-item--square" />
+							Square
+						</label>
+				</li>
+				<li class="filter">
+					<label>
+						<input type="checkbox" name="shape-filter" value=".grid-item--circle" />
+						Circle
+					</label>
+				</li>
+				<li class="filter">
+					<label>
+						<input type="checkbox" name="shape-filter" value=".grid-item--triangle" />
+						Triangle
+					</label>
+				</li>
+			</ul>
+		</div>
+	</aside>
+
+	<main class="main">
+		<section class="grid">
+			<ul class="grid-items">
+				<li class="grid-item grid-item--red grid-item--square">
+					<a href="javascript:void(0)" class="grid-item__link"></a>
+				</li>
+				<li class="grid-item grid-item--blue grid-item--circle">
+					<a href="javascript:void(0)" class="grid-item__link"></a>
+				</li>
+				<li class="grid-item grid-item--green grid-item--triangle">
+					<a href="javascript:void(0)" class="grid-item__link"></a>
+				</li>
+				<li class="grid-item grid-item--red grid-item--circle">
+					<a href="javascript:void(0)" class="grid-item__link"></a>
+				</li>
+				<li class="grid-item grid-item--blue grid-item--square">
+					<a href="javascript:void(0)" class="grid-item__link"></a>
+				</li>
+				<li class="grid-item grid-item--green grid-item--circle">
+					<a href="javascript:void(0)" class="grid-item__link"></a>
+				</li>
+				<li class="grid-item grid-item--red grid-item--triangle">
+					<a href="javascript:void(0)" class="grid-item__link"></a>
+				</li>
+				<li class="grid-item grid-item--blue grid-item--triangle">
+					<a href="javascript:void(0)" class="grid-item__link"></a>
+				</li>
+				<li class="grid-item grid-item--green grid-item--square">
+					<a href="javascript:void(0)" class="grid-item__link"></a>
+				</li>
+				<li class="grid-item grid-item--red grid-item--square">
+					<a href="javascript:void(0)" class="grid-item__link"></a>
+				</li>
+				<li class="grid-item grid-item--blue grid-item--circle">
+					<a href="javascript:void(0)" class="grid-item__link"></a>
+				</li>
+				<li class="grid-item grid-item--green grid-item--triangle">
+					<a href="javascript:void(0)" class="grid-item__link"></a>
+				</li>
+			</ul>
+		</section>
+	</main>
+</div>
+  <script src='https://unpkg.com/isotope-layout@3.0/dist/isotope.pkgd.min.js'></script>
+
+    <script src="js/index.js"></script>
+
+</body>
+</html>

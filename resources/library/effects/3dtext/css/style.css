@@ -1,0 +1,151 @@
+*, ::before, ::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #fde7fd;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-height: 100vh;
+}
+
+.spin {
+  -webkit-perspective: 500px;
+          perspective: 500px;
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.spin-group {
+  -webkit-animation: 1.8s ease-in-out infinite alternate both spin-group;
+          animation: 1.8s ease-in-out infinite alternate both spin-group;
+  display: block;
+  line-height: 0.8;
+  text-align: center;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.spin-group-text {
+  color: #ff79ff;
+  font-size: 100px;
+  font-weight: 700;
+  text-shadow: -1px 0 #3f2e53, 1px 0 #3f2e53, 0 -1px #04e7fe;
+  will-change: transform;
+}
+.spin-group-text:nth-child(n+2) {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.spin-group-text:nth-child(2) {
+  -webkit-transform: translateZ(1px);
+          transform: translateZ(1px);
+}
+.spin-group-text:nth-child(3) {
+  -webkit-transform: translateZ(2px);
+          transform: translateZ(2px);
+}
+.spin-group-text:nth-child(4) {
+  -webkit-transform: translateZ(3px);
+          transform: translateZ(3px);
+}
+.spin-group-text:nth-child(5) {
+  -webkit-transform: translateZ(4px);
+          transform: translateZ(4px);
+}
+.spin-group-text:nth-child(6) {
+  -webkit-transform: translateZ(5px);
+          transform: translateZ(5px);
+}
+.spin-group-text:nth-child(7) {
+  -webkit-transform: translateZ(6px);
+          transform: translateZ(6px);
+}
+.spin-group-text:nth-child(8) {
+  -webkit-transform: translateZ(7px);
+          transform: translateZ(7px);
+}
+.spin-group-text:nth-child(9) {
+  -webkit-transform: translateZ(8px);
+          transform: translateZ(8px);
+}
+.spin-group-text:nth-child(10) {
+  -webkit-transform: translateZ(9px);
+          transform: translateZ(9px);
+}
+.spin-group-text:nth-child(11) {
+  -webkit-transform: translateZ(10px);
+          transform: translateZ(10px);
+}
+.spin-group-text:nth-child(12) {
+  -webkit-transform: translateZ(11px);
+          transform: translateZ(11px);
+}
+.spin-group-text:nth-child(13) {
+  -webkit-transform: translateZ(12px);
+          transform: translateZ(12px);
+}
+.spin-group-text:nth-child(14) {
+  -webkit-transform: translateZ(13px);
+          transform: translateZ(13px);
+}
+.spin-group-text:nth-child(15) {
+  -webkit-transform: translateZ(14px);
+          transform: translateZ(14px);
+}
+.spin-group-text:nth-child(16) {
+  -webkit-transform: translateZ(15px);
+          transform: translateZ(15px);
+}
+.spin-group-text:nth-child(17) {
+  -webkit-transform: translateZ(16px);
+          transform: translateZ(16px);
+}
+.spin-group-text:nth-child(18) {
+  -webkit-transform: translateZ(17px);
+          transform: translateZ(17px);
+}
+.spin-group-text:nth-child(19) {
+  -webkit-transform: translateZ(18px);
+          transform: translateZ(18px);
+}
+.spin-group-text:nth-child(20) {
+  -webkit-transform: translateZ(19px);
+          transform: translateZ(19px);
+}
+
+@-webkit-keyframes spin-group {
+  from {
+    -webkit-transform: rotateY(-10deg) rotateX(-20deg);
+            transform: rotateY(-10deg) rotateX(-20deg);
+  }
+  to {
+    -webkit-transform: rotateY(10deg) rotateX(-20deg);
+            transform: rotateY(10deg) rotateX(-20deg);
+  }
+}
+
+@keyframes spin-group {
+  from {
+    -webkit-transform: rotateY(-10deg) rotateX(-20deg);
+            transform: rotateY(-10deg) rotateX(-20deg);
+  }
+  to {
+    -webkit-transform: rotateY(10deg) rotateX(-20deg);
+            transform: rotateY(10deg) rotateX(-20deg);
+  }
+}

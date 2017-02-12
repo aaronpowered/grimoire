@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Reading is awesome</title>
+  
+  
+  
+      <style>
+      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+      @import url(http://fonts.googleapis.com/css?family=Libre+Baskerville|Montserrat:700);
+html, body {
+  height: 100%;
+}
+
+p, h1 {
+  font-family: "Libre Baskerville", serif;
+  color: #292929;
+}
+
+p {
+  margin: 10px 0;
+  font-size: 13px;
+}
+
+h1 {
+  margin: 15px 0;
+  font-size: 18px;
+}
+
+body {
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 840px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: center;
+  background-color: #ff9300;
+}
+
+.read {
+  margin-top: 60px;
+  font-family: "Montserrat", san-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #141414;
+  text-transform: uppercase;
+}
+
+.book {
+  width: 800px;
+  height: 500px;
+  position: relative;
+}
+.book .cover {
+  position: absolute;
+  height: 100%;
+  background-color: #45200D;
+}
+.book .cover.left, .book .cover.right {
+  width: 45%;
+}
+.book .cover.left {
+  border: none;
+  border-radius: 5px 20px 20px 5px / 5px 3.33333px 3.33333px 5px;
+  left: 0;
+}
+.book .cover.right {
+  border: none;
+  border-radius: 20px 5px 5px 20px / 3.33333px 5px 5px 3.33333px;
+  right: 0;
+}
+.book .cover.spine {
+  border: none;
+  border-radius: 20px/3.33333px;
+  height: 100%;
+  width: 10%;
+  left: 50%;
+  margin-left: -5%;
+}
+.book .page {
+  position: absolute;
+  background-color: #CFC7A2;
+  height: auto;
+  top: 0;
+  bottom: 0;
+  margin-top: -8px;
+  margin-bottom: -8px;
+  padding: 20px 30px;
+}
+.book .page.left {
+  border-top-right-radius: 25% 20px;
+  border-top-left-radius: 100% 20px;
+  border-bottom-right-radius: 25% 20px;
+  border-bottom-left-radius: 100% 20px;
+  margin-left: 40px;
+  left: 0;
+  right: 50%;
+  background-image: linear-gradient(to left, #beb380, #cfc7a2 15%);
+}
+.book .page.left:before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: auto;
+  width: 30px;
+  background-color: #CFC7A2;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  top: 0;
+  bottom: 0;
+  margin-left: -30px;
+  left: 0;
+  border-top-left-radius: 200% 10px;
+  border-bottom-left-radius: 200% 10px;
+  box-shadow: inset -8px 0 4px -4px #beb380, inset -10px 0 0 -1px #CFC7A2, inset -14px 0 1px -2px #beb380, inset -18px 0 0 -1px #CFC7A2, inset -22px 0 1px -2px #beb380, inset -26px 0 0 -1px #CFC7A2, inset -30px 0 1px -2px #beb380;
+}
+.book .page.right {
+  border-top-left-radius: 25% 20px;
+  border-top-right-radius: 100% 20px;
+  border-bottom-left-radius: 25% 20px;
+  border-bottom-right-radius: 100% 20px;
+  margin-right: 40px;
+  left: 50%;
+  right: 0;
+  background-image: linear-gradient(to right, #d8d1b3, #cfc7a2 5%);
+}
+.book .page.right:before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: auto;
+  width: 12px;
+  top: 0;
+  bottom: 0;
+  margin-left: -28px;
+  margin-top: 6px;
+  margin-bottom: -25px;
+  border-top-left-radius: 100% 5px;
+  border-bottom-left-radius: 100% 10px;
+  background-color: #520000;
+}
+.book .page.right:after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: auto;
+  width: 30px;
+  background-color: #CFC7A2;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  top: 0;
+  bottom: 0;
+  margin-right: -30px;
+  right: 0;
+  border-top-right-radius: 200% 10px;
+  border-bottom-right-radius: 200% 10px;
+  box-shadow: inset 8px 0 4px -4px #beb380, inset 10px 0 0 -1px #CFC7A2, inset 14px 0 1px -2px #beb380, inset 18px 0 0 -1px #CFC7A2, inset 22px 0 1px -2px #beb380, inset 26px 0 0 -1px #CFC7A2, inset 30px 0 1px -2px #beb380;
+}
+
+    </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+</head>
+
+<body>
+  <div class='book'>
+  <div class='cover left'></div>
+  <div class='cover spine'></div>
+  <div class='cover right'></div>
+  <div class='page left'>
+    <h1>
+      Jabberwocky - Lewis Carrol
+    </h1>
+    <p>
+      'Twas brillig, and the slithy toves
+      <br>
+      Did gyre and gimble in the wabe:
+      <br>
+      All mimsy were the borogoves,
+      <br>
+      And the mome raths outgrabe.
+    </p>
+    <p>
+      "Beware the Jabberwock, my son!
+      <br>
+      The jaws that bite, the claws that catch!
+      <br>
+      Beware the Jubjub bird, and shun
+      <br>
+      The frumious Bandersnatch!"
+    </p>
+    <p>
+      He took his vorpal sword in hand:
+      <br>
+      Long time the manxome foe he sought—
+      <br>
+      So rested he by the Tumtum tree,
+      <br>
+      And stood awhile in thought.
+    </p>
+    <p>
+      And, as in uffish thought he stood,
+      <br>
+      The Jabberwock, with eyes of flame,
+      <br>
+      Came whiffling through the tulgey wood,
+      <br>
+      And burbled as it came!
+    </p>
+    <p>
+      One, two! One, two! and through and through
+      <br>
+      The vorpal blade went snicker-snack!
+      <br>
+      He left it dead, and with its head
+      <br>
+      He went galumphing back.
+    </p>
+  </div>
+  <div class='page right'>
+    <p>
+      "And hast thou slain the Jabberwock?
+      <br>
+      Come to my arms, my beamish boy!
+      <br>
+      O frabjous day! Callooh! Callay!"
+      <br>
+      He chortled in his joy.
+    </p>
+    <p>
+      'Twas brillig, and the slithy toves
+      <br>
+      Did gyre and gimble in the wabe;
+      <br>
+      All mimsy were the borogoves,
+      <br>
+      And the mome raths outgrabe.
+    </p>
+  </div>
+</div>
+<div class='read'>Reading is awesome</div>
+  
+  
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Spiraling Rainbow Text Input [WIP]</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:800" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  
+      <style>
+      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
+      .wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #0F0C33;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+}
+
+#input {
+  display: block;
+  width: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100%;
+  line-height: 2rem;
+  border: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-transform: uppercase;
+  overflow: visible;
+}
+#input.show-onboarding:before {
+  content: 'Tap the circle and start typing!';
+  display: block;
+  position: absolute;
+  bottom: 100%;
+  background: #fff;
+  width: 300px;
+  text-transform: none;
+  padding: 1rem;
+  color: #0F0C33;
+  line-height: 1.4;
+}
+#input:hover {
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+}
+#input:focus {
+  outline: none;
+  animation: focus 2s infinite;
+}
+#input span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  transform-origin: center center;
+  height: 4rem;
+  line-height: 4rem;
+  z-index: 1;
+  width: 4rem;
+}
+
+.controls {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #03020a;
+  z-index: 1;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes focus {
+  50% {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+    </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+</head>
+
+<body>
+  <div class="wrapper">
+  <div id="input" contenteditable >
+    Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world. 
+  </div>
+</div>
+  
+    <script src="js/index.js"></script>
+
+</body>
+</html>

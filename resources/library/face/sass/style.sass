@@ -1,0 +1,36 @@
+$c1: #aaffaa
+$c2: #8efa29
+$c3: #00a8f0
+$c4: #222
+$c5: #eee
+
+
+body
+  background-color: $c4
+
+@keyframes anim
+  25%
+    fill: $c3
+  
+  50% 
+    transform: translateX(6px) rotate(15deg) rotateY(36deg) scale(1.23)
+    fill: $c1
+  75% 
+    fill: $c2
+  
+div
+  margin: 150px auto 0 auto
+  width: 200px
+  transform: scale(2)
+  
+  
+
+svg > path
+  animation: anim 10s infinite linear
+  transform-origin: 50% 50%
+  fill: $c4
+  
+@for $i from 1 through 16
+  svg > path:nth-child(#{$i})
+    animation-delay: 0.5s * $i
+  

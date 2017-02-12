@@ -7,4 +7,5 @@
   (do
     (app/main)))
  
-(app/main)
+  (log/info "------ Cljs Load ------")
+  (app/main)

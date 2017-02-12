@@ -1,0 +1,168 @@
+@import "compass/css3";
+
+@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville|Montserrat:700);
+
+$bg-color: #ff9300;
+$cover-color: #45200D;
+$page-color: #CFC7A2;
+$book-width: 800px;
+$book-height: 500px;
+$font-family: "Libre Baskerville", serif;
+$font-color: #292929;
+$p-size: 13px;
+$h-size: 18px;
+$bookmark-color: #520000;
+
+html, body {
+  height: 100%;
+}
+p, h1{
+  font-family: $font-family;
+  color: $font-color;
+}
+p {
+  margin: 10px 0;
+  font-size: $p-size;
+}
+h1 {
+  margin: 15px 0;
+  font-size: $h-size;
+}
+body {
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: $book-width+40;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: center;
+  background-color: $bg-color;
+}
+.read {
+  margin-top: 60px;
+  font-family: "Montserrat", san-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #141414;
+  text-transform: uppercase;
+}
+.book {
+  width: $book-width;
+  height: $book-height;
+  position: relative;
+  
+  .cover {
+    position: absolute;
+    height: 100%;
+    background-color: $cover-color;
+  
+    &.left, &.right {
+      width: 45%;
+    }
+    $corner-radius: 5px;
+    $division-factor: 1.5;
+    $multiplication-factor: 4;
+    &.left {
+      border: none;
+      border-radius: #{$corner-radius} #{$corner-radius*$multiplication-factor} #{$corner-radius*$multiplication-factor} #{$corner-radius} / #{$corner-radius} #{$corner-radius/$division-factor} #{$corner-radius/$division-factor} #{$corner-radius};
+      left: 0;
+    }
+    &.right {
+      border: none;
+      border-radius: #{$corner-radius*$multiplication-factor} #{$corner-radius} #{$corner-radius} #{$corner-radius*$multiplication-factor} / #{$corner-radius/$division-factor} #{$corner-radius} #{$corner-radius} #{$corner-radius/$division-factor};
+      right: 0;
+    }
+    &.spine {
+      border: none;
+      border-radius: #{$corner-radius*$multiplication-factor}/#{$corner-radius/$division-factor};
+      height: 100%;
+      width: 10%;
+      left: 50%;
+      margin-left: -5%;
+    }
+  }
+  .page {
+    $border-distance: -8px;
+    position: absolute;
+    background-color: $page-color;
+    height: auto;
+    top: 0;
+    bottom:0;
+    margin-top: $border-distance;
+    margin-bottom: $border-distance;
+    padding: 20px 30px;
+    
+    $center-radius: 25% 20px;
+    $outer-radius: 100% 20px;
+    $outer-margin: 40px;
+    
+    @mixin pages() {
+      content: "";
+      display: block;
+      position: absolute;
+      height: auto;
+      width: $outer-margin - 10;
+      background-color: $page-color;
+      margin-top: 16px;
+      margin-bottom: 16px;
+      top: 0;
+      bottom: 0;
+    }
+    
+    &.left {
+      border-top-right-radius: $center-radius;
+      border-top-left-radius: $outer-radius;
+      border-bottom-right-radius: $center-radius;
+      border-bottom-left-radius: $outer-radius;
+      margin-left: $outer-margin;
+      left: 0;
+      right: 50%;
+      background-image: linear-gradient(right, darken($page-color, 10%), $page-color 15%);
+      
+      &:before {
+        @include pages();
+        margin-left: -1*$outer-margin+10;
+        left: 0;
+        border-top-left-radius: 200% 10px;
+        border-bottom-left-radius: 200% 10px;
+        box-shadow: inset -8px 0 4px -4px darken($page-color, 10%), inset -10px 0 0 -1px $page-color, inset -14px 0 1px -2px darken($page-color, 10%), inset -18px 0 0 -1px $page-color, inset -22px 0 1px -2px darken($page-color, 10%), inset -26px 0 0 -1px $page-color, inset -30px 0 1px -2px darken($page-color, 10%);
+      }
+    }
+    &.right {
+      border-top-left-radius: $center-radius;
+      border-top-right-radius: $outer-radius;
+      border-bottom-left-radius: $center-radius;
+      border-bottom-right-radius: $outer-radius;
+      margin-right: $outer-margin;
+      left: 50%;
+      right: 0;
+      background-image: linear-gradient(left, lighten($page-color, 5%), $page-color 5%);
+      
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        height: auto;
+        width: 12px;
+        top: 0;
+        bottom: 0;
+        margin-left: -28px;
+        margin-top: 6px;
+        margin-bottom: -25px;
+        border-top-left-radius: 100% 5px;
+        border-bottom-left-radius: 100% 10px;
+        background-color: $bookmark-color;
+      }
+      
+      &:after {
+        @include pages();
+        margin-right: -1*$outer-margin+10;
+        right: 0;
+        border-top-right-radius: 200% 10px;
+        border-bottom-right-radius: 200% 10px;
+        box-shadow: inset 8px 0 4px -4px darken($page-color, 10%), inset 10px 0 0 -1px $page-color, inset 14px 0 1px -2px darken($page-color, 10%), inset 18px 0 0 -1px $page-color, inset 22px 0 1px -2px darken($page-color, 10%), inset 26px 0 0 -1px $page-color, inset 30px 0 1px -2px darken($page-color, 10%);
+      }
+    }
+  }
+}

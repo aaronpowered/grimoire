@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css?family=Unica+One");
+@-webkit-keyframes flame {
+  100% {
+    -webkit-transform: rotate(70deg) translate(0, 0);
+            transform: rotate(70deg) translate(0, 0);
+  }
+}
+@keyframes flame {
+  100% {
+    -webkit-transform: rotate(70deg) translate(0, 0);
+            transform: rotate(70deg) translate(0, 0);
+  }
+}
+@-webkit-keyframes flame-mask {
+  100% {
+    -webkit-transform: rotate(110deg) translate(0, 250px);
+            transform: rotate(110deg) translate(0, 250px);
+  }
+}
+@keyframes flame-mask {
+  100% {
+    -webkit-transform: rotate(110deg) translate(0, 250px);
+            transform: rotate(110deg) translate(0, 250px);
+  }
+}
+.flame-mask {
+  -webkit-transform-origin: 500px 500px;
+          transform-origin: 500px 500px;
+  -webkit-transform: rotate(110deg) translate(375px, 250px);
+          transform: rotate(110deg) translate(375px, 250px);
+  -webkit-animation: flame-mask 1s linear infinite;
+          animation: flame-mask 1s linear infinite;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+}
+
+.hand {
+  fill: #ffa666;
+  stroke: #1f242e;
+  stroke-width: 10;
+}
+
+.flame {
+  -webkit-transform-origin: 500px 500px;
+          transform-origin: 500px 500px;
+  -webkit-transform: rotate(70deg) translate(375px, 0);
+          transform: rotate(70deg) translate(375px, 0);
+  -webkit-animation: flame 1s linear infinite;
+          animation: flame 1s linear infinite;
+  fill: #ffa666;
+}
+
+.flame2 {
+  -webkit-transform: translate(160px, 320px);
+          transform: translate(160px, 320px);
+}
+.flame2 .flame-mask,
+.flame2 .flame {
+  -webkit-animation-delay: -0.3s;
+          animation-delay: -0.3s;
+}
+
+.flame3 {
+  -webkit-transform: translate(-160px, 280px);
+          transform: translate(-160px, 280px);
+}
+.flame3 .flame-mask,
+.flame3 .flame {
+  -webkit-animation-delay: -0.8s;
+          animation-delay: -0.8s;
+}
+
+.bowl {
+  fill: #5971a6;
+}
+
+.background {
+  fill: #1f242e;
+}
+
+.frame {
+  fill: none;
+  stroke: #1f242e;
+  stroke-width: 10;
+}
+
+/*Page Setup*/
+svg {
+  width: 100vw;
+  height: 80vh;
+}
+
+body {
+  background: #1f242e;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.title {
+  height: 10vh;
+  line-height: 10vh;
+  font-size: 8vh;
+  padding: 2.5vh;
+  margin: 0;
+  color: #f7e3d4;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  font-family: 'Unica One', cursive;
+}

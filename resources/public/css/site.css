@@ -124,7 +124,7 @@ button:focus {
 	background:white;
 	border-radius:10px;
 	overflow-y:scroll;
-  right:-300px;
+    right: 10px;
 transition:All 1.7s ease;
 -webkit-transition:All 1.7s ease;
 -moz-transition:All 1.7s ease;
@@ -136,7 +136,7 @@ transition:All 0.7s ease;
 -webkit-transition:All 0.7s ease;
 -moz-transition:All 0.7s ease;
 -o-transition:All 0.7s ease;
-right:0px;
+right:10px;
 }
 
 .notes {

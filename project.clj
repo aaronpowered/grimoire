@@ -103,7 +103,7 @@
                {:source-paths ["src/grimoire/client"
                                "dev"]
 
-                :compiler {:main grimoire.client.start-prod
+                :compiler {:main grimoire.client.start
                            :asset-path "js/compiled/out"
                        :output-to "resources/public/js/compiled/app.js"
                        :output-dir "resources/public/js/compiled/out"

@@ -52,21 +52,16 @@
 }))
 
 (defn update-inventory [profile data]
-(swap! profile assoc :inventory 
-(into (into (into
-;vszeg concatat kell csinalni
-(:inventory (first (filter
-	#(= (:name %) (:origin @profile)) (:origin @data))))
-
-(:inventory (first (filter
-	#(= (:name %) (:role @profile)) (:role @data))))
-)
-(:inventory (first (filter
-	#(= (:name %) (:personality @profile)) (:personality @data))))
-)
-["Csodaszer"]
-)
-))
+  (swap! profile assoc :inventory 
+   (into []
+     (concat
+      (:inventory (first (filter
+         #(= (:name %) (:origin @profile)) (:origin @data))))
+      (:inventory (first (filter
+         #(= (:name %) (:role @profile)) (:role @data))))
+      (:inventory (first (filter
+         #(= (:name %) (:personality @profile)) (:personality @data))))
+    ["Csodaszer"]))))
 
 ;; -------------------------
 ;; Views
