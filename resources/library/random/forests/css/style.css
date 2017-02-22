@@ -1,0 +1,35 @@
+body {
+  background: #26233b;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#scene {
+  display: block;
+  margin: auto;
+}
+
+#filters {
+  position: absolute;
+}
+
+.ground {
+  -webkit-filter: url("#ground");
+          filter: url("#ground");
+}
+
+.top {
+  -webkit-filter: url("#ground");
+          filter: url("#ground");
+}
+
+.tree {
+  -webkit-filter: url("#tree");
+          filter: url("#tree");
+}
+
+.background {
+  opacity: .3;
+}

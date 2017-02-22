@@ -1,0 +1,117 @@
+html {
+	overflow: hidden;
+	touch-action: none;
+	content-zooming: none;
+}
+body {
+	background:#000;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#screen + label label {
+	position:absolute;
+	width: 500px;
+	height: 300px;
+}
+
+#screen + label label img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	transition: transform 0.25s ease-in-out 0s;
+}
+
+#screen + label {
+	position:absolute;
+	left: 50%;
+	top: 50%;
+	width: 3500px;
+	height: 2500px;
+	margin-left: -1750px;
+	margin-top: -1250px;
+	background: #000000 url("bumps2.gif");
+	cursor: pointer;
+	transform: scale3d(0.15, 0.15, 1);
+	transition: transform 1s ease-in-out 0s;
+}
+
+#b1 {
+	position: absolute;
+	left: 500px;
+	top: 400px;
+	width: 2550px;
+	height: 1750px;
+	outline: #777 dotted 3px;
+}
+#b2 {
+	position: absolute;
+	left: 1100px;
+	top: 950px;
+	width: 1400px;
+	height: 600px;
+	outline: #777 dotted 3px;
+}
+
+input[type="radio"] {
+	visibility: hidden;
+}
+
+#screen + label label:hover {
+	z-index: 10000;
+}
+
+#screen + label label:hover > img {
+	transform: scale3d(1.5, 1.5, 1);
+}
+
+#i01:checked ~ #screen + label { transform: rotateZ(0deg) translate(1300px, 900px); }
+#i02:checked ~ #screen + label { transform: rotateZ(-45deg) translate(650px, 900px); }
+#i03:checked ~ #screen + label { transform: rotateZ(90deg) translate(0px, 900px); }
+#i04:checked ~ #screen + label { transform: rotateZ(-135deg) translate(-650px, 900px); }
+#i05:checked ~ #screen + label { transform: rotateZ(0deg) translate(-1300px, 900px); }
+
+#i06:checked ~ #screen + label { transform: rotateZ(45deg) translate(1300px, 300px); }
+#i07:checked ~ #screen + label { transform: rotateZ(-90deg) translate(650px, 300px); }
+#i08:checked ~ #screen + label { transform: rotateZ(0deg) translate(0px, 300px); }
+#i09:checked ~ #screen + label { transform: rotateZ(-45deg) translate(-650px, 300px); }
+#i10:checked ~ #screen + label { transform: rotateZ(-90deg) translate(-1300px, 300px); }
+
+#i11:checked ~ #screen + label { transform: rotateZ(-90deg) translate(1300px, -300px); }
+#i12:checked ~ #screen + label { transform: rotateZ(0deg) translate(650px, -300px); }
+#i13:checked ~ #screen + label { transform: rotateZ(45deg) translate(0px, -300px); }
+#i14:checked ~ #screen + label { transform: rotateZ(90deg) translate(-650px, -300px); }
+#i15:checked ~ #screen + label { transform: rotateZ(-45deg) translate(-1300px, -300px); }
+
+#i16:checked ~ #screen + label { transform: rotateZ(180deg) translate(1300px, -900px); }
+#i17:checked ~ #screen + label { transform: rotateZ(45deg) translate(650px, -900px); }
+#i18:checked ~ #screen + label { transform: rotateZ(90deg) translate(0px, -900px); }
+#i19:checked ~ #screen + label { transform: rotateZ(0deg) translate(-650px, -900px); }
+#i20:checked ~ #screen + label { transform: rotateZ(45deg) translate(-1300px, -900px); }
+
+label[for="i01"] { transform: translate(200px, 200px) rotateZ(0deg); }
+label[for="i02"] { transform: translate(850px, 200px) rotateZ(45deg); }
+label[for="i03"] { transform: translate(1500px, 200px) rotateZ(-90deg); }
+label[for="i04"] { transform: translate(2150px, 200px) rotateZ(135deg); }
+label[for="i05"] { transform: translate(2800px, 200px) rotateZ(0deg); }
+
+label[for="i06"] { transform: translate(200px, 800px) rotateZ(-45deg); }
+label[for="i07"] { transform: translate(850px, 800px) rotateZ(90deg); }
+label[for="i08"] { transform: translate(1500px, 800px) rotateZ(0deg); }
+label[for="i09"] { transform: translate(2150px, 800px) rotateZ(45deg); }
+label[for="i10"] { transform: translate(2800px, 800px) rotateZ(90deg); }
+
+label[for="i11"] { transform: translate(200px, 1400px) rotateZ(90deg); }
+label[for="i12"] { transform: translate(850px, 1400px) rotateZ(0deg); }
+label[for="i13"] { transform: translate(1500px, 1400px) rotateZ(-45deg); }
+label[for="i14"] { transform: translate(2150px, 1400px) rotateZ(-90deg); }
+label[for="i15"] { transform: translate(2800px, 1400px) rotateZ(45deg); }
+
+label[for="i16"] { transform: translate(200px, 2000px) rotateZ(-180deg); }
+label[for="i17"] { transform: translate(850px, 2000px) rotateZ(-45deg); }
+label[for="i18"] { transform: translate(1500px, 2000px) rotateZ(-90deg); }
+label[for="i19"] { transform: translate(2150px, 2000px) rotateZ(0deg); }
+label[for="i20"] { transform: translate(2800px, 2000px) rotateZ(-45deg); }

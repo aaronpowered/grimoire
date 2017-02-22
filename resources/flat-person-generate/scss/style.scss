@@ -1,0 +1,784 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather');
+
+// Sizes
+$width: 30vmin;
+$height: 40vmin;
+$earW: $width / 4;
+$earH: $height / 5;
+
+// Skin Tones
+$skin01: #f9f0dc;
+$skin02: #eec78c;
+$skin03: #eec78c;
+$skin04: #d19f25;
+$skin05: #d19f24;
+$skin06: #d57828;
+$skin07: #98171d;
+$skin08: #551611;
+$skin09: #5f3d21;
+$skin10: #674628;
+$skin11: #FDE3A9;
+$skin12: #F3E1BF;
+
+//Shadow Tones
+$shadow01: #d8a53b;
+$shadow02: #d3a31b;
+$shadow03: #cd682b;
+$shadow04: #481410;
+$outer: transparentize(#000, 0.5);
+
+// Face Curvatures
+$rounded: 100%;
+$sqRounded: 40%;
+$semiRounded: 50%;
+$faceNames: face-1, face-2, face-3, face-4, face-5, face-6, face-7, face-8, face-9, face-10, face-11, face-12;
+
+//Ears Variables
+$c: 50%;
+$cTop: 50%;
+$cBottom: 50%;
+
+/* Mixins */
+
+@mixin centerMe($nvl) {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  margin: $nvl auto;
+}
+
+// Face Shape
+@mixin defineShape($w, $h, $elev) {
+  position: absolute;
+  @include centerMe(10vmin);
+  width: $w;
+  height: $h;
+}
+
+// Face Color
+@mixin faceBackground($first, $second) {
+  background: linear-gradient(to right, $first 0%, $first 50%, $second 51%, $second 100%);
+}
+
+@mixin faceShadow($color, $external) {
+  box-shadow: inset 0px -5px $color,
+    5px 5px 10px $external;
+}
+
+// Face Curvature
+@mixin applyRadius($curve) {
+  border-radius: 30%;
+  border-bottom-left-radius: $curve;
+  border-bottom-right-radius: $curve;
+}
+
+// Ears 
+@mixin earsMaker($earW, $earH, $c, $cTop, $cBottom) {
+  position: absolute;
+  width: $earW;
+  height: $earH;
+  border-radius: $c;
+  border-top-left-radius: $cTop;
+  border-top-right-radius: $cTop;
+  border-bottom-left-radius: $cBottom;
+  border-bottom-right-radius: $cBottom;
+}
+
+//Defining the Classes of Each Skin Tone
+.ginger {
+  @include faceBackground($skin12, $skin11);
+  @include faceShadow($shadow01, $outer);
+}
+
+.lighter {
+  @include faceBackground($skin02, $skin01);
+  @include faceShadow($shadow01, $outer);
+}
+
+.light {
+  @include faceBackground($skin04, $skin03);
+  @include faceShadow($shadow02, $outer);
+}
+
+.latino {
+  @include faceBackground($skin06, $skin05);
+  @include faceShadow($shadow02, $outer);
+}
+
+.dark {
+  @include faceBackground($skin09, $skin10);
+  @include faceShadow($shadow04, $outer);
+}
+
+.darker {
+  @include faceBackground($skin08, $skin07);
+  @include faceShadow($shadow04, $outer);
+}
+
+// Applying Defaults
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  &:before, &:after {
+    box-sizing: border-box;
+    content: '';
+    position: absolute;
+  }
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: cornflowerblue;
+  overflow: hidden;
+}
+
+.container {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  margin: 10vmin auto;
+  width: 60vmin;
+  height: 60vmin;
+  border-radius: 50%;
+  border: 15px solid white;
+  overflow: hidden;
+  box-shadow: 5px 5px 15px $outer;
+}
+
+.person {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.neck {
+  @include centerMe(35vmin);
+  width: $width / 4;
+  height: $height / 2;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  box-shadow: none;
+  z-index: 1;
+}
+
+.torso {
+  @include centerMe(52vmin);
+  width: $width;
+  height: $height / 6;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  box-shadow: none;
+  z-index: 1;
+}
+
+//Applying Color to Ears
+
+.ears-1.earGinger {
+  background-color: $skin12;
+}
+.ears-2.earGinger {
+  background-color: $skin11;
+}
+.ears-1.earLighter {
+  background-color: $skin02;
+}
+.ears-2.earLighter {
+  background-color: $skin01;
+}
+.ears-1.earLight {
+  background-color: $skin04;
+}
+.ears-2.earLight {
+  background-color: $skin03;
+}
+.ears-1.earLatino {
+  background-color: $skin06;
+}
+.ears-2.earLatino {
+  background-color: $skin05;
+}
+.ears-1.earDark {
+  background-color: $skin09;
+}
+.ears-2.earDark {
+  background-color: $skin10;
+}
+.ears-1.earDarker {
+  background-color: $skin08;
+}
+.ears-2.earDarker {
+  background-color: $skin07;
+}
+
+// Generating the faces
+
+  .face-1 {
+      @include defineShape($width, $height, 6vmin);
+      z-index: 1;
+  }
+
+  .face-1 {
+    @include applyRadius($rounded);
+  }
+  
+  .face-1 .ears-1,
+  .face-1 .ears-2 {
+    position: absolute;
+    top: 40%;
+    @include earsMaker($earW, $earH, $c, $cTop, $cBottom);
+  }
+  
+  .face-1 .ears-1 {
+    top: 40%;
+    left: -10%;
+  }
+  
+  .face-1 .ears-2 {
+    top: 40%;
+    right: -10%;
+  }
+  
+  .face-2 {
+      @include defineShape($width, $height, 6vmin);
+  }
+
+  .face-2 {
+    @include applyRadius($sqRounded);
+  }
+  
+  .face-2 .ears-1,
+  .face-2 .ears-2 {
+    position: absolute;
+    top: 40%;
+    @include earsMaker($earW, $earH, $c, $cTop, $cBottom);
+  }
+  
+  .face-2 .ears-1 {
+    top: 40%;
+    left: -10%;
+  }
+  
+  .face-2 .ears-2 {
+    top: 40%;
+    right: -10%;
+  }
+
+  .face-3 {
+      @include defineShape($width, $height, 6vmin);
+  }
+
+  .face-3 {
+    @include applyRadius($semiRounded);
+  }
+  
+  .face-3 .ears-1,
+  .face-3 .ears-2 {
+    position: absolute;
+    top: 40%;
+    @include earsMaker($earW, $earH, $c, $cTop, $cBottom);
+  }
+  
+  .face-3 .ears-1 {
+    top: 40%;
+    left: -10%;
+  }
+  
+  .face-3 .ears-2 {
+    top: 40%;
+    right: -10%;
+  }
+
+
+
+//Hair Section
+
+//Color
+$gray01: #59595b;
+$gray02: #221e1f;
+$black01: #224156;
+$black02: #021728;
+$brown01: #8c6238;
+$brown02: #825734;
+$yellow01: #d49d16;
+$yellow02: #c5912c;
+$orange01: #d47727;
+$orange02: #c0381e;
+
+@for $i from 1 through 12 {
+  .hair-#{$i} {
+    opacity: 0;
+  }
+  //Gray
+  .beard-#{$i}.gray,
+  .hair-back-short.gray,
+  .hair-back-medium.gray,
+  .hair-back-large.gray,
+  .hair-#{$i}.gray {
+    @include faceBackground($gray02, $gray01);
+  }
+  .hair-#{$i}.gray:before,
+  .beard-#{$i}.gray:before {
+    background-color: $gray02;  
+  }
+  .hair-#{$i}.gray:after,
+  .beard-#{$i}.gray:after {
+    background-color: $gray01;  
+  }
+  
+  //Black
+  .beard-#{$i}.black,
+  .hair-back-short.black,
+  .hair-back-medium.black,
+  .hair-back-large.black,
+  .hair-#{$i}.black {
+    @include faceBackground($black02, $black01);
+  }
+  .hair-#{$i}.black:before,
+  .beard-#{$i}.black:before {
+    background-color: $black02;  
+  }
+  .hair-#{$i}.black:after,
+  .beard-#{$i}.black:after {
+    background-color: $black01;  
+  }
+  
+  //Orange
+  .beard-#{$i}.orange,
+  .hair-back-short.orange,
+  .hair-back-medium.orange,
+  .hair-back-large.orange,
+  .hair-#{$i}.orange {
+    @include faceBackground($orange02, $orange01);
+  }
+  .hair-#{$i}.orange:before,
+  .beard-#{$i}.orange:before {
+    background-color: $orange02;  
+  }
+  .hair-#{$i}.orange:after,
+  .beard-#{$i}.orange:after {
+    background-color: $orange01;  
+  }
+  
+  //yellow
+  .beard-#{$i}.yellow,
+  .hair-back-short.yellow,
+  .hair-back-medium.yellow,
+  .hair-back-large.yellow,
+  .hair-#{$i}.yellow {
+    @include faceBackground($yellow02, $yellow01);
+  }
+  .hair-#{$i}.yellow:before,
+  .beard-#{$i}.yellow:before {
+    background-color: $yellow02;  
+  }
+  .hair-#{$i}.yellow:after,
+  .beard-#{$i}.yellow:after {
+    background-color: $yellow01;  
+  }
+  
+  //brown
+  .beard-#{$i}.brown,
+  .hair-back-short.brown,
+  .hair-back-medium.brown,
+  .hair-back-large.brown,
+  .hair-#{$i}.brown {
+    @include faceBackground($brown02, $brown01);
+  }
+  .hair-#{$i}.brown:before,
+  .beard-#{$i}.brown:before {
+    background-color: $brown02;  
+  }
+  .hair-#{$i}.brown:after,
+  .beard-#{$i}.brown:after {
+    background-color: $brown01;  
+  }
+}
+
+//Hair 01 - Male 
+.hair-1 { 
+  @include centerMe(5vmin);
+  width: $width;
+  height: calc(100% - 40vmin);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.hair-1::before,
+.hair-1:after {
+  top: 45%;
+  width: 30%;
+  height: 100%;
+  border-radius: 50% / 50% 50% 20% 20%;
+}
+
+.hair-1:before {
+  left: -5%;
+}
+
+.hair-1:after {
+  right: -5%;
+}
+
+//Hair 02 - Male
+.hair-2 { 
+  @include centerMe(5vmin);
+  width: $width;
+  height: calc(100% - 40vmin);
+  border-radius: 50%;
+  @include faceBackground($gray02, $gray01);
+  z-index: 2;
+}
+
+.hair-2::before,
+.hair-2:after {
+  top: 45%;
+  width: 10%;
+  height: 100%;
+  border-radius: 50% / 50% 50% 20% 20%;
+}
+
+.hair-2::before {
+  left: -3%;
+}
+
+.hair-2:after {
+  right: -3%;
+}
+
+// Hair 03 - Male
+.hair-3 { 
+  @include centerMe(7vmin);
+  width: $width;
+  height: calc(100% - 40vmin);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.hair-3::before,
+.hair-3:after {
+  top: 45%;
+  width: 5%;
+  height: 100%;
+  border-radius: 50% / 50% 50% 20% 20%;
+}
+
+.hair-3::before {
+  left: -2%;
+}
+
+.hair-3:after {
+  right: -2%;
+}
+
+// Hair 04 - Male
+.hair-4 { 
+  @include centerMe(5vmin);
+  width: 100%;
+  height: calc(100% - 40vmin);
+  border-radius: 50%;
+  z-index: 2;
+  background: transparent!important;
+}
+
+.hair-4:before,
+.hair-4:after {
+  top: 55%;
+  width: 17vmin;
+  height: 60%;
+  border-radius: 50% / 50% 50% 40% 20%;
+}
+
+.hair-4:before {
+  left: 10%;
+  transform: rotate(-80deg);
+}
+
+.hair-4:after {
+  right: 10%;
+  transform: rotate(80deg);
+}
+
+// Hair 05 - Male
+.hair-5 { 
+  @include centerMe(7vmin);
+  width: $width;
+  height: calc(100% - 50vmin);
+  border-radius: 50% / 100% 100% 50% 50%;
+  z-index: 2;
+}
+
+.hair-5:before,
+.hair-5:after {
+  top: 10%;
+  width: 20vmin;
+  height: 10vmin;
+  border-radius: 50% / 50% 50% 40% 20%;
+}
+
+.hair-5:before {
+  left: -5%;
+}
+
+.hair-5:after {
+  width: 16vmin;
+  border-radius: 50% / 0% 50% 50% 0%;
+  right: -3.5%;
+}
+
+// Hair 06 - Male
+.hair-6 { 
+  @include centerMe(-10vmin);
+  width: $width;
+  height: calc(100% - 20vmin);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.hair-6:before,
+.hair-6:after {
+  top: 55%;
+  width: 15%;
+  height: 50%;
+  border-radius: 50% / 50% 50% 40% 20%;
+}
+
+.hair-6:before {
+  left: -5%;
+}
+
+.hair-6:after {
+  right: -3%;
+}
+
+// Hair 07 - Male
+.hair-7 { 
+  @include centerMe(8vmin);
+  width: calc(100% - 27vmin);
+  height: calc(100% - 50vmin);
+  border-radius: 50% / 100% 100% 0 0;
+  z-index: 2;
+}
+
+.hair-7:before,
+.hair-7:after {
+  top: 80%;
+  width: 15%;
+  height: 90%;
+}
+
+.hair-7:before {
+  left: 35.7%;
+  border-radius: 50% / 50% 0% 0% 20%;
+}
+
+.hair-7:after {
+  right: 34.6%;
+  border-radius: 50% / 0% 50% 50% 0%;
+}
+
+//Types of Female Back Hair
+
+.hair-back-short {
+  @include centerMe(6vmin);
+  top: 0%;
+  left: 0%;
+  width: 75%;
+  height: 60%;
+  border-radius: 50% / 100% 100% 20% 20%;
+}
+
+.hair-back-medium {
+  @include centerMe(6vmin);
+  top: 0%;
+  left: 0%;
+  width: 65%;
+  height: 80%;
+  border-radius: 50% / 100% 100% 20% 20%;
+  transform-origin: top 50%;
+  transform: rotate(10deg);
+}
+
+.hair-back-large {
+  @include centerMe(0vmin);
+  top: 0%;
+  left: 0%;
+  width: 75%;
+  height: 100%;
+  border-radius: 50% / 100% 100% 50% 50%;
+  transform-origin: top 50%;
+  transform: rotate(0deg);
+}
+
+// Hair 08 - Female
+.hair-8 { 
+  @include centerMe(2vmin);
+  width: 56%;
+  height: calc(100% - 40vmin);
+  border-radius: 50% / 100% 100% 0 0;
+  z-index: 2;
+}
+
+.hair-8:before,
+.hair-8:after {
+  top: 90%;
+  width: 15%;
+  height: 70%;
+  border-radius: 50%;
+}
+
+.hair-8:before {
+  left: -2%;
+}
+
+.hair-8:after {
+  right: -2%;
+}
+
+.hair-8 .back {
+  position: absolute;
+  width: 100%;
+  height: 50vmin;
+}
+
+// Hair 09 - Female
+.hair-9 { 
+  @include centerMe(5vmin);
+  width: 56%;
+  height: calc(100% - 35vmin);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.hair-9:before,
+.hair-9:after {
+  top: 50%;
+  width: 10%;
+  height: 70%;
+  border-radius: 50% / 50% 50% 10% 10%;
+}
+
+.hair-9:before {
+  left: -2%;
+}
+
+.hair-9:after {
+  right: -2%;
+}
+
+// Hair 10 Female
+.hair-10 {
+  @include centerMe(8vmin);
+  width: 50%;
+  height: calc(100% - 50vmin);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.hair-10:before,
+.hair-10:after {
+  top: -5%;
+  width: 65%;
+  height: 15vmin;
+  border-radius: 50%;
+}
+
+.hair-10:before {
+  left: -10%;
+  border-bottom-left-radius: 10%;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 50%;
+  transform: rotate(-15deg);
+}
+
+.hair-10:after {
+  right: -15%;
+  border-bottom-right-radius: 10%;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 50%;
+  transform: rotate(15deg);
+}
+
+// Hair 11 Female
+.hair-11 {
+  @include centerMe(5vmin);
+  width: $width;
+  height: calc(100% - 40vmin);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.hair-11:before {
+  left: -5%;
+  top: 15%;
+  width: 16vmin;
+  height: 15vmin;
+  border-radius: 50% / 50% 50% 50% 0;
+}
+
+.hair-11:after {
+  top: 23%;
+  right: -5%;
+  width: 15vmin;
+  height: 15vmin;
+  border-radius: 50% / 50% 50% 30% 0;
+  transform: rotate(20deg);
+}
+
+//Facial Hair 
+.beard-1 {
+  @include centerMe(32vmin);
+  width: 10%;
+  height: 3vmin;
+  border-radius: 50% / 10% 10% 100% 100%;
+}
+
+.beard-2 {
+  @include centerMe(32vmin);
+  width: 10%;
+  height: 3vmin;
+  border-radius: 50% / 10% 10% 100% 100%;
+  z-index: 2;
+}
+
+.beard-2:before {
+  top: -4vmin;
+  left: -5.4vmin;
+  width: 7vmin;
+  height: 5vmin;
+  border-radius: 50% / 50% 50% 50% 0;
+  z-index: 2;
+}
+
+.beard-2:after {
+  top: -4vmin;
+  right: -5.5vmin;
+  width: 7vmin;
+  height: 5vmin;
+  border-radius: 50% / 50% 50% 0% 50%;
+  z-index: 2;
+}
+
+//Generate Button
+.button {
+  @include centerMe(80vmin);
+  background-color: transparent;
+  border: 5px solid white;
+  width: $width * 2;
+  height: 10vmin;
+  z-index: 999;
+  text-align: center;
+  line-height: 8vmin;
+  font-size: 2em;
+  background-color: white;
+  color: cornflowerblue;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px $outer;
+  transition: all 0.5s;
+  border-radius: 25px;
+  font-family: 'Merriweather', serif;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}

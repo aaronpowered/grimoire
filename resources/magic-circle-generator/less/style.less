@@ -1,0 +1,535 @@
+@font-face {
+  font-family: Quivira;
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/24822/Quivira.otf") format("opentype");
+}
+
+@color: #454647;
+@bordercolor: #e74c3c;
+@lightcolor: lighten(@color, 20%);
+@lightercolor: lighten(@color, 40%);
+@lightestcolor: lighten(@color, 50%);
+@bgcolor: #fafbfc;
+@circleradius: 250px;
+
+* {
+  box-sizing: border-box;
+}
+
+
+html, body {
+  font: 16px Lato;
+  line-height: 1.4em;
+  color: @color;
+  background: @bgcolor; 
+}
+
+a {
+  line-height: 1.2;
+  display: inline-block;
+  
+  &:after {
+    display: block;
+    content: "";
+    height: 2px;
+    width: 0%;
+    background-color: @bordercolor;
+    transition: width 0.3s ease-in-out;
+  }
+  
+  &:hover:after, 
+  &:focus:after {
+    width: 100%;
+
+  }
+}
+
+a {
+    color: @bordercolor;
+    text-decoration: none;
+  }
+
+h1 {
+  font-size: 4em;
+  font-weight: 300;
+  line-height: 1.2em;
+  margin: 1em 0;
+  padding-bottom: 1em;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 300;
+  margin: 1em 0;
+  line-height: 1.2em;
+}
+
+p {
+  margin: 1em 0;
+  
+  &::first-letter {
+    font-size: 2.8em;
+    font-weight: 300;
+    display: block;
+    float: left;
+    padding-top: 0.25em;
+    padding-right: 0.05em; 
+  }
+}
+
+.page-content {
+  max-width: 960px;
+  margin: auto;
+  text-align: justify;
+  padding: 0 20px;
+}
+
+.circle-container {
+  margin: 100px;
+  float: left;
+}
+
+/* 
+ * Circles
+ */
+.magic-circle {
+  display: block;
+  position: relative;
+  width: @circleradius;
+  height: @circleradius;
+  border: 1px solid @lightcolor;
+  border-radius: @circleradius * 0.5;
+  
+  &.lighter {
+    border: 1px solid @lightercolor;
+  }
+  
+  &.lightest {
+    border: 1px solid @lightestcolor;
+  }
+  
+  &.dotted {
+    border-style: dotted; 
+  }
+  
+  &.doubled {
+    &:after {
+      display: block; 
+      content: '';
+      width: 108%;
+      height: 108%;
+      border: 1px solid @lightcolor;
+      border-radius: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    &.dotted:after { 
+      border-style: dotted; 
+    }
+  }
+  
+  > .formula {
+    font-family: Quivira;
+    transform: translate(47%,0);
+    height: 100%;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    color: @lightcolor;
+    
+    span {
+      height: 50%;
+      position: absolute;
+      width: 1em;
+      padding-top: .25em;
+      left: 0;
+      top: 0;
+      transform-origin: bottom center;
+    }
+    
+    .generate-chars(72);
+    
+    .generate-chars(@n, @i: 1) when (@i =< @n) {
+      .char@{i} {
+        transform: rotate(@i * 5deg); 
+      }
+      .generate-chars(@n, (@i + 1));
+    }
+  }
+  
+  > .magic-circle {
+    width: 48%;
+    height: 48%;
+    position: absolute;
+    left: 26%;
+    top: 26%;
+    font-size: 0.6em;
+    
+    &.top {
+      top: -23%;
+    }
+    &.bottom {
+      top: 77%;
+    }
+    &.left {
+      left: -23%;
+    }
+    &.right {
+      left: 77%;
+    }
+    &.top-left {
+      top: -11%;
+      left: -11%; 
+    }
+    &.top-right {
+      top: -11%;
+      left: 62%; 
+    }
+    &.bottom-left {
+      top: 62%; 
+      left: -11%; 
+    }
+    &.bottom-right {
+      top: 62%;
+      left: 62%;
+    }
+  }
+  
+  /*
+   * Symbols
+   */
+  
+  .symbol {
+    position: absolute;
+    font-family: Quivira;
+    font-size: 3em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: @lightcolor;
+
+    
+    &.lighter {
+      color: @lightercolor;
+    }
+    
+    &.lightest {
+      color: @lightestcolor;
+    }
+  }
+  
+  /*
+   * Squares
+   */
+  .square {
+    position: absolute;
+    border: 1px solid @lightcolor;
+    width: 70%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    &.lighter {
+      border: 1px solid @lightercolor;
+    }
+
+    &.lightest {
+      border: 1px solid @lightestcolor;
+    }
+    
+    &.dotted {
+      border-style: dotted;
+    }
+    
+    > .formula {
+      font-family: Quivira;
+      font-size: 0.8em; 
+      text-align: center;
+      text-transform: uppercase;
+      color: @lightcolor;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      
+      &.up {
+        top: 0%;
+        transform: translate(-50%, 0%);
+      }
+      
+      &.down {
+        top: 100%;
+        margin-top: -1em;
+        transform: translate(-50%, 0%) rotate(180deg);
+      }
+      
+      &.right {
+        left: 100%;
+        transform: translate(-70%, -50%) rotate(90deg);
+      }
+      
+      &.left {
+        left: 0%;
+        transform: translate(-35%, -50%) rotate(-90deg);
+      }
+    }
+    
+    > .magic-circle {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    > .triangle {
+      width: 100%;
+      left: 0;
+      top: 100%;
+      
+      &:before {
+        width: 112%;
+        transform: rotate(-63.3deg);
+        
+      }
+      
+      &:after {
+        width: 112%;
+        transform: rotate(63.3deg);
+        left: -11.5%;
+      }
+      
+      &.reverse {
+        width: 100%;
+        left: 0;
+        top: -0.6%; 
+
+        &:before {
+          width: 112%;
+          transform: rotate(-63.3deg);
+        }
+
+        &:after {
+          width: 112%;
+          transform: rotate(63.3deg);
+          left: -11.5%;
+        }
+      }
+      
+      > .square {
+        width: @circleradius * 0.353;
+        height: @circleradius * 0.353; 
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -100%);
+        border: 1px solid @lightcolor;
+        
+        > .triangle {
+          width: 100%;
+          left: 0;
+          top: 100%;
+
+          &:before {
+            width: 112%;
+            transform: rotate(-63.3deg);
+
+          }
+
+          &:after {
+            width: 112%;
+            transform: rotate(63.3deg);
+            left: -11.5%;
+          }
+
+          &.reverse {
+            width: 100%;
+            left: 0;
+            top: 0%;
+
+            &:before {
+              width: 112%;
+              transform: rotate(-63.3deg);
+            }
+
+            &:after {
+              width: 112%;
+              transform: rotate(63.3deg);
+              left: -11.5%;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  /*
+   * Triangles
+   */
+  .triangle {
+    position: absolute;
+    width: 88%;
+    height: 0;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    border-color: @lightcolor;
+    top: 75.5%;
+    left: 6%;
+    
+    &.reverse {
+      transform: rotate(180deg);
+      top: 24.5%;
+    }
+    
+    &:before {
+      
+      content: ''; 
+      position: absolute;
+      width: 100%;
+      height: 0;
+      border-width: 1px 0 0 0;
+      border-style: solid;
+      border-color: @lightcolor;
+      transform-origin: 0% 50%;
+      transform: rotate(-60deg);
+      
+    }
+    
+    &:after {
+      
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 0;
+      border-width: 1px 0 0 0;
+      border-style: solid;
+      border-color: @lightcolor;
+      transform-origin: 100% 50%;
+      transform: rotate(60deg);
+      
+    }
+    
+    &.lighter {
+      
+      background: @lightercolor;
+      
+      &:before, &:after {
+        
+        background: @lightercolor;
+        
+      }
+      
+    }
+    
+    &.lightest {
+      background: @lightestcolor;
+      
+      &:before, &:after {
+        background: @lightestcolor;
+      }
+    }
+    
+    &.dotted {
+      border-style: dotted;
+      
+      &:before, &:after {
+        border-style: dotted; 
+      }
+    }
+    
+    > .formula {
+      font-family: Quivira;
+      font-size: 0.8em; 
+      text-align: center;
+      text-transform: uppercase;
+      color: @lightcolor;
+      position: absolute;
+      top: -@circleradius * 0.27;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      
+      &.base {
+        top: 0%;
+        margin-top: -1.5em;
+        transform: translate(-50%, 0%);
+      }
+      
+      &.right {
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        transform-origin: 100% 50%;
+        transform: rotate(60deg) translate(0, .5em);
+      }
+      
+      &.left {
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        transform-origin: 0% 50%;
+        transform: rotate(-60deg) translate(0, .5em);
+      }
+    }
+    
+    > .symbol {
+      transform: translate(-50%, -450%); 
+    }
+    
+    > .square {
+      width: @circleradius * 0.4;
+      height: @circleradius * 0.4; 
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      border: 1px solid @lightcolor;
+    }
+    
+    > .magic-circle {
+      width: @circleradius * 0.5; 
+      height: @circleradius * 0.5;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      
+      > .triangle > .magic-circle {
+        width: @circleradius * 0.25; 
+        height: @circleradius * 0.25;
+      }
+      
+      > .triangle > .magic-circle > .triangle > .magic-circle {
+        width: @circleradius * 0.125; 
+        height: @circleradius * 0.125;
+      }
+    }
+    
+    > .triangle {
+      width: @circleradius * 0.44;
+      left: 50%;
+      top: -@circleradius * 0.125;
+      transform: translate(-50%, -50%);
+      
+      &.reverse {
+        transform: translate(-50%, -50%) rotate(180deg);
+        top: -@circleradius * 0.38;
+      }
+      
+      > .triangle {
+        width: @circleradius * 0.21;
+        left: 50%;
+        top: -@circleradius * 0.07;
+        transform: translate(-50%, -50%);
+
+        &.reverse {
+          transform: translate(-50%, -50%) rotate(180deg);
+          top: -@circleradius * 0.19;
+        }
+      }
+    }
+  }
+}

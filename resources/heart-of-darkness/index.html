@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Heart of darkness</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="HandheldFriendly" content="true">
+<base href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/222599/" target="_blank">
+<script>
+
+var ge1doot = ge1doot || {
+	screen: {
+		elem: null,
+		callback: null,
+		width:  0,
+		height: 0,
+		left:   0,
+		top:    0,
+		init: function (id, callback, initRes) {
+			this.elem = document.getElementById(id);
+			this.callback = callback || null;
+			window.addEventListener('resize', function () {
+				ge1doot.screen.resize();
+			}, false);
+			initRes && this.resize();
+		},
+		resize: function () {
+			var o = this.elem;
+			this.width  = o.offsetWidth;
+			this.height = o.offsetHeight;
+			for (this.left = 0, this.top = 0; o != null; o = o.offsetParent) {
+			this.left += o.offsetLeft;
+			this.top  += o.offsetTop;
+			}
+			this.callback && this.callback();
+		}
+	},
+	drag: {
+		screen: null,
+		elem: null,
+		x:  0,
+		y:  0,
+		xs: 0,
+		ys: 0,
+		bx: 0,
+		by: 0,
+		xp: 0,
+		yp: 0,
+		active: false,
+		down: function (e, touch) {
+			if (touch) e.preventDefault();
+			var pointer = touch ? e.touches[0] : e;
+			(!touch && document.setCapture) && document.setCapture();
+			this.xp = this.xs = pointer.clientX - this.screen.left;
+			this.yp = this.ys = pointer.clientY - this.screen.top;
+			this.active = true;
+		},
+		up: function (e, touch) {
+			e.preventDefault();
+			(!touch && document.releaseCapture) && document.releaseCapture();
+			this.bx = this.x;
+			this.by = this.y;
+			this.active = false;
+		},
+		move: function (e, touch) {
+			e.preventDefault();
+			if (this.active) {
+				var pointer = touch ? e.touches[0] : e;
+				this.xp = pointer.clientX - this.screen.left;
+				this.yp = pointer.clientY - this.screen.top;
+				this.x = this.bx - (this.xp - this.xs);
+				this.y = this.by - (this.yp - this.ys);
+			}
+		},
+		init: function (screen) {
+			var self = this;
+			this.screen = screen;
+			this.elem = screen.elem;
+			if ('ontouchstart' in window) {
+				// touch
+				this.elem.ontouchstart  = function (e) { self.down(e, true); }
+				this.elem.ontouchmove   = function (e) { self.move(e, true); }
+				this.elem.ontouchend    = function (e) { self.up(e, true);   }
+				this.elem.ontouchcancel = function (e) { self.up(e, true);   }
+			}
+			// mouse
+			this.elem.addEventListener("mousedown", function (e) { self.down(e, false); }, true);
+			document.addEventListener("mousemove", function (e) { self.move(e, false); }, true);
+			document.addEventListener("mouseup",   function (e) { self.up  (e, false); }, true);
+		}
+	},
+	Ease: function (speed, val) {
+		this.speed = speed;
+		this.target = val;
+		this.value = val;
+	}
+}
+
+ge1doot.Ease.prototype.ease = function (target) {
+	this.value += (target - this.value) * this.speed;
+}
+
+</script>
+  
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+  <div id="screen">
+	<div id="scene">
+		<img src="back.jpg" class="bfh" data-transform="translateX(-360px) rotateX(90deg) translateZ(-200px)">
+		<img src="11_effect_circle.png" data-transform="translateX(-233px) translateY(-320px) translateZ(-90px)">
+		<img src="11_effect_circle.png" data-transform="translateX(-233px) translateY(-320px) translateZ(-60px)">
+		<img src="11_effect_circle.png" data-transform="translateX(-233px) translateY(-320px) translateZ(-30px)">
+		<img src="7_effect_back.png" data-transform="translateX(-153px) translateY(-244px) translateZ(20px)">
+		<img src="9_effet_left.png" data-transform="translateX(-253px) translateY(-80px) translateZ(40px)">
+		<img src="6_1_effect_dome.png" data-transform="translateX(-140px) translateY(-190px) translateZ(60px)">
+		<img src="8_plant_center.png" data-transform="translateX(-180px) translateY(-60px) translateZ(80px)">
+		<img src="6_3_effect_dome.png" data-transform="translateX(-50px) translateY(-140px) translateZ(100px)">
+		<img src="4_2_rain_compo.png" data-transform="translateX(-200px) translateY(-150px) translateZ(140px)">
+		<img src="4_2_rain_compo.png" data-transform="translateX(-200px) translateY(-150px) translateZ(150px)">
+		<img src="1_3_light_geyser.png" data-transform="translateX(-100px) translateY(-220px) translateZ(120px)">
+		<img src="sphere_moy_v3.png" data-transform="translateX(-5px) translateY(-20px) translateZ(80px)" id="particle">
+	</div>
+</div>
+  
+    <script src="js/index.js"></script>
+
+</body>
+</html>

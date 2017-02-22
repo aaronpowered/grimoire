@@ -1,0 +1,1 @@
+{"version":3,"file":"\/home\/masik\/ENVIRONMENT\/repositories\/viri.me\/unused\/multiplayer-master\/target\/cljsbuild\/public\/js\/out\/multiplayer\/app.js","sources":["dev.cljs"],"lineCount":9,"mappings":";AAAA;;;;AAIA,AAACA;AAED,2CAAA,uEAAA,lHAACC","names":["cljs.core\/enable-console-print!","figwheel.client\/watch-and-reload"]}

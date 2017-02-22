@@ -1,0 +1,2 @@
+;; Analyzed by ClojureScript 1.7.228
+{:name multiplayer.app, :doc nil, :excludes #{}, :use-macros nil, :require-macros {figwheel figwheel.client, figwheel.client figwheel.client}, :uses nil, :requires {core multiplayer.core, multiplayer.core multiplayer.core, figwheel figwheel.client, figwheel.client figwheel.client}, :imports nil, :cljs.analyzer/constants {:seen #{:websocket-url}, :order [:websocket-url]}}
