@@ -14,34 +14,36 @@
 .'______________________________\|/______________________________`.
 #+END_SRC
 
-** Manifesto
+** What is it?
 
 Grimoire demonstrates the *power of CSS* in the browser, a game engine built with pure CSS transformations, React and Clojurescript.
 
 Grimoire demonstrates the *sandbox economy* with real player driven prices powered by Ethereum smart contracts.
 
-Grimoire demonstrates the *holy grail* workflow for online game development: an auto-restartable back-end + a hot-reloadable front-end.
+Grimoire demonstrates the *holy grail* workflow for online game development: an auto-restartable back-end + a hot-reloadable front-end powered by Clojure + Boot + System.
 
-Grimoire demonstrates the *public domain* an open-source game decorated with renaissance paintings.
+** Why is it great?
 
-Grimoire demonstrates the *decentralized* ruleset, real players govern the world, their magic effects the environment, their willpower break walls.
+Made with *public domain* renaissance paintings.
 
-Grimoire demonstrates the *freedom of PKing* with high-traffic PVP areas and a virtuous combat system.
+*Decentralized* ruleset, real players govern the world, their magic effects the environment, their willpower break walls.
+
+*Freedom of PKing* with high-traffic PVP areas and a virtuous combat system.
 
 ** Start playing:
 [[http://grimoire.world]]
 
-Contributing: 
-Clone this repo, cd into it and start the development pipeline build.
+** Join the creator gods: 
+Clone this repo, cd into it and start the development build.
 #+BEGIN_SRC shell
 $ git clone git@github.com:aaronpowered/grimoire.git
 $ cd grimoire
 $ ./dev.sh
 #+END_SRC
 
-Your world is started and available at [[http://localhost:3000]].
+Your world is created and available at [[http://localhost:3000]].
 
-Start a REPL in an other terminal:
+Open your spellbook in an other terminal:
 #+BEGIN_SRC shell
 $ ./repl.sh
 #+END_SRC
@@ -50,5 +52,5 @@ The ~auto~ option in the ~system~ boot task takes care of your application lifec
 
 This workflow is built on top of [[http://boot-clj.com/][Boot]], a build tool, and [[https://github.com/danielsz/system/tree/master/examples/boot][system]], a component library. 
 
-Do you feel the creative juices flow? Are you ready for endless hours of sheer creative output?
+** Are you ready for the new dawn?
 
