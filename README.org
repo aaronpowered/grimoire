@@ -1,4 +1,4 @@
-* Grimoire World - The Decentralized Massive Multiplayer Online Sandbox Economy Game with RPG flavors.
+* Grimoire World - MMO Sandbox Economy Game with RPG flavors.
 
 #+BEGIN_QUOTE 
  If you don't believe it or don't get it, I don't have the time to try to convince you, sorry. — Satoshi Nakamoto
@@ -7,14 +7,19 @@
 ** Manifesto
 
 Grimoire demonstrates the *power of CSS* in the browser, a game engine built with pure CSS transformations, React and Clojurescript.
+
 Grimoire demonstrates the *sandbox economy* with real player driven prices powered by Ethereum smart contracts.
+
 Grimoire demonstrates the *holy grail* workflow for online game development: an auto-restartable back-end + a hot-reloadable front-end.
+
 Grimoire demonstrates the *public domain* an open-source game decorated with renaissance paintings.
+
 Grimoire demonstrates the *decentralized* ruleset, real players govern the world, their magic effects the environment, their willpower break walls.
+
 Grimoire demonstrates the *freedom of PKing* with high-traffic PVP areas and a virtuous combat system.
 
 ** Start playing:
-grimoire.world
+[[http://grimoire.world]]
 
 Contributing: 
 Clone this repo, cd into it and start the development pipeline build.
