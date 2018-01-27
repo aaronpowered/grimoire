@@ -1,3 +1,0 @@
-A Pen created at CodePen.io. You can find this one at http://codepen.io/dudleystorey/pen/MbLbQr.
-
- Demonstrates a responsive family tree using semantic markup and CSS: in this case, the sequence of movies derived from, or inspired by, the Kurosawa film Seven Samurai. [Derived from this demo](http://thecodeplayer.com/walkthrough/css3-family-tree) (Smallest viewport arrangement still needs a little work)

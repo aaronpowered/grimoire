@@ -1,1 +1,0 @@
-var stackBlurCanvasRGB = function(){};

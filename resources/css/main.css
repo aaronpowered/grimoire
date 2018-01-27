@@ -1,0 +1,184 @@
+body {margin:0;}
+
+.world {
+    overflow:hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background:beige;
+}
+
+.cards {
+    display:flex;
+    width: 100%;
+    justify-content: center;
+    height:220px;
+    overflow:hidden;
+    display:none;
+}
+
+.card {
+    border: 2px solid darkgray;
+    border-radius: 20px;
+    height: 210px;
+    width: 140px;
+    text-align: center;
+    background: beige;
+    margin-left:-20px;
+    box-shadow:1px 10px 10px 0px rgba(0,0,0,0.2);
+    transform: translateY(50%);
+    transition: all 0.7s ease;
+}
+.card:hover {
+    transform: translateY(0%);
+}
+
+
+.perspective .environment {
+    background-color: hsla(0,0%,0%,.1);
+    background-image: -webkit-linear-gradient(hsla(0,0%,0%,.1) 2.5%, transparent 2.5%, transparent 97.5%, hsla(0,0%,0%,.1) 97.5%),
+                      -webkit-linear-gradient(left, hsla(0,0%,0%,.1) 2.5%, transparent 2.5%, transparent 97.5%, hsla(0,0%,0%,.1) 97.5%);
+    box-shadow: 0px 30px 50px -20px rgba(0,0,0,0.3);
+}
+
+.world > input {
+    display: none;
+}
+label {
+    background: #ddd;
+    cursor: pointer;
+    display: block;
+    font-family: sans-serif;
+    line-height: 3em;
+    position: absolute;
+    left: .5em;
+    text-align: center;
+    top: 4em;
+    width: 4.5em;
+    -webkit-transition: .25s;
+}
+label[for="left"] {
+    left: 10.5em;
+}
+label[for="reset"] {
+    left: 5.5em;
+}
+label[for="up"] {
+    left: 5.5em;
+    top: .5em;
+}
+label[for="down"] {
+    left: 5.5em;
+    top: 7.5em;
+}
+label[for="zoom"] {
+    left: 5.5em;
+    top: 14.5em;
+}
+label[for="far"] {
+    left: 0.5em;
+    top: 14.5em;
+}
+label:hover {
+    background-color: #bbb;
+}
+input:checked + label {
+    background-color: #666;
+    color: #fff;
+}
+#left:checked ~ .perspective {
+    -webkit-transform: perspective(500) rotateX(45deg) rotateZ(-30deg) !important;
+}
+#right:checked ~ .perspective {
+    -webkit-transform: perspective(500) rotateX(45deg) rotateZ(30deg) !important;
+}
+#up:checked ~ .perspective {
+    -webkit-transform: perspective(500) rotateX(75deg) !important;
+}
+#down:checked ~ .perspective {
+    -webkit-transform: perspective(500) rotateX(15deg) !important;
+}​
+#zoom:checked ~ .perspective {
+    -webkit-transform: perspective(500) rotateX(70deg) !important;
+}
+#far:checked ~ .perspective {
+    -webkit-transform: perspective(3000) rotateX(45deg) !important;
+}
+
+.perspective > .centrum {
+    -webkit-transform: perspective(500) rotateX(-90deg) rotateZ(0deg) !important;
+}
+
+#left:checked ~ .perspective > .centrum {
+    -webkit-transform: perspective(500) rotateX(-90deg) rotateY(-30deg) !important;
+}
+#right:checked ~ .perspective > .centrum {
+    -webkit-transform: perspective(500) rotateX(-90deg) rotateY(+30deg) !important;
+}
+#down:checked ~ .perspective > .centrum {
+    -webkit-transform: perspective(500) !important;
+}
+#left:checked ~ .perspective > .environment {
+    box-shadow: -20px 30px 50px -20px rgba(0,0,0,0.3);
+}
+#right:checked ~ .perspective > .environment {
+    box-shadow: 20px 30px 50px -20px rgba(0,0,0,0.3);
+}
+#down:checked ~ .perspective > .environment {
+    box-shadow: 0px 0px 10px -20px rgba(0,0,0,0.3);
+}
+#far:checked ~ .perspective > .environment {
+    box-shadow: 0px 0px 10px -20px rgba(0,0,0,0.3);
+}
+
+
+
+
+@-webkit-keyframes slideOut {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  80% {
+    -webkit-transform: translate3d(0, -80%, 0);
+    transform: translate3d(0, -80%, 0);
+    opacity:1;
+  }
+
+  100% {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    opacity:0;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  80% {
+    -webkit-transform: translate3d(0, -80%, 0);
+    transform: translate3d(0, -80%, 0);
+    opacity:1;
+  }
+
+  100% {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    opacity:0;
+  }
+}
+
+.fading-message {
+  -webkit-animation-name: slideOut;
+  animation-name: slideOut;
+  -webkit-animation-duration: 10s;
+  animation-duration: 10s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
