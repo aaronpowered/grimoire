@@ -4,6 +4,15 @@
  If you don't believe it or don't get it, I don't have the time to try to convince you, sorry. — Satoshi Nakamoto
 #+END_QUOTE
 
+                .-~~~~~~~~~-._       _.-~~~~~~~~~-.
+            __.'              ~.   .~              `.__
+          .'//                  \./                  \\`.
+        .'//                     |                     \\`.
+      .'// .-~"""""""~~~~-._     |     _,-~~~~"""""""~-. \\`.
+    .'//.-"                 `-.  |  .-'                 "-.\\`.
+  .'//______.============-..   \ | /   ..-============.______\\`.
+.'______________________________\|/______________________________`.
+
 ** Manifesto
 
 Grimoire demonstrates the *power of CSS* in the browser, a game engine built with pure CSS transformations, React and Clojurescript.
@@ -26,12 +35,12 @@ Clone this repo, cd into it and start the development pipeline build.
 #+BEGIN_SRC shell
 $ git clone git@github.com:aaronpowered/grimoire.git
 $ cd grimoire
-$ boot dev
+$ ./dev.sh
 #+END_SRC
 
 Your world is started and available at [[http://localhost:3000]].
 
-Try out the functions live in a REPL:
+Start a REPL in an other terminal:
 #+BEGIN_SRC shell
 $ ./repl.sh
 #+END_SRC
