@@ -33,7 +33,7 @@ Made with *public domain* renaissance paintings.
 ** Start playing:
 [[http://grimoire.world]]
 
-** Join the creator gods: 
+** Join the creators: 
 Clone this repo, cd into it and start the development build.
 #+BEGIN_SRC shell
 $ git clone git@github.com:aaronpowered/grimoire.git
