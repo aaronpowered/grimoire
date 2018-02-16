@@ -43,16 +43,16 @@
 
 (def environment-state 
   (atom 
-    {[3 3 0] {:id :woodenbox
-              :comp
-              [{:type :plank :id 0 :name nil :res 2 :vul 1}
-               {:type :plank :id 1 :name nil :res 2 :vul 1}
-               {:type :plank :id 2 :name nil :res 2 :vul 1}
-               {:type :plank :id 3 :name nil :res 2 :vul 1}
-               {:type :plank :id 4 :name nil :res 2 :vul 1}
-               {:type :plank :id 5 :name nil :res 2 :vul 1}
-               ]}
-     [-4 3 0] {:id :stonebox
+    {
+     [-6 -6 -6] {:id :window
+              :comp []}
+     [-3 -6 -6] {:id :window
+              :comp []}
+     [0 -6 -6] {:id :window
+              :comp []}
+     [3 -6 -6] {:id :window
+              :comp []}
+     [6 3 0] {:id :stonebox
                :comp
               [{:type :stone :id 0 :name nil :res 4 :vul 1}
                {:type :stone :id 1 :name nil :res 4 :vul 1}

@@ -37,6 +37,7 @@
              :nick client-id
              :uid client-id
              :direction :up
+             :role "barbarian"
              :environment nil
              :chat nil
              :hand [0 1 2 3 4 5]}}))
@@ -107,8 +108,8 @@
 (defmethod engine :init-ready [_ [state]]
   (if-not (nil? state)
     (map-of state)
-    {:state {:width 440 :height 440 
-             :x 11 :y 11
+    {:state {:width 1000 :height 440 
+             :x 25 :y 11
              :animation-time 0.7
              :animation-easing "ease"}}))
 
@@ -188,7 +189,7 @@
 
 ;//////////\\\\\\\\\ UI
 
-(rum/defc Party < rum/static [r party game-chat tile-width tile-height animation-time animation-easing]
+(rum/defc Party < rum/static [r role party game-chat tile-width tile-height animation-time animation-easing]
   [:div.party 
    (when (keys party)
      (map-indexed 
@@ -229,7 +230,7 @@
    [:img {:style {:width "100%"
                   :position "absolute"
                   :bottom 0 :left 0}
-          :src (str "/css/"(apply str (rest (str direction))) ".png")}]
+          :src (str "/css/" role "/" (apply str (rest (str direction))) ".png")}]
         ])) 
      party))
    ])
@@ -282,6 +283,40 @@
           :transform "rotateY(90deg) translateX(0px)"
           :transformOrigin "100% 0"})}]]))
 
+
+
+
+(rum/defc Image < rum/static [path r tile-width tile-height x y z color]
+  (let 
+    [style   
+     {:boxShadow "inset 0 0 0 .25em hsla(0,0%,0%,.1)"
+      :transformStyle "preserve-3d"
+      :transition ".25s"
+      :position "absolute"
+      :width (str tile-width"px")
+      :height (str tile-height"px")
+      }]
+    [:.cube 
+     {:style 
+      {:position "absolute" 
+       :zIndex (+ 100 y 1)
+       :transform-origin "top"
+       :transform "rotateX(-45deg) translateY(-120px)"
+       :left (str (* (+ x 6) tile-width)"px")
+       :top (str (* (+ y 6) tile-height)"px")
+       }}
+     [:.side 
+      {:style;back
+       (merge style 
+         {:background (str "url('""')")
+          :transform (str "rotateY(90deg) translateZ(-"tile-width"px)")
+          :transformOrigin "100% 0"})}]
+     
+   [:img {:style {:width (str (* 3 tile-width) "px")}
+          :src (str "/css/inn/" (name path) ".png")}]
+     ]))
+ 
+
 (rum/defc Tiles < rum/static [r environment party game-chat tile-width tile-height animation-time animation-easing]
   [:div.tiles {:style 
                {:position "relative"
@@ -295,14 +330,25 @@
        (let [[x y z] coord
              {:keys [id color]} m]
        (case id
+         :window (Image :window r tile-width tile-height x y z color)
          :cube (Cube r tile-width tile-height x y z color)
          :woodenbox (Cube r tile-width tile-height x y z color)
          :stonebox (Cube r tile-width tile-height x y z color)
          :stonechest (Cube r tile-width tile-height x y z color)
          )))
      environment)
-   (Party r party game-chat tile-width tile-height animation-time animation-easing)
+   (Party r "barbarian" party game-chat tile-width tile-height animation-time animation-easing)
    ])
+
+(defn obj->clj
+  [obj]
+  (-> (fn [result key]
+        (let [v (aget obj key)]
+          (if (= "function" (goog/typeOf v))
+            result
+            (assoc result key v))))
+      (reduce {} (.getKeys goog/object obj))))
+
 
 (rum/defc Environment < rum/reactive [r]
   (let [tile-width (double (/ (rum/react (citrus/subscription r [:engine :width])) (rum/react (citrus/subscription r [:engine :x]))))
@@ -314,16 +360,28 @@
         animation-easing (rum/react (citrus/subscription r [:engine :animation-easing]))
         right (* (- (rum/react (citrus/subscription r [:game :x])) 0) tile-width)
         bottom (* (- (rum/react (citrus/subscription r [:game :y])) 0) tile-height)
+        click-coordinates 
+        (fn [event]
+          (let [emap (obj->clj event)
+                pos-x (get emap "clientX");event.offsetX?(event.offsetX):event.pageX-document.getElementById("env").offsetLeft;
+	            pos-y (get emap "clientY");event.offsetY?(event.offsetY):event.pageY-document.getElementById("env").offsetTop;
+                p-x (get emap "pageX");event.offsetX?(event.offsetX):event.pageX-document.getElementById("env").offsetLeft;
+	            p-y (get emap "pageY");event.offsetY?(event.offsetY):event.pageY-document.getElementById("env").offsetTop;
+                ]
+            (js/console.log (str pos-x" "pos-y))
+            (js/console.log (str p-x" "p-y))
+            ;(js/console.log (str emap))
+            (js/console.log (str (keys emap)))
+            ))
         initial-style 
         {:position "absolute"
          :transition (str "all "animation-time"s "animation-easing)
-         :width "100%"
-         :height "100%"
-         :background-size (str tile-width"px "tile-height"px")}
+         :width "100%" :height "100%"
+         :backgroundSize (str tile-width"px "tile-height"px")}
         style (assoc initial-style
                      :right (str right "px")
                      :bottom (str bottom "px"))]
-    [:div.environment (map-of style) 
+    [:div#env.environment {:style style :on-click click-coordinates}
      (Tiles r environment party game-chat tile-width tile-height animation-time animation-easing)
      ]))
 
@@ -408,7 +466,7 @@
    [:img {:style {:width "100%"
                   :position "absolute"
                   :bottom 0}
-          :src (str "/css/"(apply str (rest (str (rum/react (citrus/subscription r [:game :direction]))))) ".png")}]
+          :src (str "/css/" (rum/react (citrus/subscription r [:game :role])) "/"(apply str (rest (str (rum/react (citrus/subscription r [:game :direction]))))) ".png")}]
     ])
 
 (rum/defc Perspective < rum/reactive [r]
@@ -444,19 +502,22 @@
 (rum/defc Panel < rum/reactive [r]
    [:div {:style 
           {:position "absolute"
-           :top 50
-           :right 50
+           :top 10
+           :right 10
            :width "200px"
-           :border "2px solid black"
-           :padding "30px"
-           :border-radius "15px"}}
+           :border "2px solid white"
+           :padding "17px"
+           :border-radius "17px"}}
     [:h4 (str (rum/react (citrus/subscription r [:game :nick])))]
     [:span (str 
              " x:" (rum/react (citrus/subscription r [:game :x]))
              " y:" (rum/react (citrus/subscription r [:game :y]))
                 )]
     [:br]
-    (input r :game :nick :update)
+    [:input {:type "text" :name "form_x" :size 4}]
+    [:input {:type "text" :name "form_y" :size 4}]
+    ;(input r :game :nick :update)
+    (input r :game :role :update)
     ;[:span (str (rum/react (citrus/subscription r [:game])))]
     [:h5 "Game engine:"]
     (input r :engine :width :edit)
