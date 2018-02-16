@@ -22,4 +22,4 @@ echo "                     ,
          |*::V '-'   //,):/Ä
          |:::+| ||
 		   " | lolcat
-lein repl :connect localhost:44444
+./lein repl :connect localhost:44444
