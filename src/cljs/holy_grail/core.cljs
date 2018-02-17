@@ -33,14 +33,14 @@
 (defmethod game :init-ready [_ [state]]
   (if-not (nil? state)
     (map-of state)
-    {:state {:x 0 :y 0 
+    {:state (hash-map :x 0 :y 0 
              :nick client-id
              :uid client-id
              :direction :up
-             :role "barbarian"
+             :role (rand-nth ["tradesman" "priest" "barbarian"])
              :environment nil
              :chat nil
-             :hand [0 1 2 3 4 5]}}))
+             :hand [0 1 2 3 4 5])}))
 
 (defmethod game :update [_ new-state state]
   (let [state (merge state (first new-state))
@@ -286,7 +286,7 @@
 
 
 
-(rum/defc Image < rum/static [path r tile-width tile-height x y z color]
+(rum/defc Image < rum/static [path r [rotateX rotateY rotateZ] width [transX transY transZ] tile-width tile-height x y z color]
   (let 
     [style   
      {:boxShadow "inset 0 0 0 .25em hsla(0,0%,0%,.1)"
@@ -301,7 +301,11 @@
       {:position "absolute" 
        :zIndex (+ 100 y 1)
        :transform-origin "top"
-       :transform "rotateX(-45deg) translateY(-120px)"
+       :transform (str "rotateX("rotateX"deg) rotateY("rotateY"deg) rotateZ("rotateZ"deg) 
+                      translateX("transX"px)
+                      translateY("transY"px)
+                      translateZ("transZ"px)
+                                        ")
        :left (str (* (+ x 6) tile-width)"px")
        :top (str (* (+ y 6) tile-height)"px")
        }}
@@ -312,7 +316,7 @@
           :transform (str "rotateY(90deg) translateZ(-"tile-width"px)")
           :transformOrigin "100% 0"})}]
      
-   [:img {:style {:width (str (* 3 tile-width) "px")}
+   [:img {:style {:width (str (* width tile-width) "px")}
           :src (str "/css/inn/" (name path) ".png")}]
      ]))
  
@@ -330,7 +334,11 @@
        (let [[x y z] coord
              {:keys [id color]} m]
        (case id
-         :window (Image :window r tile-width tile-height x y z color)
+         :floor (Image :floor r [0 0 0] 6 [0 0 0] tile-width tile-height x y z color)
+         :window (Image :window r [-90 0 0] 6 [0 -280 0] tile-width tile-height x y z color)
+         :curtain (Image :curtain r [-90 0 0] 6 [0 -280 0] tile-width tile-height x y z color)
+         :window2 (Image :window r [0 90 -90] 6 [120 -280 -120] tile-width tile-height x y z color)
+         :tapestry (Image :tapestry r [0 90 -90] 3 [-60 -180 -60] tile-width tile-height x y z color)
          :cube (Cube r tile-width tile-height x y z color)
          :woodenbox (Cube r tile-width tile-height x y z color)
          :stonebox (Cube r tile-width tile-height x y z color)
@@ -465,7 +473,13 @@
            :text-align "center"}} (rum/react (citrus/subscription r [:game :nick]))]
    [:img {:style {:width "100%"
                   :position "absolute"
-                  :bottom 0}
+                  :bottom 0
+                      :box-shadow "0px 0px 30px rgba(255,255,255,1)"
+    :background "rgba(255,255,255,0.5)"
+    :border-top-left-radius "40px"
+    :border-top-right-radius "40px"
+                  ;:background "white"
+                  }
           :src (str "/css/" (rum/react (citrus/subscription r [:game :role])) "/"(apply str (rest (str (rum/react (citrus/subscription r [:game :direction]))))) ".png")}]
     ])
 

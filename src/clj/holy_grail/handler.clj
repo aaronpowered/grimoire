@@ -44,23 +44,45 @@
 (def environment-state 
   (atom 
     {
-     [-6 -6 -6] {:id :window
-              :comp []}
-     [-3 -6 -6] {:id :window
-              :comp []}
-     [0 -6 -6] {:id :window
-              :comp []}
-     [3 -6 -6] {:id :window
-              :comp []}
-     [6 3 0] {:id :stonebox
-               :comp
-              [{:type :stone :id 0 :name nil :res 4 :vul 1}
-               {:type :stone :id 1 :name nil :res 4 :vul 1}
-               {:type :stone :id 2 :name nil :res 4 :vul 1}
-               {:type :stone :id 3 :name nil :res 4 :vul 1}
-               {:type :stone :id 4 :name nil :res 4 :vul 1}
-               {:type :stone :id 5 :name nil :res 4 :vul 1}
-               ]}
+     [-12 12 -1] {:id :floor :comp []}
+     [-6 12 -1] {:id :floor :comp []}
+     [0 12 -1] {:id :floor :comp []}
+     [6 12 -1] {:id :floor :comp []}
+     [12 12 -1] {:id :floor :comp []}
+     [-12 6 -1] {:id :floor :comp []}
+     [-6 6 -1] {:id :floor :comp []}
+     [0 6 -1] {:id :floor :comp []}
+     [6 6 -1] {:id :floor :comp []}
+     [12 6 -1] {:id :floor :comp []}
+     [-12 0 -1] {:id :floor :comp []}
+     [-6 0 -1] {:id :floor :comp []}
+     [0 0 -1] {:id :floor :comp []}
+     [6 0 -1] {:id :floor :comp []}
+     [12 0 -1] {:id :floor :comp []}
+     [-12 -6 -1] {:id :floor :comp []}
+     [-6 -6 -1] {:id :floor :comp []}
+     [0 -6 -1] {:id :floor :comp []}
+     [6 -6 -1] {:id :floor :comp []}
+     [12 -6 -1] {:id :floor :comp []}
+     [-12 -12 -1] {:id :floor :comp []}
+     [-6 -12 -1] {:id :floor :comp []}
+     [0 -12 -1] {:id :floor :comp []}
+     [6 -12 -1] {:id :floor :comp []}
+     [12 -12 -1] {:id :floor :comp []}
+     [-6 -7 -2] {:id :curtain :comp []}
+     [0 -7 -2] {:id :curtain :comp []}
+     [6 -7 -2] {:id :curtain :comp []}
+     [12 -7 -2] {:id :curtain :comp []}
+     [-6 -6 0] {:id :window :comp []}
+     [0 -6 0] {:id :window :comp []}
+     [6 -6 0] {:id :window :comp []}
+     [12 -6 0] {:id :window :comp []}
+     [-6 0 0] {:id :window2 :comp []}
+     [-6 6 0] {:id :window2 :comp []}
+     [-7 -6 0] {:id :tapestry :comp []}
+     [-7 -3 0] {:id :tapestry :comp []}
+     [-7 0 0] {:id :tapestry :comp []}
+     [-7 3 0] {:id :tapestry :comp []}
      [-2 -1 0] {:id :stonechest
                 :comp
               [{:type :stone :id 0 :name nil :res 4 :vul 1}
@@ -120,10 +142,10 @@
                                     :up [x (dec y) 0]
                                     :down [x (inc y) 0]))
                          (case opt
-                           :right (< 5 (inc x))
-                           :left (> -5 (dec x))
-                           :up (> -5 (dec y))
-                           :down (< 5 (inc y))
+                           :right (< 12 (inc x))
+                           :left (> -12 (dec x))
+                           :up (> -6 (dec y))
+                           :down (< 6 (inc y))
                            ))
                  (case opt
                    :right (swap! game-state update-in [uid :x] inc)
