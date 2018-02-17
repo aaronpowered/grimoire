@@ -1,4 +1,4 @@
-body {margin:0;}
+body {margin:0;overflow:hidden;}
 
 .world {
     overflow:hidden;
@@ -34,7 +34,9 @@ body {margin:0;}
     transform: translateY(0%);
 }
 
-
+.perspective {
+    position: absolute;
+}
 .perspective .environment {
     background-color: hsla(0,0%,0%,.1);
     background-image: -webkit-linear-gradient(hsla(0,0%,0%,.1) 2.5%, transparent 2.5%, transparent 97.5%, hsla(0,0%,0%,.1) 97.5%),

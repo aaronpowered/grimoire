@@ -108,8 +108,8 @@
 (defmethod engine :init-ready [_ [state]]
   (if-not (nil? state)
     (map-of state)
-    {:state {:width 1000 :height 440 
-             :x 25 :y 11
+    {:state {:width 1000 :height 1000
+             :x 25 :y 25
              :animation-time 0.7
              :animation-easing "ease"}}))
 
@@ -286,7 +286,9 @@
 
 
 
-(rum/defc Image < rum/static [path r [rotateX rotateY rotateZ] width [transX transY transZ] tile-width tile-height x y z color]
+(rum/defc Image < rum/static [path r [rotateX rotateY rotateZ] width [transX transY transZ]
+                              tile-width tile-height x y z color
+                              animation-time animation-easing]
   (let 
     [style   
      {:boxShadow "inset 0 0 0 .25em hsla(0,0%,0%,.1)"
@@ -299,7 +301,8 @@
     [:.cube 
      {:style 
       {:position "absolute" 
-       :zIndex (+ 100 y 1)
+      :transition (str "all "animation-time"s "animation-easing)
+       :zIndex (+ 80 y 1)
        :transform-origin "top"
        :transform (str "rotateX("rotateX"deg) rotateY("rotateY"deg) rotateZ("rotateZ"deg) 
                       translateX("transX"px)
@@ -321,7 +324,7 @@
      ]))
  
 
-(rum/defc Tiles < rum/static [r environment party game-chat tile-width tile-height animation-time animation-easing]
+(rum/defc Tiles < rum/static [r rx ry environment party game-chat tile-width tile-height animation-time animation-easing]
   [:div.tiles {:style 
                {:position "relative"
                 :width "100%"
@@ -332,18 +335,23 @@
    (map
      (fn [[coord m]]
        (let [[x y z] coord
-             {:keys [id color]} m]
+             {:keys [id color]} m
+             x (- x rx)
+             y (- y ry)
+             z z
+             ]
        (case id
-         :floor (Image :floor r [0 0 0] 6 [0 0 0] tile-width tile-height x y z color)
-         :window (Image :window r [-90 0 0] 6 [0 -280 0] tile-width tile-height x y z color)
-         :curtain (Image :curtain r [-90 0 0] 6 [0 -280 0] tile-width tile-height x y z color)
-         :window2 (Image :window r [0 90 -90] 6 [120 -280 -120] tile-width tile-height x y z color)
-         :tapestry (Image :tapestry r [0 90 -90] 3 [-60 -180 -60] tile-width tile-height x y z color)
+         :floor (Image :floor r [0 0 0] 6 [0 0 0] tile-width tile-height x y z color animation-time animation-easing)
+         :window (Image :window r [-90 0 0] 6 [0 -280 0] tile-width tile-height x y z color animation-time animation-easing)
+         :curtain (Image :curtain r [-90 0 0] 6 [0 -280 0] tile-width tile-height x y z color animation-time animation-easing)
+         :window2 (Image :window r [0 90 -90] 6 [120 -280 -120] tile-width tile-height x y z color animation-time animation-easing)
+         :tapestry (Image :tapestry r [0 90 -90] 3 [-60 -180 -60] tile-width tile-height x y z color animation-time animation-easing)
          :cube (Cube r tile-width tile-height x y z color)
          :woodenbox (Cube r tile-width tile-height x y z color)
          :stonebox (Cube r tile-width tile-height x y z color)
          :stonechest (Cube r tile-width tile-height x y z color)
-         )))
+         )
+       ))
      environment)
    (Party r "barbarian" party game-chat tile-width tile-height animation-time animation-easing)
    ])
@@ -366,8 +374,10 @@
         party (rum/react (citrus/subscription r [:party]))
         animation-time (rum/react (citrus/subscription r [:engine :animation-time]))
         animation-easing (rum/react (citrus/subscription r [:engine :animation-easing]))
-        right (* (- (rum/react (citrus/subscription r [:game :x])) 0) tile-width)
-        bottom (* (- (rum/react (citrus/subscription r [:game :y])) 0) tile-height)
+        rx (- (rum/react (citrus/subscription r [:game :x])) 0)
+        ry (- (rum/react (citrus/subscription r [:game :y])) 0)
+        right (* rx tile-width)
+        bottom (* ry tile-height)
         click-coordinates 
         (fn [event]
           (let [emap (obj->clj event)
@@ -386,11 +396,14 @@
          :transition (str "all "animation-time"s "animation-easing)
          :width "100%" :height "100%"
          :backgroundSize (str tile-width"px "tile-height"px")}
-        style (assoc initial-style
-                     :right (str right "px")
-                     :bottom (str bottom "px"))]
+        style ;(assoc 
+                initial-style
+                     ;:right (str right "px")
+                     ;:bottom (str bottom "px")
+        ;             )
+        ]
     [:div#env.environment {:style style :on-click click-coordinates}
-     (Tiles r environment party game-chat tile-width tile-height animation-time animation-easing)
+     (Tiles r rx ry environment party game-chat tile-width tile-height animation-time animation-easing)
      ]))
 
 (rum/defc Centrum < rum/reactive [r]

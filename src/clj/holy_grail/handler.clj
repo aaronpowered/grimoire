@@ -83,15 +83,6 @@
      [-7 -3 0] {:id :tapestry :comp []}
      [-7 0 0] {:id :tapestry :comp []}
      [-7 3 0] {:id :tapestry :comp []}
-     [-2 -1 0] {:id :stonechest
-                :comp
-              [{:type :stone :id 0 :name nil :res 4 :vul 1}
-               {:type :stone :id 1 :name nil :res 4 :vul 1}
-               {:type :stone :id 2 :name nil :res 4 :vul 1}
-               {:type :stone :id 3 :name nil :res 4 :vul 1}
-               {:type :stone :id 4 :name nil :res 4 :vul 1}
-               {:type :stone :id 5 :name nil :res 4 :vul 1}
-               {:type :lock :id 6 :name nil :res 4 :vul 3}]}
      }))
 
 (def game-state (atom {}))
