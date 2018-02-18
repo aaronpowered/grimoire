@@ -189,20 +189,23 @@
 
 ;//////////\\\\\\\\\ UI
 
-(rum/defc Party < rum/static [r role party game-chat tile-width tile-height animation-time animation-easing]
+(rum/defc Party < rum/static [r rx ry party game-chat tile-width tile-height animation-time animation-easing]
   [:div.party 
    (when (keys party)
      (map-indexed 
      (fn [index [uid state]]
-       (let [{:keys [nick uid direction x y]} state]
+       (let [{:keys [nick uid role direction x y]} state
+             x (- x rx)
+             y (- y ry)]
        [:div.person {:key index
                      :style 
                  {:position "absolute"
-                  :left (str (* (+ x 5) tile-width)"px")
-                  :top (str (* (+ y 5) tile-height)"px")
+                  :left (str (* (+ x 12) tile-width)"px")
+                  :top (str (* (+ y 12) tile-height)"px")
                   :height (str (/ tile-height 2.0) "px")
                   :width (str tile-width "px")
-                  :transform "rotateX(-45deg)"
+                  :zIndex (+ y 101)
+                  :transform "rotateX(-90deg)"
                   :transform-style "preserve-3d"
                   :transition (str "all "animation-time"s "animation-easing)
                   :transform-origin "center center"
@@ -286,7 +289,7 @@
 
 
 
-(rum/defc Image < rum/static [path r [rotateX rotateY rotateZ] width [transX transY transZ]
+(rum/defc Image < rum/static [path r [rotateX rotateY rotateZ] width zindex [transX transY transZ]
                               tile-width tile-height x y z color
                               animation-time animation-easing]
   (let 
@@ -302,7 +305,7 @@
      {:style 
       {:position "absolute" 
       :transition (str "all "animation-time"s "animation-easing)
-       :zIndex (+ 80 y 1)
+       :zIndex (+ zindex y)
        :transform-origin "top"
        :transform (str "rotateX("rotateX"deg) rotateY("rotateY"deg) rotateZ("rotateZ"deg) 
                       translateX("transX"px)
@@ -341,11 +344,12 @@
              z z
              ]
        (case id
-         :floor (Image :floor r [0 0 0] 6 [0 0 0] tile-width tile-height x y z color animation-time animation-easing)
-         :window (Image :window r [-90 0 0] 6 [0 -280 0] tile-width tile-height x y z color animation-time animation-easing)
-         :curtain (Image :curtain r [-90 0 0] 6 [0 -280 0] tile-width tile-height x y z color animation-time animation-easing)
-         :window2 (Image :window r [0 90 -90] 6 [120 -280 -120] tile-width tile-height x y z color animation-time animation-easing)
-         :tapestry (Image :tapestry r [0 90 -90] 3 [-60 -180 -60] tile-width tile-height x y z color animation-time animation-easing)
+         :floor (Image :floor r [0 0 0] 6 81 [0 0 0] tile-width tile-height x y z color animation-time animation-easing)
+         :window (Image :window r [-90 0 0] 6 81 [0 -280 0] tile-width tile-height x y z color animation-time animation-easing)
+         :out (Image :out r [-90 0 0] 6 101 [0 -280 0] tile-width tile-height x y z color animation-time animation-easing)
+         :curtain (Image :curtain r [-90 0 0] 6 81 [0 -280 30] tile-width tile-height x y z color animation-time animation-easing)
+         :window2 (Image :window r [0 90 -90] 6 81 [120 -280 -120] tile-width tile-height x y z color animation-time animation-easing)
+         :tapestry (Image :tapestry r [0 90 -90] 3 81 [-60 -200 -20] tile-width tile-height x y z color animation-time animation-easing)
          :cube (Cube r tile-width tile-height x y z color)
          :woodenbox (Cube r tile-width tile-height x y z color)
          :stonebox (Cube r tile-width tile-height x y z color)
@@ -353,7 +357,7 @@
          )
        ))
      environment)
-   (Party r "barbarian" party game-chat tile-width tile-height animation-time animation-easing)
+   (Party r rx ry party game-chat tile-width tile-height animation-time animation-easing)
    ])
 
 (defn obj->clj
@@ -400,86 +404,75 @@
         ]
     [:div#env.environment {:style style :on-click click-coordinates}
      (Tiles r rx ry environment party game-chat tile-width tile-height animation-time animation-easing)
+     
+   (Character 
+  {:nickname (rum/react (citrus/subscription r [:game :nick]))
+   :role (rum/react (citrus/subscription r [:game :role]))
+   :direction (rum/react (citrus/subscription r [:game :direction]))
+   :z-index (+ 100 (rum/react (citrus/subscription r [:game :y])))
+   :left (/ (- (rum/react (citrus/subscription r [:engine :width]))
+            (/ (rum/react (citrus/subscription r [:engine :width])) 
+               (rum/react (citrus/subscription r [:engine :x])))) 2.0)
+   :bottom (+ (/ (- (rum/react (citrus/subscription r [:engine :height]))
+              (/ (rum/react (citrus/subscription r [:engine :height])) 
+                 (rum/react (citrus/subscription r [:engine :y])))) 2.0)
+              (/ (rum/react (citrus/subscription r [:engine :height])) 
+                 (rum/react (citrus/subscription r [:engine :y])) 4.0))
+   :height (double (/ (rum/react (citrus/subscription r [:engine :height])) 
+                      (rum/react (citrus/subscription r [:engine :y])) 0.5))
+   :width (double (/ (rum/react (citrus/subscription r [:engine :width])) 
+                                 (rum/react (citrus/subscription r [:engine :x]))))
+   :animation-time (rum/react (citrus/subscription r [:engine :animation-time]))
+   :animation-easing (rum/react (citrus/subscription r [:engine :animation-easing]))
+   :mtop (/ (rum/react (citrus/subscription r [:engine :height])) 
+            (rum/react (citrus/subscription r [:engine :y])) 1.0)
+   :mleft (/ (rum/react (citrus/subscription r [:engine :width])) 
+             (rum/react (citrus/subscription r [:engine :x])) 4.0)
+   :mwidth (double (/ (rum/react (citrus/subscription r [:engine :width])) 
+             (rum/react (citrus/subscription r [:engine :x]))))
+   :messages (filterv (fn [m] (= (:uid m) (rum/react (citrus/subscription r [:game :uid]))))
+              (rum/react (citrus/subscription r [:game :chat])))
+   :ctop (/ (rum/react (citrus/subscription r [:engine :height])) 
+            (rum/react (citrus/subscription r [:engine :y])) 2.0)
+   :cleft (/ (rum/react (citrus/subscription r [:engine :width])) 
+             (rum/react (citrus/subscription r [:engine :x])) 4.0)
+   :cwidth (double (/ (rum/react (citrus/subscription r [:engine :width])) 
+             (rum/react (citrus/subscription r [:engine :x]))))
+  })
      ]))
 
-(rum/defc Centrum < rum/reactive [r]
+
+(rum/defc Character < rum/static [{:keys [nickname role direction
+                                          z-index left bottom height width animation-time animation-easing messages
+                                          mtop mleft mwidth
+                                          ctop cleft cwidth]}]
 [:div.centrum {:style 
                  {:position "absolute"
-                  :zIndex (+ 100 (rum/react (citrus/subscription r [:game :y])))
-                  :left (str 
-                          (/ 
-                            (- 
-                              (rum/react (citrus/subscription r [:engine :width]))
-                              (/ 
-                                (rum/react (citrus/subscription r [:engine :width])) 
-                                (rum/react (citrus/subscription r [:engine :x]))))
-                            2.0)
-                          "px")
-                  :bottom (str
-                           (+ 
-                            (/ 
-                              (- 
-                                (rum/react (citrus/subscription r [:engine :height]))
-                                (/ 
-                                  (rum/react (citrus/subscription r [:engine :height])) 
-                                  (rum/react (citrus/subscription r [:engine :y])))) 
-                              2.0)
-                             (/ 
-                                  (rum/react (citrus/subscription r [:engine :height])) 
-                                  (rum/react (citrus/subscription r [:engine :y]))
-                               4.0)
-                             )
-                            "px")
-                  :height (str 
-                            (double (/ (rum/react (citrus/subscription r [:engine :height])) 
-                                 (rum/react (citrus/subscription r [:engine :y]))
-                                       0.5)) "px")
-                  :width (str 
-                            (double (/ (rum/react (citrus/subscription r [:engine :width])) 
-                                 (rum/react (citrus/subscription r [:engine :x])))) "px")
-                  :transition (str "all "
-                                   (rum/react (citrus/subscription r [:engine :animation-time]))
-                                   "s "
-                                   (rum/react (citrus/subscription r [:engine :animation-easing])))
+                  :zIndex z-index 
+                  :left (str left "px")
+                  :bottom (str bottom"px")
+                  :height (str height"px")
+                  :width (str width"px")
+                  :transition (str "all " animation-time"s "animation-easing)
                   :transform-style "preserve-3d"
                   :transform-origin "bottom"}}
    [:div {:style 
           {:position "absolute"
-           :top (str "-"
-                      (/ (rum/react (citrus/subscription r [:engine :height])) 
-                       (rum/react (citrus/subscription r [:engine :y])) 1.0)
-                      "px")
-           :left (str "-"
-                      (/ (rum/react (citrus/subscription r [:engine :width])) 
-                       (rum/react (citrus/subscription r [:engine :x])) 4.0)
-                      "px")
-           :width (str 
-                    (double (/ (rum/react (citrus/subscription r [:engine :width])) 
-                       (rum/react (citrus/subscription r [:engine :x]))))
-                    "px")
+           :top (str "-" mtop "px")
+           :left (str "-" mleft "px")
+           :width (str mwidth"px")
            :text-align "left"
            :font-size "11px"
            }}
     (map
       (fn [m]
-        [:div.fading-message (:content m)])
-      (filterv (fn [m] (= (:uid m) (rum/react (citrus/subscription r [:game :uid]))))
-              (rum/react (citrus/subscription r [:game :chat]))))]
+        [:div.fading-message (:content m)]) messages)]
    [:div {:style 
           {:position "absolute"
-           :top (str "-"
-                      (/ (rum/react (citrus/subscription r [:engine :height])) 
-                       (rum/react (citrus/subscription r [:engine :y])) 2.0)
-                      "px")
-           :left (str "-"
-                      (/ (rum/react (citrus/subscription r [:engine :width])) 
-                       (rum/react (citrus/subscription r [:engine :x])) 4.0)
-                      "px")
-           :width (str 
-                    (double (/ (rum/react (citrus/subscription r [:engine :width])) 
-                       (rum/react (citrus/subscription r [:engine :x]))))
-                    "px")
-           :text-align "center"}} (rum/react (citrus/subscription r [:game :nick]))]
+           :top (str "-" ctop "px")
+           :left (str "-" cleft "px")
+           :width (str cwidth"px")
+           :text-align "center"}} nickname]
    [:img {:style {:width "100%"
                   :position "absolute"
                   :bottom 0
@@ -487,10 +480,10 @@
     :background "rgba(255,255,255,0.5)"
     :border-top-left-radius "40px"
     :border-top-right-radius "40px"
-                  ;:background "white"
                   }
-          :src (str "/css/" (rum/react (citrus/subscription r [:game :role])) "/"(apply str (rest (str (rum/react (citrus/subscription r [:game :direction]))))) ".png")}]
+          :src (str "/css/" role "/"(apply str (rest (str direction))) ".png")}]
     ])
+
 
 (rum/defc Perspective < rum/reactive [r]
   [:div.perspective 
@@ -501,7 +494,7 @@
      :transform-style "preserve-3d"
      :transition "1s"}} 
    (Environment r)
-   (Centrum r)])
+   ])
 
 
 (rum/defc OnlinePlayers < rum/static [r party]
@@ -528,6 +521,8 @@
            :top 10
            :right 10
            :width "200px"
+           :z-index 4000
+           :background "cornsilk"
            :border "2px solid white"
            :padding "17px"
            :border-radius "17px"}}

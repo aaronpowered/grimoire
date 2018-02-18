@@ -103,23 +103,23 @@ input:checked + label {
     -webkit-transform: perspective(500) rotateX(15deg) !important;
 }​
 #zoom:checked ~ .perspective {
-    -webkit-transform: perspective(500) rotateX(70deg) !important;
+    -webkit-transform: perspective(300) rotateX(75deg) !important;
 }
 #far:checked ~ .perspective {
     -webkit-transform: perspective(3000) rotateX(45deg) !important;
 }
 
-.perspective > .centrum {
+.perspective .centrum {
     -webkit-transform: perspective(500) rotateX(-90deg) rotateZ(0deg) !important;
 }
 
-#left:checked ~ .perspective > .centrum {
+#left:checked ~ .perspective .centrum {
     -webkit-transform: perspective(500) rotateX(-90deg) rotateY(-30deg) !important;
 }
-#right:checked ~ .perspective > .centrum {
+#right:checked ~ .perspective .centrum {
     -webkit-transform: perspective(500) rotateX(-90deg) rotateY(+30deg) !important;
 }
-#down:checked ~ .perspective > .centrum {
+#down:checked ~ .perspective .centrum {
     -webkit-transform: perspective(500) !important;
 }
 #left:checked ~ .perspective > .environment {

@@ -69,20 +69,27 @@
      [0 -12 -1] {:id :floor :comp []}
      [6 -12 -1] {:id :floor :comp []}
      [12 -12 -1] {:id :floor :comp []}
-     [-6 -7 -2] {:id :curtain :comp []}
-     [0 -7 -2] {:id :curtain :comp []}
-     [6 -7 -2] {:id :curtain :comp []}
-     [12 -7 -2] {:id :curtain :comp []}
+     [-6 -7 2] {:id :curtain :comp []}
+     [0 -7 2] {:id :curtain :comp []}
+     [6 -7 2] {:id :curtain :comp []}
+     [12 -7 2] {:id :curtain :comp []}
      [-6 -6 0] {:id :window :comp []}
      [0 -6 0] {:id :window :comp []}
      [6 -6 0] {:id :window :comp []}
      [12 -6 0] {:id :window :comp []}
+     [-6 12 0] {:id :out :comp []}
+     [0 12 0] {:id :out :comp []}
+     [6 12 0] {:id :out :comp []}
+     [12 12 0] {:id :out :comp []}
      [-6 0 0] {:id :window2 :comp []}
      [-6 6 0] {:id :window2 :comp []}
+     [-6 9 0] {:id :window2 :comp []}
      [-7 -6 0] {:id :tapestry :comp []}
      [-7 -3 0] {:id :tapestry :comp []}
      [-7 0 0] {:id :tapestry :comp []}
      [-7 3 0] {:id :tapestry :comp []}
+     [-7 6 0] {:id :tapestry :comp []}
+     [-7 9 0] {:id :tapestry :comp []}
      }))
 
 (def game-state (atom {}))
@@ -133,10 +140,10 @@
                                     :up [x (dec y) 0]
                                     :down [x (inc y) 0]))
                          (case opt
-                           :right (< 12 (inc x))
-                           :left (> -12 (dec x))
-                           :up (> -6 (dec y))
-                           :down (< 6 (inc y))
+                           :right (< 18 (inc x))
+                           :left (> -18 (dec x))
+                           :up (> -18 (dec y))
+                           :down (< 18 (inc y))
                            ))
                  (case opt
                    :right (swap! game-state update-in [uid :x] inc)
