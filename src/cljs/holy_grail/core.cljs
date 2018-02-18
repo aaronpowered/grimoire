@@ -386,10 +386,6 @@
                 p-x (get emap "pageX");event.offsetX?(event.offsetX):event.pageX-document.getElementById("env").offsetLeft;
 	            p-y (get emap "pageY");event.offsetY?(event.offsetY):event.pageY-document.getElementById("env").offsetTop;
                 ]
-            (js/console.log (str pos-x" "pos-y))
-            (js/console.log (str p-x" "p-y))
-            ;(js/console.log (str emap))
-            (js/console.log (str (keys emap)))
             ))
         initial-style 
         {:position "absolute"
