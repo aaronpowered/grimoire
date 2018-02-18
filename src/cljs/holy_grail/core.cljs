@@ -369,79 +369,6 @@
             (assoc result key v))))
       (reduce {} (.getKeys goog/object obj))))
 
-
-(rum/defc Environment < rum/reactive [r]
-  (let [tile-width (double (/ (rum/react (citrus/subscription r [:engine :width])) (rum/react (citrus/subscription r [:engine :x]))))
-        tile-height (double (/ (rum/react (citrus/subscription r [:engine :height])) (rum/react (citrus/subscription r [:engine :y]))))
-        environment (rum/react (citrus/subscription r [:game :environment]))
-        game-chat (rum/react (citrus/subscription r [:game :chat]))
-        party (rum/react (citrus/subscription r [:party]))
-        animation-time (rum/react (citrus/subscription r [:engine :animation-time]))
-        animation-easing (rum/react (citrus/subscription r [:engine :animation-easing]))
-        rx (- (rum/react (citrus/subscription r [:game :x])) 0)
-        ry (- (rum/react (citrus/subscription r [:game :y])) 0)
-        right (* rx tile-width)
-        bottom (* ry tile-height)
-        click-coordinates 
-        (fn [event]
-          (let [emap (obj->clj event)
-                pos-x (get emap "clientX");event.offsetX?(event.offsetX):event.pageX-document.getElementById("env").offsetLeft;
-	            pos-y (get emap "clientY");event.offsetY?(event.offsetY):event.pageY-document.getElementById("env").offsetTop;
-                p-x (get emap "pageX");event.offsetX?(event.offsetX):event.pageX-document.getElementById("env").offsetLeft;
-	            p-y (get emap "pageY");event.offsetY?(event.offsetY):event.pageY-document.getElementById("env").offsetTop;
-                ]
-            ))
-        initial-style 
-        {:position "absolute"
-         :transition (str "all "animation-time"s "animation-easing)
-         :width "100%" :height "100%"
-         :backgroundSize (str tile-width"px "tile-height"px")}
-        style ;(assoc 
-                initial-style
-                     ;:right (str right "px")
-                     ;:bottom (str bottom "px")
-        ;             )
-        ]
-    [:div#env.environment {:style style :on-click click-coordinates}
-     (Tiles r rx ry environment party game-chat tile-width tile-height animation-time animation-easing)
-     
-   (Character 
-  {:nickname (rum/react (citrus/subscription r [:game :nick]))
-   :role (rum/react (citrus/subscription r [:game :role]))
-   :direction (rum/react (citrus/subscription r [:game :direction]))
-   :z-index (+ 100 (rum/react (citrus/subscription r [:game :y])))
-   :left (/ (- (rum/react (citrus/subscription r [:engine :width]))
-            (/ (rum/react (citrus/subscription r [:engine :width])) 
-               (rum/react (citrus/subscription r [:engine :x])))) 2.0)
-   :bottom (+ (/ (- (rum/react (citrus/subscription r [:engine :height]))
-              (/ (rum/react (citrus/subscription r [:engine :height])) 
-                 (rum/react (citrus/subscription r [:engine :y])))) 2.0)
-              (/ (rum/react (citrus/subscription r [:engine :height])) 
-                 (rum/react (citrus/subscription r [:engine :y])) 4.0))
-   :height (double (/ (rum/react (citrus/subscription r [:engine :height])) 
-                      (rum/react (citrus/subscription r [:engine :y])) 0.5))
-   :width (double (/ (rum/react (citrus/subscription r [:engine :width])) 
-                                 (rum/react (citrus/subscription r [:engine :x]))))
-   :animation-time (rum/react (citrus/subscription r [:engine :animation-time]))
-   :animation-easing (rum/react (citrus/subscription r [:engine :animation-easing]))
-   :mtop (/ (rum/react (citrus/subscription r [:engine :height])) 
-            (rum/react (citrus/subscription r [:engine :y])) 1.0)
-   :mleft (/ (rum/react (citrus/subscription r [:engine :width])) 
-             (rum/react (citrus/subscription r [:engine :x])) 4.0)
-   :mwidth (double (/ (rum/react (citrus/subscription r [:engine :width])) 
-             (rum/react (citrus/subscription r [:engine :x]))))
-   :messages (filterv (fn [m] (= (:uid m) (rum/react (citrus/subscription r [:game :uid]))))
-              (rum/react (citrus/subscription r [:game :chat])))
-   :ctop (/ (rum/react (citrus/subscription r [:engine :height])) 
-            (rum/react (citrus/subscription r [:engine :y])) 2.0)
-   :cleft (/ (rum/react (citrus/subscription r [:engine :width])) 
-             (rum/react (citrus/subscription r [:engine :x])) 4.0)
-   :cwidth (double (/ (rum/react (citrus/subscription r [:engine :width])) 
-             (rum/react (citrus/subscription r [:engine :x]))))
-  })
-     ]))
-
-
 (rum/defc Character < rum/static [{:keys [nickname role direction
                                           z-index left bottom height width animation-time animation-easing messages
                                           mtop mleft mwidth
@@ -484,18 +411,76 @@
           :src (str "/css/" role "/"(apply str (rest (str direction))) ".png")}]
     ])
 
+(rum/defc Environment < rum/reactive [r]
+  (let [engine-width (rum/react (citrus/subscription r [:engine :width]))
+        engine-x (rum/react (citrus/subscription r [:engine :x]))
+        engine-height (rum/react (citrus/subscription r [:engine :height]))
+        engine-y (rum/react (citrus/subscription r [:engine :y]))
+        tile-width (double (/ engine-width engine-x))
+        tile-height (double (/ engine-height engine-y))
+        environment (rum/react (citrus/subscription r [:game :environment]))
+        game-chat (rum/react (citrus/subscription r [:game :chat]))
+        party (rum/react (citrus/subscription r [:party]))
+        animation-time (rum/react (citrus/subscription r [:engine :animation-time]))
+        animation-easing (rum/react (citrus/subscription r [:engine :animation-easing]))
+        rx (- (rum/react (citrus/subscription r [:game :x])) 0)
+        ry (- (rum/react (citrus/subscription r [:game :y])) 0)
+        right (* rx tile-width)
+        bottom (* ry tile-height)
+        click-coordinates 
+        (fn [event]
+          (let [emap (obj->clj event)
+                pos-x (get emap "clientX");event.offsetX?(event.offsetX):event.pageX-document.getElementById("env").offsetLeft;
+	            pos-y (get emap "clientY");event.offsetY?(event.offsetY):event.pageY-document.getElementById("env").offsetTop;
+                p-x (get emap "pageX");event.offsetX?(event.offsetX):event.pageX-document.getElementById("env").offsetLeft;
+	            p-y (get emap "pageY");event.offsetY?(event.offsetY):event.pageY-document.getElementById("env").offsetTop;
+                ]
+            ))
+        initial-style 
+        {:position "absolute"
+         :transition (str "all "animation-time"s "animation-easing)
+         :width "100%" :height "100%"
+         :backgroundSize (str tile-width"px "tile-height"px")}
+        style ;(assoc 
+                initial-style
+                     ;:right (str right "px")
+                     ;:bottom (str bottom "px")
+        ;             )
+        ]
 
-(rum/defc Perspective < rum/reactive [r]
-  [:div.perspective 
+[:div.perspective 
    {:style 
-    {:width (str (rum/react (citrus/subscription r [:engine :width]))"px")
-     :height (str (rum/react (citrus/subscription r [:engine :height]))"px")
-     :transform (str "perspective("(rum/react (citrus/subscription r [:engine :height]))"px) rotateX(45deg)")
+    {:width (str engine-width"px")
+     :height (str engine-height"px")
+     :transform (str "perspective("engine-height"px) rotateX(45deg)")
      :transform-style "preserve-3d"
      :transition "1s"}} 
-   (Environment r)
-   ])
+    [:div#env.environment {:style style :on-click click-coordinates}
+     (Tiles r rx ry environment party game-chat tile-width tile-height animation-time animation-easing)
+     
+   (Character 
+  {:nickname (rum/react (citrus/subscription r [:game :nick]))
+   :role (rum/react (citrus/subscription r [:game :role]))
+   :direction (rum/react (citrus/subscription r [:game :direction]))
+   :z-index (+ 100 (rum/react (citrus/subscription r [:game :y])))
+   :left (/ (- engine-width tile-width) 2.0)
+   :bottom (+ (/ (- engine-height tile-height) 2.0)
+              (/ tile-height 4.0))
+   :height (* 2 tile-height) 
+   :width tile-width 
+   :animation-time animation-time  
+   :animation-easing animation-easing 
+   :mtop tile-height 
+   :mleft (/ tile-width 4.0) 
+   :mwidth tile-width 
+   :messages (filterv (fn [m] (= (:uid m) (rum/react (citrus/subscription r [:game :uid]))))
+              (rum/react (citrus/subscription r [:game :chat])))
+   :ctop (/ tile-height 2.0) 
+   :cleft (/ tile-width 4.0) 
+   :cwidth tile-width})
 
+     ]]))
+ 
 
 (rum/defc OnlinePlayers < rum/static [r party]
   [:div
@@ -588,7 +573,7 @@
 [:label {:for "far"} "Far"]
    
    (Panel r)
-   (Perspective r)
+   (Environment r)
    (Cards r)
    ])
 
