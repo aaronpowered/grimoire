@@ -14,6 +14,8 @@
   
    [taoensso.sente :as sente]))
 
+(defn drop-nth [n coll] (keep-indexed #(if (not= %1 n) %2) coll))
+
 (defmulti event-msg-handler :id)
 
 (defn event-msg-handler* [{:as ev-msg :keys [id ?data event]}]
@@ -43,27 +45,34 @@
 
 (def environment-state 
   (atom 
-    {[-12 12 -1] {:id :floor :comp []}
+    {
+     [-12 12 -1] {:id :dirt :comp []}
+     [-12 6 -1] {:id :dirt :comp []}
+     [-12 0 -1] {:id :dirt :comp []}
+     [-12 -6 -1] {:id :dirt :comp []}
+     [-12 -12 -1] {:id :dirt :comp []}
+     [18 12 -1] {:id :dirt :comp []}
+     [18 6 -1] {:id :dirt :comp []}
+     [18 0 -1] {:id :dirt :comp []}
+     [18 -6 -1] {:id :dirt :comp []}
+     [18 -12 -1] {:id :dirt :comp []}
+
      [-6 12 -1] {:id :floor :comp []}
      [0 12 -1] {:id :floor :comp []}
      [6 12 -1] {:id :floor :comp []}
      [12 12 -1] {:id :floor :comp []}
-     [-12 6 -1] {:id :floor :comp []}
      [-6 6 -1] {:id :floor :comp []}
      [0 6 -1] {:id :floor :comp []}
      [6 6 -1] {:id :floor :comp []}
      [12 6 -1] {:id :floor :comp []}
-     [-12 0 -1] {:id :floor :comp []}
      [-6 0 -1] {:id :floor :comp []}
      [0 0 -1] {:id :floor :comp []}
      [6 0 -1] {:id :floor :comp []}
      [12 0 -1] {:id :floor :comp []}
-     [-12 -6 -1] {:id :floor :comp []}
      [-6 -6 -1] {:id :floor :comp []}
      [0 -6 -1] {:id :floor :comp []}
      [6 -6 -1] {:id :floor :comp []}
      [12 -6 -1] {:id :floor :comp []}
-     [-12 -12 -1] {:id :floor :comp []}
      [-6 -12 -1] {:id :floor :comp []}
      [0 -12 -1] {:id :floor :comp []}
      [6 -12 -1] {:id :floor :comp []}
@@ -105,7 +114,13 @@
 
 (def game-state (atom {}))
 
+(def game-time (atom 0))
+
 (def future-state (atom {}))
+
+(def report-state (atom []))
+
+(defn report! [data] (swap! report-state conj {:time @game-time :data data}))
 
 (defmethod event-msg-handler :chsk/uidport-open
   [ev-msg] 
@@ -113,28 +128,23 @@
     (swap! game-state assoc uid true)
     (when-not (get @knowledge-state uid) 
       (swap! knowledge-state assoc uid {:id uid}))
-    (println (str uid " joined the game."))
-    ))
+    (report! {:uid uid :id :uidport-open})))
 
 (defmethod event-msg-handler :chsk/uidport-close
   [ev-msg] 
   (let [uid (:uid ev-msg)]
     (swap! game-state dissoc uid)
-    (println (str uid " left the game."))
-    ))
+    (report! {:uid uid :id :uidport-close})))
 
 (defmethod event-msg-handler :player/state
   [{:keys [uid ?data]}] 
-  (do
-    (swap! game-state assoc uid ?data)
-    (println (str "Synced player state for " uid": " ?data))
-    ))
+  (swap! game-state assoc uid ?data))
 
 (defmethod event-msg-handler :game/action
   [{:keys [uid ?data]}] 
     (when-not (= ?data (get @future-state uid))
       (do
-        (println (str uid": " ?data))
+        (report! {:uid uid :id :action :data ?data})
         (swap! future-state assoc uid ?data)
         )))
 
@@ -168,8 +178,9 @@
 (defn draw-resolver [player-state]
   (let [hand (:hand player-state)
         hand-count (count hand)
-        to-draw (- 6 hand-count)]
-    (if (< hand-count 6)
+        min-hand-size 3
+        to-draw (- min-hand-size hand-count)]
+    (if (< hand-count min-hand-size)
       (vec
         (concat
           hand 
@@ -179,28 +190,26 @@
       hand)))
 
 (defn action-handler [t] 
-  (let [actions @future-state]
-    (when (keys actions)
-      (do
-        (doseq [action actions]
-          (let [[uid act] action]
-            (action-resolver uid act)
-            (swap! future-state dissoc uid)
-            ))
-        (let [next-game-state @game-state]
-          (doseq [player next-game-state]
-            (let [[uid player-state] player]
-              (send! uid :player/state (assoc player-state
-                                              :environment @environment-state
-                                              :hand (draw-resolver player-state) 
-                                              :chat (take-last 10 @social-state)))
-              (send! uid :party/state (dissoc next-game-state uid))
-              )))))))
+  (do
+    (swap! game-time inc)
+    (let [actions @future-state]
+      (when (keys actions)
+        (do
+          (doseq [action actions]
+            (let [[uid act] action]
+              (action-resolver uid act)
+              (swap! future-state dissoc uid)
+              ))
+          (let [next-game-state @game-state]
+            (doseq [player next-game-state]
+              (let [[uid player-state] player]
+                (send! uid :player/state (assoc player-state
+                                                :environment @environment-state
+                                                :hand (draw-resolver player-state) 
+                                                :chat (take-last 10 @social-state)))
+                (send! uid :party/state (dissoc next-game-state uid))))))))))
 
-(def scheduler 
-  (hara/scheduler 
-    {:game-actions 
-     {:handler (fn [t]
+(defn time-handler [t]
                  (do
                    (action-handler t)
                    (Thread/sleep 200)
@@ -211,8 +220,41 @@
                    (action-handler t)
                    (Thread/sleep 200)
                    (action-handler t)
+                   (Thread/sleep 200)
+                   (action-handler t)
+                   (Thread/sleep 200)
+                   (action-handler t)
+                   (Thread/sleep 200)
+                   (action-handler t)
+                   (Thread/sleep 200)
+                   (action-handler t)
+                   (Thread/sleep 200)
+                   (action-handler t)
                    ))
-      :schedule "/1 * * * * * *"}}
+
+(defn report-handler [t]
+
+(println (str "
+    |          ,` \r\n    |\\        // \r\n    |\\\\      //(\r\n    | \\\\    //  '\r\n    '  \\\\  //  /\r\n     \\  )\\((  /\r\n      )`    `/\r\n     /   __  \\\r\n    /   (_O)  \\\r\n   /           \\________\r\n_.(_)           )      /\r\n   (__,        /      / \r\n    \\         /      /  \r\n     \\_______/      ( \r\n      \\    /         \\\r\n       \\  /           \\\r\n        \\/             \\\r\n        /               )    \r\n       /               /   \r\n      / _     o__     /      \r\n     ( (_)   //\\,\\   (   \r\n      \\    ``~---~`   ) \r\n\\      \\             /\r\n \\      \\           /   \r\n  \\      \\         /    \r\n   \\____/ \\_______/ 
+
+"))
+
+  (println "_______________________")
+  (println (str "Game time: " @game-time))
+  (println (str "Real time: " (let [{:keys [second minute hour day month year timezone]} (dissoc t :type :millisecond)]
+                                (str year"/"month"/"day " " hour":"minute":"second))))
+  (println (str "Report: " @report-state))
+  (reset! report-state [])
+  (println (str "State: " (apply str (map (fn [{:keys [x y nick role]}] (str "["nick" "role" ("x", "y")]")) 
+               (map (fn [[id player]] (dissoc player :environment :chat :uid :hand :location :direction)) @game-state)))))
+  )
+
+(def scheduler 
+  (hara/scheduler 
+    {
+     :game-actions {:handler time-handler :schedule "/1 * * * * * *"}
+     :game-report {:handler report-handler :schedule "/10 * * * * * *"}
+     }
     {}
     {:clock {:type "clojure.lang.PersistentArrayMap"
              :timezone "CET"

@@ -31,6 +31,7 @@
              :nick client-id
              :uid client-id
              :direction :up
+             :location {:id 0 :title "Dead Hare"}
              :role (rand-nth ["tradesman" "priest" "barbarian"])
              :environment nil
              :chat nil
@@ -104,8 +105,8 @@
     (map-of state)
     {:state {:width 1000 :height 1000
              :x 25 :y 25
-             :animation-time 0.7
-             :animation-easing "ease"}}))
+             :animation-time 0.5
+             :animation-easing "linear"}}))
 
 (defmethod engine :edit [_ new-state state]
   (let [state (merge state (first new-state))
@@ -177,6 +178,7 @@
 
 (defn action [id opt]
   (case id
+    :play (chsk-send! [:game/action {:id :play :opt {:index opt :card (get (citrus/subscription reconciler [:game :hand]) opt)}}])
     :move (chsk-send! [:game/action {:id :move :opt opt}])
     :chat (chsk-send! [:game/action {:id :chat :opt opt}])
     nil))
@@ -371,6 +373,7 @@
              ]
        (case id
          :floor (Image :floor r [0 0 0] 6 81 [0 0 0] tile-width tile-height x y z color animation-time animation-easing)
+         :dirt (Image :dirt r [0 0 0] 6 81 [0 0 0] tile-width tile-height x y z color animation-time animation-easing)
          :window (Image :window r [-90 0 0] 6 81 [0 -280 0] tile-width tile-height x y z color animation-time animation-easing)
          :out (Image :out r [-90 0 0] 6 101 [0 -280 0] tile-width tile-height x y z color animation-time animation-easing)
          :curtain (Image :curtain r [-90 0 0] 6 81 [0 -280 30] tile-width tile-height x y z color animation-time animation-easing)
@@ -530,12 +533,12 @@
 (rum/defc Cards < rum/reactive [r]
   (let [hand (rum/react (citrus/subscription r [:game :hand]))]
     [:div.cards
-     {:style {:position "absolute"
-              :bottom "10px"}}
+     {:style {:position "absolute" :bottom "0px"}}
      (map-indexed 
        (fn [index card]
-           [:div.card 
-            {:key index}
+           [:a.card {:on-click #() 
+                     :key index}
+            [:span index]
             [:h2 (:title card)]
             [:p (:role card)]
             ])
@@ -589,10 +592,18 @@
   "keydown" (fn [event]
               (let [k (.-key event)]
               (cond
-                (contains? #{"ArrowRight" \d} k) (action :move :right)
-                (contains? #{"ArrowLeft" \a} k) (action :move :left)
-                (contains? #{"ArrowUp" \w} k) (action :move :up)
-                (contains? #{"ArrowDown" \s} k) (action :move :down)
+
+                (contains? #{"ArrowRight" \d} k)  (action :move :right)
+                (contains? #{"ArrowLeft" \a} k)   (action :move :left)
+                (contains? #{"ArrowUp" \w} k)     (action :move :up)
+                (contains? #{"ArrowDown" \s} k)   (action :move :down)
+                (contains? #{\0} k)                (action :play 0)
+                (contains? #{\1} k)                (action :play 0)
+                (contains? #{\2} k)                (action :play 0)
+                (contains? #{\3} k)                (action :play 0)
+                (contains? #{\4} k)                (action :play 0)
+                (contains? #{\5} k)                (action :play 0)
+
                 :else (js/console.log (str "Unhandled key event: "k))))))
 
 (defmethod event-msg-handler :chsk/handshake

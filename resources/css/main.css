@@ -1,7 +1,11 @@
 body {margin:0;overflow:hidden;}
 
+.panel {
+    transition: all 0.3s ease;
+}
 .panel:hover {
-    right: 10px !important;
+    right: 0px !important;
+    transition: all 0.7s ease;
 }
 
 .world {
