@@ -35,7 +35,7 @@
              :role (rand-nth ["tradesman" "priest" "barbarian"])
              :environment nil
              :chat nil
-             :hand nil)}))
+             :hand [])}))
 
 (defmethod game :update [_ new-state state]
   (let [state (merge state (first new-state))
@@ -103,7 +103,9 @@
 (defmethod engine :init-ready [_ [state]]
   (if-not (nil? state)
     (map-of state)
-    {:state {:width 1000 :height 1000
+    {:state {:perspective 1
+             :rotateX 45 :rotateZ 0
+             :width 1000 :height 1000
              :x 25 :y 25
              :animation-time 0.5
              :animation-easing "linear"}}))
@@ -178,7 +180,7 @@
 
 (defn action [id opt]
   (case id
-    :play (chsk-send! [:game/action {:id :play :opt {:index opt :card (get (citrus/subscription reconciler [:game :hand]) opt)}}])
+    :play (chsk-send! [:game/action {:id :play :opt {:index opt :card (get (vec @(citrus/subscription reconciler [:game :hand])) opt)}}])
     :move (chsk-send! [:game/action {:id :move :opt opt}])
     :chat (chsk-send! [:game/action {:id :chat :opt opt}])
     nil))
@@ -187,14 +189,16 @@
 
 
 (rum/defc Character < rum/static
-  [{:keys [nickname role direction index
+  [{:keys [nickname role direction index 
+           engine-height engine-perspective rotateX rotateZ
            z-index left bottom height width animation-time animation-easing messages
            mtop mleft mwidth
            ctop cleft cwidth]}]
-[:div.person.centrum 
+[:div.person
  {:key index
   :style 
-  {:position "absolute"
+  {:-webkit-transform (str "perspective("(* engine-perspective engine-height)") rotateX(-90deg) rotateY("rotateZ"deg)")
+   :position "absolute"
    :zIndex z-index 
    :left (str left "px")
    :bottom (str bottom"px")
@@ -218,7 +222,7 @@
  [:div 
   {:style 
    {:position "absolute"
-    :top (str "-" ctop "px")
+    :bottom (str "-" ctop "px")
     :left (str "-" cleft "px")
     :width (str cwidth"px")
     :text-align "center"}} nickname]
@@ -227,15 +231,17 @@
    {:width "100%"
     :position "absolute"
     :bottom 0
-    :box-shadow "0px 0px 30px rgba(255,255,255,1)"
-    :background "rgba(255,255,255,0.5)"
+    ;:box-shadow "0px 0px 30px rgba(255,255,255,1)"
+    ;:background "rgba(255,255,255,0.5)"
     :border-top-left-radius "40px"
     :border-top-right-radius "40px"
     }
    :src (str "/css/" role "/"(apply str (rest (str direction))) ".png")}]
  ])
 
-(rum/defc Party < rum/static [r rx ry party game-chat tile-width tile-height animation-time animation-easing]
+(rum/defc Party < rum/static 
+  [{:keys [r rx ry party game-chat tile-width tile-height 
+           engine-perspective rotateX rotateZ engine-height animation-time animation-easing]}]
   [:div.party 
    (when (keys party)
      (map-indexed 
@@ -253,6 +259,10 @@
    :bottom (* (+ y 12) tile-height)
    :height (/ tile-height 2.0)
    :width tile-width 
+   :engine-perspective engine-perspective
+   :rotateX rotateX
+   :rotateZ rotateZ
+   :engine-height engine-height
    :animation-time animation-time  
    :animation-easing animation-easing 
    :mtop tile-height 
@@ -286,32 +296,32 @@
       {:style;back
        (merge style 
          {:backgroundColor "#d44"
-          :transform (str "rotateY(90deg) translateZ(-"tile-width"px)")
+          :-webkit-transform (str "rotateY(90deg) translateZ(-"tile-width"px)")
           :transformOrigin "100% 0"})}]
      [:.side 
       {:style;left
        (merge style 
          {:backgroundColor "#e55"
-          :transform (str "rotateX(-90deg) translateZ(-"tile-height"px)")
+          :-webkit-transform (str "rotateX(-90deg) translateZ(-"tile-height"px)")
           :transformOrigin "100% 100%"})}]
      [:.side;top 
       {:style 
        (merge style 
          {:backgroundColor "#f66"
           :zIndex 10
-          :transform (str "rotateZ(0deg) translateZ("tile-height"px)")})}]
+          :-webkit-transform (str "rotateZ(0deg) translateZ("tile-height"px)")})}]
      [:.side 
       {:style;front
        (merge style 
          {:backgroundColor "#e55"
-          :transform "rotateX(-90deg) translateY(0px)"
+          :-webkit-transform "rotateX(-90deg) translateY(0px)"
           :zIndex 10
           :transformOrigin "100% 100%"})}]
      [:.side 
       {:style;right
        (merge style 
          {:backgroundColor "#d44"
-          :transform "rotateY(90deg) translateX(0px)"
+          :-webkit-transform "rotateY(90deg) translateX(0px)"
           :transformOrigin "100% 0"})}]]))
 
 
@@ -335,7 +345,7 @@
       :transition (str "all "animation-time"s "animation-easing)
        :zIndex (+ zindex y)
        :transform-origin "top"
-       :transform (str "rotateX("rotateX"deg) rotateY("rotateY"deg) rotateZ("rotateZ"deg) 
+       :-webkit-transform (str "rotateX("rotateX"deg) rotateY("rotateY"deg) rotateZ("rotateZ"deg) 
                       translateX("transX"px)
                       translateY("transY"px)
                       translateZ("transZ"px)
@@ -347,7 +357,7 @@
       {:style;back
        (merge style 
          {:background (str "url('""')")
-          :transform (str "rotateY(90deg) translateZ(-"tile-width"px)")
+          :-webkit-transform (str "rotateY(90deg) translateZ(-"tile-width"px)")
           :transformOrigin "100% 0"})}]
      
    [:img {:style {:width (str (* width tile-width) "px")}
@@ -355,7 +365,10 @@
      ]))
  
 
-(rum/defc Tiles < rum/static [r rx ry environment party game-chat tile-width tile-height animation-time animation-easing]
+(rum/defc Tiles < rum/static [{:keys [r rx ry environment party game-chat tile-width tile-height
+                              engine-perspective rotateX rotateZ
+                              engine-height animation-time animation-easing]
+                               :as params}]
   [:div.tiles {:style 
                {:position "relative"
                 :width "100%"
@@ -386,7 +399,7 @@
          )
        ))
      environment)
-   (Party r rx ry party game-chat tile-width tile-height animation-time animation-easing)
+   (Party params)
    ])
 
 (defn obj->clj
@@ -400,7 +413,11 @@
 
 
 (rum/defc Environment < rum/reactive [r]
-  (let [engine-width (rum/react (citrus/subscription r [:engine :width]))
+  (let [
+        engine-perspective (rum/react (citrus/subscription r [:engine :perspective]))
+        rotateX (rum/react (citrus/subscription r [:engine :rotateX]))
+        rotateZ (rum/react (citrus/subscription r [:engine :rotateZ]))
+        engine-width (rum/react (citrus/subscription r [:engine :width]))
         engine-x (rum/react (citrus/subscription r [:engine :x]))
         engine-height (rum/react (citrus/subscription r [:engine :height]))
         engine-y (rum/react (citrus/subscription r [:engine :y]))
@@ -425,7 +442,15 @@
                 ]
             ))
         initial-style 
-        {:position "absolute"
+        {:boxShadow 
+         ;(case engine-view
+         ;              :left "-20px 30px 50px -20px rgba(0,0,0,0.3)"
+         ;              :right "20px 30px 50px -20px rgba(0,0,0,0.3)"
+         ;              :down "0px 0px 10px -20px rgba(0,0,0,0.3)"
+         ;              :far "0px 0px 10px -20px rgba(0,0,0,0.3)"
+                       "0px 30px 50px -20px rgba(0,0,0,0.3)"
+                       ;)
+         :position "absolute"
          :transition (str "all "animation-time"s "animation-easing)
          :width "100%" :height "100%"
          :backgroundSize (str tile-width"px "tile-height"px")}
@@ -440,11 +465,14 @@
    {:style 
     {:width (str engine-width"px")
      :height (str engine-height"px")
-     :transform (str "perspective("engine-height"px) rotateX(45deg)")
      :transform-style "preserve-3d"
-     :transition "1s"}} 
+     :transition "1s"
+     :-webkit-transform (str "perspective("(* engine-perspective engine-height)") rotateX("rotateX"deg) rotateZ("rotateZ"deg)")
+     }} 
     [:div#env.environment {:style style :on-click click-coordinates}
-     (Tiles r rx ry environment party game-chat tile-width tile-height animation-time animation-easing)
+     (Tiles (map-of r rx ry environment party game-chat tile-width tile-height
+                    engine-perspective rotateX rotateZ
+                    engine-height animation-time animation-easing))
      
    (Character 
   {:nickname (rum/react (citrus/subscription r [:game :nick]))
@@ -456,6 +484,10 @@
               (/ tile-height 4.0))
    :height (* 2 tile-height) 
    :width tile-width 
+   :engine-perspective engine-perspective
+   :rotateX rotateX
+   :rotateZ rotateZ
+   :engine-height engine-height
    :animation-time animation-time  
    :animation-easing animation-easing 
    :mtop tile-height 
@@ -512,6 +544,9 @@
     (input r :game :role :update)
     ;[:span (str (rum/react (citrus/subscription r [:game])))]
     [:h5 "Game engine:"]
+    (input r :engine :perspective :edit)
+    (input r :engine :rotateX :edit)
+    (input r :engine :rotateZ :edit)
     (input r :engine :width :edit)
     (input r :engine :height :edit)
     (input r :engine :x :edit)
@@ -544,8 +579,8 @@
             ])
        hand)]))
 
-(rum/defc World < rum/static [r]
-  [:div.world 
+(rum/defc ViewControl < rum/static [r]
+  [:div   
 [:input {:type "radio", :id "left", :name "rotate"}]
 [:label {:for "left"} "Left"]
 [:input {:type "radio", :id "reset", :name "rotate"}]
@@ -556,17 +591,18 @@
 [:label {:for "up"} "Up"]
 [:input {:type "radio", :id "down", :name "rotate"}]
 [:label {:for "down"} "Down"]
-
 [:input {:type "radio", :id "zoom", :name "rotate"}]
 [:label {:for "zoom"} "Zoom"]
 [:input {:type "radio", :id "far", :name "rotate"}]
 [:label {:for "far"} "Far"]
-   
-   (Panel r)
-   (Environment r)
-   (Cards r)
    ])
 
+(rum/defc World < rum/static [r]
+  [:div.world 
+   ;(ViewControl r)
+   (Panel r)
+   (Environment r)
+   (Cards r)])
 
 (rum/mount (World reconciler)
            (. js/document (getElementById "container")))

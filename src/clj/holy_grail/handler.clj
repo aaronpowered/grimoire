@@ -152,6 +152,7 @@
   (let [uid-state (get @game-state uid)
         {:keys [x y]} uid-state]
   (case id
+    :play (swap! game-state update-in [uid :hand] (fn [hand] (vec (drop-nth (:index opt) hand))))
     :chat (swap! social-state conj {:id :chat :uid uid :content opt :date (t/now)})
     :move  (do (when-not (or
                          (contains? @environment-state 
@@ -235,15 +236,27 @@
 (defn report-handler [t]
 
 (println (str "
-    |          ,` \r\n    |\\        // \r\n    |\\\\      //(\r\n    | \\\\    //  '\r\n    '  \\\\  //  /\r\n     \\  )\\((  /\r\n      )`    `/\r\n     /   __  \\\r\n    /   (_O)  \\\r\n   /           \\________\r\n_.(_)           )      /\r\n   (__,        /      / \r\n    \\         /      /  \r\n     \\_______/      ( \r\n      \\    /         \\\r\n       \\  /           \\\r\n        \\/             \\\r\n        /               )    \r\n       /               /   \r\n      / _     o__     /      \r\n     ( (_)   //\\,\\   (   \r\n      \\    ``~---~`   ) \r\n\\      \\             /\r\n \\      \\           /   \r\n  \\      \\         /    \r\n   \\____/ \\_______/ 
 
+
+    |          ,` \r\n    |\\        // \r\n    |\\\\      //(\r\n    | \\\\    //  '\r\n    '  \\\\  //  /\r\n     \\  )\\((  /\r\n      )`    `/\r\n     /   __  \\\r\n    /   (_O)  \\\r\n   /           \\________\r\n_.(_)           )      /\r\n   (__,        /      / \r\n    \\         /      /  \r\n     \\_______/      ( \r\n      \\    /         \\\r\n       \\  /           \\\r\n        \\/             \\\r\n        /               )    \r\n       /               /   \r\n      / _     o__     /      \r\n     ( (_)   //\\,\\   (   \r\n      \\    ``~---~`   ) \r\n\\      \\             /\r\n \\      \\           /   \r\n  \\      \\         /    \r\n   \\____/ \\_______/ 
 "))
 
   (println "_______________________")
   (println (str "Game time: " @game-time))
   (println (str "Real time: " (let [{:keys [second minute hour day month year timezone]} (dissoc t :type :millisecond)]
                                 (str year"/"month"/"day " " hour":"minute":"second))))
-  (println (str "Report: " @report-state))
+  (println (str "Report:")) 
+  (doseq [report (map (fn [{:keys [time data] :as report}]
+                                             (let [{:keys [id uid data]} data]
+                                             (case id
+                                               :action (let [{:keys [id opt]} data]
+                                                         (case id
+                                                           :move (str "["time" "opt" "uid"]")
+                                                           :play (str "["time" played "(get-in opt [:card :title])" "uid"]")
+                                                           (str data)))
+                                               (apply str (map str data)))
+                                               )) @report-state)]
+    (println report))
   (reset! report-state [])
   (println (str "State: " (apply str (map (fn [{:keys [x y nick role]}] (str "["nick" "role" ("x", "y")]")) 
                (map (fn [[id player]] (dissoc player :environment :chat :uid :hand :location :direction)) @game-state)))))
@@ -253,7 +266,7 @@
   (hara/scheduler 
     {
      :game-actions {:handler time-handler :schedule "/1 * * * * * *"}
-     :game-report {:handler report-handler :schedule "/10 * * * * * *"}
+     :game-report {:handler report-handler :schedule "/3 * * * * * *"}
      }
     {}
     {:clock {:type "clojure.lang.PersistentArrayMap"
