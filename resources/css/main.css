@@ -1,5 +1,9 @@
 body {margin:0;overflow:hidden;}
 
+.panel:hover {
+    right: 10px !important;
+}
+
 .world {
     overflow:hidden;
     height: 100vh;

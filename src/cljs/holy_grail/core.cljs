@@ -11,14 +11,8 @@
 (defn console! [& s] (js/console.log (apply str s)))
 
 (def nick-collection ["savage" "bobo" "aaron" "viri" "Anonimus" "Pajti" "ESCOBAR" "WINNIETHEPOOH" "EATYOU" "keksz" "Darius"])
-(def cards {0 {:title "Stab"}
-            1 {:title "Slash"}
-            2 {:title "Kick"}
-            3 {:title "Flee"}
-            4 {:title "Backflip"}
-            5 {:title "Stun"}})
 
-(def client-id (str (rand-nth nick-collection) (rand-nth ["" 0 1 2 3 4 5 6 7 8 9 007 113 227 366 420 565 666 768 810 930])))
+(def client-id (str (rand-nth nick-collection) (rand-nth ["" 0 1 2 3 4 5 6 7 8 9 007 113 227 366 420 512 666 768 810 930])))
 
 ;//////\\\\\\\\ CONTROLLERS
 
@@ -40,7 +34,7 @@
              :role (rand-nth ["tradesman" "priest" "barbarian"])
              :environment nil
              :chat nil
-             :hand [0 1 2 3 4 5])}))
+             :hand nil)}))
 
 (defmethod game :update [_ new-state state]
   (let [state (merge state (first new-state))
@@ -189,6 +183,56 @@
 
 ;//////////\\\\\\\\\ UI
 
+
+(rum/defc Character < rum/static
+  [{:keys [nickname role direction index
+           z-index left bottom height width animation-time animation-easing messages
+           mtop mleft mwidth
+           ctop cleft cwidth]}]
+[:div.person.centrum 
+ {:key index
+  :style 
+  {:position "absolute"
+   :zIndex z-index 
+   :left (str left "px")
+   :bottom (str bottom"px")
+   :height (str height"px")
+   :width (str width"px")
+   :transition (str "all " animation-time"s "animation-easing)
+   :transform-style "preserve-3d"
+   :transform-origin "bottom"}}
+ [:div 
+  {:style 
+   {:position "absolute"
+    :top (str "-" mtop "px")
+    :left (str "-" mleft "px")
+    :width (str mwidth"px")
+    :text-align "left"
+    :font-size "11px"
+    }}
+  (map
+    (fn [m]
+      [:div.fading-message (:content m)]) messages)]
+ [:div 
+  {:style 
+   {:position "absolute"
+    :top (str "-" ctop "px")
+    :left (str "-" cleft "px")
+    :width (str cwidth"px")
+    :text-align "center"}} nickname]
+ [:img 
+  {:style 
+   {:width "100%"
+    :position "absolute"
+    :bottom 0
+    :box-shadow "0px 0px 30px rgba(255,255,255,1)"
+    :background "rgba(255,255,255,0.5)"
+    :border-top-left-radius "40px"
+    :border-top-right-radius "40px"
+    }
+   :src (str "/css/" role "/"(apply str (rest (str direction))) ".png")}]
+ ])
+
 (rum/defc Party < rum/static [r rx ry party game-chat tile-width tile-height animation-time animation-easing]
   [:div.party 
    (when (keys party)
@@ -197,44 +241,26 @@
        (let [{:keys [nick uid role direction x y]} state
              x (- x rx)
              y (- y ry)]
-       [:div.person {:key index
-                     :style 
-                 {:position "absolute"
-                  :left (str (* (+ x 12) tile-width)"px")
-                  :top (str (* (+ y 12) tile-height)"px")
-                  :height (str (/ tile-height 2.0) "px")
-                  :width (str tile-width "px")
-                  :zIndex (+ y 101)
-                  :transform "rotateX(-90deg)"
-                  :transform-style "preserve-3d"
-                  :transition (str "all "animation-time"s "animation-easing)
-                  :transform-origin "center center"
-                  :text-align "center"}}
-        [:div {:style 
-               {:position "absolute"
-                :top (str "-" (* tile-height 2)"px")
-                :left (str "-" (/ tile-width 4.0)"px")
-                :width (str (/ tile-width 2.0)"px")
-                :text-align "left"
-                :font-size "11px"
-                }}
-         (map
-           (fn [m]
-             [:div.fading-message (:content m)])
-           (filterv (fn [m] (= (:uid m) uid))
-                    game-chat))]
-        
-        [:div {:style 
-          {:position "absolute"
-           :top (str "-"(* tile-height 2)"px")
-           :left (str "-"(/ tile-width 4.0)"px")
-           :width (str tile-width "px")
-           :text-align "center"}} nick]
-   [:img {:style {:width "100%"
-                  :position "absolute"
-                  :bottom 0 :left 0}
-          :src (str "/css/" role "/" (apply str (rest (str direction))) ".png")}]
-        ])) 
+       (Character 
+  {:nickname nick
+   :index index 
+   :role role 
+   :direction direction 
+   :z-index (+ 100 y)
+   :left (* (+ x 12) tile-width)
+   :bottom (* (+ y 12) tile-height)
+   :height (/ tile-height 2.0)
+   :width tile-width 
+   :animation-time animation-time  
+   :animation-easing animation-easing 
+   :mtop tile-height 
+   :mleft (/ tile-width 4.0) 
+   :mwidth tile-width 
+   :messages (filterv (fn [m] (= (:uid m) uid)) game-chat)
+   :ctop (/ tile-height 2.0) 
+   :cleft (/ tile-width 4.0) 
+   :cwidth tile-width})
+         )) 
      party))
    ])
 
@@ -369,47 +395,6 @@
             (assoc result key v))))
       (reduce {} (.getKeys goog/object obj))))
 
-(rum/defc Character < rum/static [{:keys [nickname role direction
-                                          z-index left bottom height width animation-time animation-easing messages
-                                          mtop mleft mwidth
-                                          ctop cleft cwidth]}]
-[:div.centrum {:style 
-                 {:position "absolute"
-                  :zIndex z-index 
-                  :left (str left "px")
-                  :bottom (str bottom"px")
-                  :height (str height"px")
-                  :width (str width"px")
-                  :transition (str "all " animation-time"s "animation-easing)
-                  :transform-style "preserve-3d"
-                  :transform-origin "bottom"}}
-   [:div {:style 
-          {:position "absolute"
-           :top (str "-" mtop "px")
-           :left (str "-" mleft "px")
-           :width (str mwidth"px")
-           :text-align "left"
-           :font-size "11px"
-           }}
-    (map
-      (fn [m]
-        [:div.fading-message (:content m)]) messages)]
-   [:div {:style 
-          {:position "absolute"
-           :top (str "-" ctop "px")
-           :left (str "-" cleft "px")
-           :width (str cwidth"px")
-           :text-align "center"}} nickname]
-   [:img {:style {:width "100%"
-                  :position "absolute"
-                  :bottom 0
-                      :box-shadow "0px 0px 30px rgba(255,255,255,1)"
-    :background "rgba(255,255,255,0.5)"
-    :border-top-left-radius "40px"
-    :border-top-right-radius "40px"
-                  }
-          :src (str "/css/" role "/"(apply str (rest (str direction))) ".png")}]
-    ])
 
 (rum/defc Environment < rum/reactive [r]
   (let [engine-width (rum/react (citrus/subscription r [:engine :width]))
@@ -501,16 +486,17 @@
            :on-change #(citrus/dispatch! r major function {minor (.. % -target -value)})}])
 
 (rum/defc Panel < rum/reactive [r]
-   [:div {:style 
-          {:position "absolute"
-           :top 10
-           :right 10
-           :width "200px"
-           :z-index 4000
-           :background "cornsilk"
-           :border "2px solid white"
-           :padding "17px"
-           :border-radius "17px"}}
+   [:div.panel
+    {:style 
+     {:position "absolute"
+      :top 10
+      :right "-208px"
+      :width "200px"
+      :z-index 4000
+      :background "cornsilk"
+      :border "2px solid white"
+      :padding "17px"
+      :border-radius "17px"}}
     [:h4 (str (rum/react (citrus/subscription r [:game :nick])))]
     [:span (str 
              " x:" (rum/react (citrus/subscription r [:game :x]))
@@ -547,11 +533,12 @@
      {:style {:position "absolute"
               :bottom "10px"}}
      (map-indexed 
-       (fn [index card-id]
-         (let [card (get cards card-id)]
+       (fn [index card]
            [:div.card 
             {:key index}
-            (:title card)]))
+            [:h2 (:title card)]
+            [:p (:role card)]
+            ])
        hand)]))
 
 (rum/defc World < rum/static [r]

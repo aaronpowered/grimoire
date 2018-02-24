@@ -43,8 +43,7 @@
 
 (def environment-state 
   (atom 
-    {
-     [-12 12 -1] {:id :floor :comp []}
+    {[-12 12 -1] {:id :floor :comp []}
      [-6 12 -1] {:id :floor :comp []}
      [0 12 -1] {:id :floor :comp []}
      [6 12 -1] {:id :floor :comp []}
@@ -91,6 +90,18 @@
      [-7 6 0] {:id :tapestry :comp []}
      [-7 9 0] {:id :tapestry :comp []}
      }))
+
+(def cards-state (atom 
+                   {0 {:title "Punch" :role "barbarian"}
+                    1 {:title "Rage" :role "barbarian"}
+                    2 {:title "Warcry" :role "barbarian"}
+                    3 {:title "Shot" :role "tradesman"}
+                    4 {:title "Bribe" :role "tradesman"}
+                    5 {:title "Swindle" :role "tradesman"}
+                    6 {:title "Pray" :role "priest"}
+                    7 {:title "Chant" :role "priest"}
+                    8 {:title "Miracle" :role "priest"}
+                    }))
 
 (def game-state (atom {}))
 
@@ -154,6 +165,19 @@
                (swap! game-state assoc-in [uid :direction] opt))
     (println (str "Action resolver catched an unknown act: " act)))))
 
+(defn draw-resolver [player-state]
+  (let [hand (:hand player-state)
+        hand-count (count hand)
+        to-draw (- 6 hand-count)]
+    (if (< hand-count 6)
+      (vec
+        (concat
+          hand 
+          (vec (map 
+                 (fn [a] (rand-nth (vec (keep (fn [[id card]] (if (= (:role card) (:role player-state)) card nil)) (vec @cards-state)))))
+                 (range to-draw)))))
+      hand)))
+
 (defn action-handler [t] 
   (let [actions @future-state]
     (when (keys actions)
@@ -168,6 +192,7 @@
             (let [[uid player-state] player]
               (send! uid :player/state (assoc player-state
                                               :environment @environment-state
+                                              :hand (draw-resolver player-state) 
                                               :chat (take-last 10 @social-state)))
               (send! uid :party/state (dissoc next-game-state uid))
               )))))))
