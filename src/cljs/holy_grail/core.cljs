@@ -398,7 +398,16 @@
          :stonechest (Cube r tile-width tile-height x y z color)
          )
        ))
-     environment)
+;     (vec (keep (fn [[coord tile]] (let [[x y z] coord
+;                                    x (- x rx)
+;                                    y (- y ry)]
+;                                (when (and
+;                                      (< x 10)
+;                                      (< y 10))
+;                                  (vec coord tile)))) 
+                (vec environment)
+                ;))
+     )
    (Party params)
    ])
 

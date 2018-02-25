@@ -57,6 +57,13 @@
      [18 -6 -1] {:id :dirt :comp []}
      [18 -12 -1] {:id :dirt :comp []}
 
+     [18 18 -1] {:id :dirt :comp []}
+     [12 18 -1] {:id :dirt :comp []}
+     [6 18 -1] {:id :dirt :comp []}
+     [0 18 -1] {:id :dirt :comp []}
+     [-6 18 -1] {:id :dirt :comp []}
+     [-12 18 -1] {:id :dirt :comp []}
+
      [-6 12 -1] {:id :floor :comp []}
      [0 12 -1] {:id :floor :comp []}
      [6 12 -1] {:id :floor :comp []}
