@@ -276,7 +276,7 @@
      party))
    ])
 
-(rum/defc Cube < rum/static [r tile-width tile-height x y z color]
+(rum/defc Cube < rum/static [r tile-width tile-height x y z]
   (let 
     [style   
      {:boxShadow "inset 0 0 0 .25em hsla(0,0%,0%,.1)"
@@ -325,45 +325,28 @@
           :transformOrigin "100% 0"})}]]))
 
 
-
-
-(rum/defc Image < rum/static [path r [rotateX rotateY rotateZ] width zindex [transX transY transZ]
-                              tile-width tile-height x y z color
-                              animation-time animation-easing]
+(rum/defc Image < rum/static 
+[path r [rotateX rotateY rotateZ] width zindex [transX transY transZ]
+ tile-width tile-height x y z
+ animation-time animation-easing]
   (let 
     [style   
-     {:boxShadow "inset 0 0 0 .25em hsla(0,0%,0%,.1)"
-      :transformStyle "preserve-3d"
-      :transition ".25s"
-      :position "absolute"
-      :width (str tile-width"px")
-      :height (str tile-height"px")
-      }]
-    [:.cube 
-     {:style 
-      {:position "absolute" 
+     {:position "absolute" 
       :transition (str "all "animation-time"s "animation-easing)
        :zIndex (+ zindex y)
        :transform-origin "top"
-       :-webkit-transform (str "rotateX("rotateX"deg) rotateY("rotateY"deg) rotateZ("rotateZ"deg) 
+       :WebkitTransform (str "rotateX("rotateX"deg) rotateY("rotateY"deg) rotateZ("rotateZ"deg) 
                       translateX("transX"px)
                       translateY("transY"px)
                       translateZ("transZ"px)
                                         ")
        :left (str (* (+ x 6) tile-width)"px")
-       :top (str (* (+ y 6) tile-height)"px")
-       }}
-     [:.side 
-      {:style;back
-       (merge style 
-         {:background (str "url('""')")
-          :-webkit-transform (str "rotateY(90deg) translateZ(-"tile-width"px)")
-          :transformOrigin "100% 0"})}]
-     
-   [:img {:style {:width (str (* width tile-width) "px")}
-          :src (str "/css/inn/" (name path) ".png")}]
-     ]))
- 
+       :top (str (* (+ y 6) tile-height)"px")}]
+    [:.image
+     {:style style}  
+     [:img {:style {:width (str (* width tile-width) "px")}
+            :src (str "/css/inn/" (name path) ".png")}]]))
+
 
 (rum/defc Tiles < rum/static [{:keys [r rx ry environment party game-chat tile-width tile-height
                               engine-perspective rotateX rotateZ
@@ -376,40 +359,18 @@
                 :display "flex"
                 :flex-direction "row"
                 :flex-wrap "wrap"}}
-   (map
-     (fn [[coord m]]
+   (map-indexed
+     (fn [index [coord m]]
        (let [[x y z] coord
-             {:keys [id color]} m
+             {:keys [id rotate width zindex transition]} m
              x (- x rx)
              y (- y ry)
-             z z
-             ]
-       (case id
-         :floor (Image :floor r [0 0 0] 6 81 [0 0 0] tile-width tile-height x y z color animation-time animation-easing)
-         :dirt (Image :dirt r [0 0 0] 6 81 [0 0 0] tile-width tile-height x y z color animation-time animation-easing)
-         :window (Image :window r [-90 0 0] 6 81 [0 -280 0] tile-width tile-height x y z color animation-time animation-easing)
-         :out (Image :out r [-90 0 0] 6 101 [0 -280 0] tile-width tile-height x y z color animation-time animation-easing)
-         :curtain (Image :curtain r [-90 0 0] 6 81 [0 -280 30] tile-width tile-height x y z color animation-time animation-easing)
-         :window2 (Image :window r [0 90 -90] 6 81 [120 -280 -120] tile-width tile-height x y z color animation-time animation-easing)
-         :tapestry (Image :tapestry r [0 90 -90] 3 81 [-60 -200 -20] tile-width tile-height x y z color animation-time animation-easing)
-         :cube (Cube r tile-width tile-height x y z color)
-         :woodenbox (Cube r tile-width tile-height x y z color)
-         :stonebox (Cube r tile-width tile-height x y z color)
-         :stonechest (Cube r tile-width tile-height x y z color)
-         )
-       ))
-;     (vec (keep (fn [[coord tile]] (let [[x y z] coord
-;                                    x (- x rx)
-;                                    y (- y ry)]
-;                                (when (and
-;                                      (< x 10)
-;                                      (< y 10))
-;                                  (vec coord tile)))) 
-                (vec environment)
-                ;))
-     )
-   (Party params)
-   ])
+             z z]
+        (rum/with-key
+          (Image id r rotate width zindex transition tile-width tile-height x y z animation-time animation-easing)
+          index)))
+     (vec environment))
+   (Party params)])
 
 (defn obj->clj
   [obj]
