@@ -1,5 +1,14 @@
 body {margin:0;overflow:hidden;}
 
+* {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+}
+
 .panel {
     transition: all 0.3s ease;
 }
@@ -20,26 +29,26 @@ body {margin:0;overflow:hidden;}
 
 .cards {
     display:flex;
-    width: 100%;
     justify-content: center;
-    height:220px;
-    overflow:hidden;
+    height:100px;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 .card {
     border: 2px solid darkgray;
     border-radius: 20px;
-    height: 210px;
+    height: 200px;
     width: 140px;
     text-align: center;
     background: beige;
     margin-left:-20px;
+    transform: translateY(0%);
     box-shadow:1px 10px 10px 0px rgba(0,0,0,0.2);
-    transform: translateY(50%);
     transition: all 0.7s ease;
 }
 .card:hover {
-    transform: translateY(0%);
+    transform: translateY(-50%);
 }
 
 .perspective {

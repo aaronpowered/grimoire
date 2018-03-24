@@ -27,13 +27,12 @@
 (defmethod game :init-ready [_ [state]]
   (if-not (nil? state)
     (map-of state)
-    {:state (hash-map :x 0 :y 0 :z 0 
+    {:state (hash-map :x 0 :y 0 
              :nick client-id
              :uid client-id
              :direction :up
              :location {:id 0 :title "Dead Hare"}
              :role (rand-nth ["tradesman" "priest" "barbarian"])
-             :select nil
              :environment nil
              :chat nil
              :hand [])}))
@@ -105,12 +104,11 @@
   (if-not (nil? state)
     (map-of state)
     {:state {:perspective 1
-             :scape "mockup"
              :rotateX 45 :rotateZ 0
              :width 1000 :height 1000
              :x 25 :y 25
-             :animation-time 1.7
-             :animation-easing "ease"}}))
+             :animation-time 0.5
+             :animation-easing "linear"}}))
 
 (defmethod engine :edit [_ new-state state]
   (let [state (merge state (first new-state))
@@ -208,7 +206,7 @@
    :width (str width"px")
    :transition (str "all " animation-time"s "animation-easing)
    :transform-style "preserve-3d"
-   :transformOrigin "bottom"}}
+   :transform-origin "bottom"}}
  [:div 
   {:style 
    {:position "absolute"
@@ -279,59 +277,29 @@
    ])
 
 (rum/defc Image < rum/static 
-[path r selected? [rotateX rotateY rotateZ] width height [transX transY transZ]
- tile-width tile-height x y z scape
+[path r [rotateX rotateY rotateZ] width zindex [transX transY transZ]
+ tile-width tile-height x y z
  animation-time animation-easing]
   (let 
     [style   
      {:position "absolute" 
       :transition (str "all "animation-time"s "animation-easing)
-       :zIndex (+ 100 y)
-       :transformOrigin "top"
+       :zIndex (+ zindex y)
+       :transform-origin "top"
        :WebkitTransform (str "rotateX("rotateX"deg) rotateY("rotateY"deg) rotateZ("rotateZ"deg) 
-                      translateX("(* transX tile-width)"px)
-                      translateY("(* transY tile-height)"px)
-                      translateZ("(* (+ transZ z) tile-width)"px)
+                      translateX("transX"px)
+                      translateY("transY"px)
+                      translateZ("transZ"px)
                                         ")
        :left (str (* (+ x 6) tile-width)"px")
-       :top (str (* (+ y 6) tile-height)"px")}
-     select-trigger #(if selected?
-                       (citrus/dispatch! r :game :update {:select nil})
-                       (citrus/dispatch! r :game :update {:select [x y z]}))
-     ]
+       :top (str (* (+ y 6) tile-height)"px")}]
     [:.image
-     {:style style}
-   (case scape
-    "dots"
-     [:a {:on-click select-trigger}
-     (when (< -1 z) 
-       [:div {:style {:width (str tile-width "px")
-                      :height (str tile-height "px")
-                      :background (if selected? "rgba(255,255,255,0.6)" "rgba(0,0,0,1)")}}])
-     [:div {:style {:position "absolute" :top 0
-                    :width (str (* width tile-width) "px")
-                    :height (str (* height tile-height) "px")
-                    :background (if selected? "rgba(0,0,0,0.6)" "rgba(0,0,0,0.3)") 
-                    :border "1px solid black"}}
-      [:center [:h3 (name path)]
-       [:p (str "x:"x" y:"y" z:"z)]
-       [:p (str width "x"height)]
-     [:img {:style {:width (str tile-width "px")}
-            :src (str "/css/inn/" (name path) ".png")}]
-       ]
-      ]]
-    "mockup"
-     [:a {:on-click select-trigger}
-     [:div {:style {:width (str (* width tile-width) "px")
-                    :height (str (* height tile-height) "px")
-                    :background (if selected? "rgba(0,0,0,0.6)" "rgba(0,0,0,0.3)") :border "1px solid black"}}]]
-     "montage"
+     {:style style}  
      [:img {:style {:width (str (* width tile-width) "px")}
-            :src (str "/css/inn/" (name path) ".png")}]
-     )]))
+            :src (str "/css/inn/" (name path) ".png")}]]))
 
 
-(rum/defc Tiles < rum/static [{:keys [r rx ry rz environment selected scape party game-chat tile-width tile-height
+(rum/defc Tiles < rum/static [{:keys [r rx ry environment party game-chat tile-width tile-height
                               engine-perspective rotateX rotateZ
                               engine-height animation-time animation-easing]
                                :as params}]
@@ -345,13 +313,12 @@
    (map-indexed
      (fn [index [coord m]]
        (let [[x y z] coord
-             {:keys [id rotate width height transition]} m
+             {:keys [id rotate width zindex transition]} m
              x (- x rx)
              y (- y ry)
-             z (- z rz)
-             selected? (if (= [x y z] selected) true false)]
+             z z]
         (rum/with-key
-          (Image id r selected? rotate width height transition tile-width tile-height x y z scape animation-time animation-easing)
+          (Image id r rotate width zindex transition tile-width tile-height x y z animation-time animation-easing)
           index)))
      (vec environment))
    (Party params)])
@@ -375,18 +342,15 @@
         engine-x (rum/react (citrus/subscription r [:engine :x]))
         engine-height (rum/react (citrus/subscription r [:engine :height]))
         engine-y (rum/react (citrus/subscription r [:engine :y]))
-        scape (rum/react (citrus/subscription r [:engine :scape]))
         tile-width (double (/ engine-width engine-x))
         tile-height (double (/ engine-height engine-y))
         environment (rum/react (citrus/subscription r [:game :environment]))
         game-chat (rum/react (citrus/subscription r [:game :chat]))
-        selected (rum/react (citrus/subscription r [:game :select]))
         party (rum/react (citrus/subscription r [:party]))
         animation-time (rum/react (citrus/subscription r [:engine :animation-time]))
         animation-easing (rum/react (citrus/subscription r [:engine :animation-easing]))
         rx (- (rum/react (citrus/subscription r [:game :x])) 0)
         ry (- (rum/react (citrus/subscription r [:game :y])) 0)
-        rz (- (rum/react (citrus/subscription r [:game :z])) 0)
         right (* rx tile-width)
         bottom (* ry tile-height)
         click-coordinates 
@@ -421,14 +385,14 @@
 [:div.perspective 
    {:style 
     {:width (str engine-width"px")
-     :top (str "-" (double (/ engine-height 4))"px")
+     :top (str (double (/ engine-height 4))"px")
      :height (str engine-height"px")
      :transform-style "preserve-3d"
      :transition "1s"
      :-webkit-transform (str "perspective("(* engine-perspective engine-height)") rotateX("rotateX"deg) rotateZ("rotateZ"deg)")
      }} 
     [:div#env.environment {:style style :on-click click-coordinates}
-     (Tiles (map-of r rx ry rz environment selected scape party game-chat tile-width tile-height
+     (Tiles (map-of r rx ry environment party game-chat tile-width tile-height
                     engine-perspective rotateX rotateZ
                     engine-height animation-time animation-easing))
      
@@ -496,18 +460,21 @@
              " y:" (rum/react (citrus/subscription r [:game :y]))
                 )]
     [:br]
+    [:input {:type "text" :name "form_x" :size 4}]
+    [:input {:type "text" :name "form_y" :size 4}]
+    ;(input r :game :nick :update)
     (input r :game :role :update)
-    [:div
-     (input r :game :select :update)
-      (str (get (rum/react (citrus/subscription r [:game :environment]))
-                (rum/react (citrus/subscription r [:game :select]))))]
+    ;[:span (str (rum/react (citrus/subscription r [:game])))]
     [:h5 "Game engine:"]
-    (map-indexed
-      (fn [index kw] 
-        (rum/with-key
-          (apply input (concat [r :engine] [kw] [:edit]))
-          index))
-      (keys (rum/react (citrus/subscription r [:engine]))))
+    (input r :engine :perspective :edit)
+    (input r :engine :rotateX :edit)
+    (input r :engine :rotateZ :edit)
+    (input r :engine :width :edit)
+    (input r :engine :height :edit)
+    (input r :engine :x :edit)
+    (input r :engine :y :edit)
+    (input r :engine :animation-time :edit)
+    (input r :engine :animation-easing :edit)
     (OnlinePlayers r (rum/react (citrus/subscription r [:party])))
     
     [:input {:id "chat-message"
