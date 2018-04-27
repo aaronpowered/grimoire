@@ -105,11 +105,11 @@
   (if-not (nil? state)
     (map-of state)
     {:state {:perspective 1
-             :scape "mockup"
+             :scape "dots"
              :rotateX 45 :rotateZ 0
              :width 1000 :height 1000
              :x 25 :y 25
-             :animation-time 1.7
+             :animation-time 0.3
              :animation-easing "ease"}}))
 
 (defmethod engine :edit [_ new-state state]
@@ -293,19 +293,20 @@
                       translateY("(* transY tile-height)"px)
                       translateZ("(* (+ transZ z) tile-width)"px)
                                         ")
-       :left (str (* (+ x 6) tile-width)"px")
-       :top (str (* (+ y 6) tile-height)"px")}
+       :left (str (* x tile-width)"px")
+       :top (str (* y tile-height)"px")}
      select-trigger #(if selected?
                        (citrus/dispatch! r :game :update {:select nil})
                        (citrus/dispatch! r :game :update {:select [x y z]}))
      ]
     [:.image
      {:style style}
-   (case scape
+     (case scape
     "dots"
      [:a {:on-click select-trigger}
-     (when (< -1 z) 
-       [:div {:style {:width (str tile-width "px")
+     (when (< -2 z) 
+       [:div {:style {:position "absolute" :left (str "calc("tile-width"px * "(dec width)")") :top 0
+                      :width (str tile-width "px")
                       :height (str tile-height "px")
                       :background (if selected? "rgba(255,255,255,0.6)" "rgba(0,0,0,1)")}}])
      [:div {:style {:position "absolute" :top 0
@@ -352,7 +353,7 @@
              selected? (if (= [x y z] selected) true false)]
         (rum/with-key
           (Image id r selected? rotate width height transition tile-width tile-height x y z scape animation-time animation-easing)
-          index)))
+          (str "coord" x y z))))
      (vec environment))
    (Party params)])
 
