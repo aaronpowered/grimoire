@@ -240,8 +240,12 @@
                                     (into (hash-map) 
                                           (keep (fn [[k v]] 
                                                   (when (and 
-                                                          (<= x (first k) (+ x 24)) 
-                                                          (<= y (second k) (+ y 24))) 
+                                                          (<= (- x (dec (:width v)))
+                                                              (first k) 
+                                                              (+ x 24)) 
+                                                          (<= (- y (dec (:height v))) 
+                                                              (second k) 
+                                                              (+ y 24))) 
                                                     [k v])) 
                                                 @environment-state))]
                                 seen-state)
