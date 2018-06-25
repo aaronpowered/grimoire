@@ -29,6 +29,7 @@
                  [mantra "0.6.0"]
 
                  [metosin/potpuri "0.5.1"]
+                 [ubergraph "0.5.0"]
                  ])
 
 (require

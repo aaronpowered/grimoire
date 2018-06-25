@@ -280,11 +280,12 @@
 
 (rum/defc Image < rum/static 
 [path r selected? [rotateX rotateY rotateZ] width height [transX transY transZ]
- tile-width tile-height x y z scape
+ tile-width tile-height coord x y z scape
  animation-time animation-easing]
   (let 
     [style   
-     {:position "absolute" 
+     (if (not (and (= rotateX 0) (= rotateY 0) (= rotateZ 0)))
+       {:position "absolute" 
       :transition (str "all "animation-time"s "animation-easing)
        :zIndex (+ 100 y)
        :transformOrigin "top"
@@ -295,9 +296,19 @@
                                         ")
        :left (str (* x tile-width)"px")
        :top (str (* y tile-height)"px")}
+       {:position "absolute" 
+      :transition (str "all "animation-time"s "animation-easing)
+       :zIndex (+ 100 y)
+       :transformOrigin "top"
+       :WebkitTransform (str "translateX("(+ (* transX tile-width) (* x tile-width))"px)
+                              translateY("(+ (* transY tile-height) (* y tile-height))"px)
+                              translateZ("(+ (* (+ transZ z) tile-width) (if selected? 10 0))"px)
+                                        ")
+        :left 0
+        :top 0})
      select-trigger #(if selected?
                        (citrus/dispatch! r :game :update {:select nil})
-                       (citrus/dispatch! r :game :update {:select [x y z]}))
+                       (citrus/dispatch! r :game :update {:select coord}))
      ]
     [:.image
      {:style style}
@@ -347,13 +358,15 @@
      (fn [index [coord m]]
        (let [[x y z] coord
              {:keys [id rotate width height transition]} m
-             x (- x rx)
-             y (- y ry)
-             z (- z rz)
-             selected? (if (= [x y z] selected) true false)]
+             relative-x (- x rx)
+             relative-y (- y ry)
+             relative-z (- z rz)
+             selected? (if (= coord selected) true false)]
         (rum/with-key
-          (Image id r selected? rotate width height transition tile-width tile-height x y z scape animation-time animation-easing)
-          (str "coord" x y z))))
+          (Image id r selected? rotate width height transition tile-width tile-height 
+                 coord
+                 relative-x relative-y relative-z scape animation-time animation-easing)
+          (str "coord"x y z))))
      (vec environment))
    (Party params)])
 
@@ -422,7 +435,7 @@
 [:div.perspective 
    {:style 
     {:width (str engine-width"px")
-     :top (str "-" (double (/ engine-height 4))"px")
+     :margin-top (str "-" (double (/ engine-height 4))"px")
      :height (str engine-height"px")
      :transform-style "preserve-3d"
      :transition "1s"
@@ -536,7 +549,7 @@
        hand)]))
 
 (rum/defc ViewControl < rum/static [r]
-  [:div   
+  [:div.view-control 
 [:input {:type "radio", :id "left", :name "rotate"}]
 [:label {:for "left"} "Left"]
 [:input {:type "radio", :id "reset", :name "rotate"}]
@@ -549,13 +562,11 @@
 [:label {:for "down"} "Down"]
 [:input {:type "radio", :id "zoom", :name "rotate"}]
 [:label {:for "zoom"} "Zoom"]
-[:input {:type "radio", :id "far", :name "rotate"}]
-[:label {:for "far"} "Far"]
    ])
 
 (rum/defc World < rum/static [r]
   [:div.world 
-   ;(ViewControl r)
+   (ViewControl r)
    (Panel r)
    (Environment r)
    (Cards r)])

@@ -50,16 +50,14 @@ body {margin:0;overflow:hidden;}
 .card:hover {
     transform: translateY(-50%);
 }
-
-.perspective {
-    position: absolute;
-}
 .perspective .environment {
     background-color: hsla(0,0%,0%,.1);
     background-image: -webkit-linear-gradient(hsla(0,0%,0%,.1) 2.5%, transparent 2.5%, transparent 97.5%, hsla(0,0%,0%,.1) 97.5%),
                       -webkit-linear-gradient(left, hsla(0,0%,0%,.1) 2.5%, transparent 2.5%, transparent 97.5%, hsla(0,0%,0%,.1) 97.5%);
 }
 
+.view-control > input {
+display:none;}
 .world > input {
     display: none;
     z-index: 4000;}

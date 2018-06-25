@@ -64,66 +64,66 @@
 (def environment-state 
   (atom 
     {
-     [-12 12 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [-12 6 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [-12 0 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [-12 -6 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [-12 -12 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [18 12 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [18 6 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [18 0 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [18 -6 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [18 -12 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
+     [-12 12 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [-12 6 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [-12 0 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [-12 -6 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [-12 -12 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [18 12 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [18 6 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [18 0 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [18 -6 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [18 -12 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
 
-     [18 18 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [12 18 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [6 18 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [0 18 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [-6 18 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [-12 18 -1] {:id :dirt :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
+     [18 18 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [12 18 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [6 18 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [0 18 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [-6 18 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [-12 18 -1] {:id :dirt :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
 
-     [-6 12 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [0 12 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [6 12 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [12 12 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [-6 6 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [0 6 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [6 6 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [12 6 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [-6 0 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [0 0 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [6 0 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [12 0 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [-6 -6 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [0 -6 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [6 -6 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [12 -6 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [-6 -12 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [0 -12 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [6 -12 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
-     [12 -12 -1] {:id :floor :comp [] :rotate [0 0 -90] :width 6 :height 6 :transition [-6 0 1]}
+     [-6 12 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [0 12 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [6 12 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [12 12 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [-6 6 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [0 6 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [6 6 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [12 6 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [-6 0 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [0 0 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [6 0 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [12 0 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [-6 -6 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [0 -6 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [6 -6 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [12 -6 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [-6 -12 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [0 -12 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [6 -12 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
+     [12 -12 -1] {:id :floor :comp [] :rotate [0 0 0] :width 6 :height 6 :transition [-6 0 1]}
 
-     [-6 -7 2] {:id :curtain :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 1]}
-     [0 -7 2] {:id :curtain :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 1]}
-     [6 -7 2] {:id :curtain :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 1]}
-     [12 -7 2] {:id :curtain :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 1]}
-     [-6 -6 0] {:id :window :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
-     [0 -6 0] {:id :window :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
-     [6 -6 0] {:id :window :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
-     [12 -6 0] {:id :window :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
-     [-6 12 0] {:id :out :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
-     [0 12 0] {:id :out :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
-     [6 12 0] {:id :out :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
-     [12 12 0] {:id :out :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
-     [-6 0 0] {:id :window :comp [] :rotate [90 -90 0] :width 6 :height 6 :transition [0 0 0]}
-     [-6 6 0] {:id :window :comp [] :rotate [90 -90 0] :width 6 :height 6 :transition [0 0 0]}
-     [-6 9 0] {:id :window :comp [] :rotate [90 -90 0] :width 6 :height 6 :transition [0 0 0]}
-     [-7 -6 0] {:id :tapestry :comp [] :rotate [90 -90 0] :width 3 :height 3 :transition [0 0 0]}
-     [-7 -3 0] {:id :tapestry :comp [] :rotate [90 -90 0] :width 3 :height 3 :transition [0 0 0]}
-     [-7 0 0] {:id :tapestry :comp [] :rotate [90 -90 0] :width 3 :height 3 :transition [0 0 0]}
-     [-7 3 0] {:id :tapestry :comp [] :rotate [90 -90 0] :width 3 :height 3 :transition [0 0 0]}
-     [-7 6 0] {:id :tapestry :comp [] :rotate [90 -90 0] :width 3 :height 3 :transition [0 0 0]}
-     [-7 9 0] {:id :tapestry :comp [] :rotate [90 -90 0] :width 3 :height 3 :transition [0 0 0]}
+;     [-6 -7 2] {:id :curtain :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 1]}
+;     [0 -7 2] {:id :curtain :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 1]}
+;     [6 -7 2] {:id :curtain :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 1]}
+;     [12 -7 2] {:id :curtain :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 1]}
+;     [-6 -6 0] {:id :window :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
+;     [0 -6 0] {:id :window :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
+;     [6 -6 0] {:id :window :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
+;     [12 -6 0] {:id :window :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
+;     [-6 12 0] {:id :out :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
+;     [0 12 0] {:id :out :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
+;     [6 12 0] {:id :out :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
+;     [12 12 0] {:id :out :comp [] :rotate [90 0 0] :width 6 :height 6 :transition [0 0 0]}
+;     [-6 0 0] {:id :window :comp [] :rotate [90 -90 0] :width 6 :height 6 :transition [0 0 0]}
+;     [-6 6 0] {:id :window :comp [] :rotate [90 -90 0] :width 6 :height 6 :transition [0 0 0]}
+;     [-6 9 0] {:id :window :comp [] :rotate [90 -90 0] :width 6 :height 6 :transition [0 0 0]}
+;     [-7 -6 0] {:id :tapestry :comp [] :rotate [90 -90 0] :width 3 :height 3 :transition [0 0 0]}
+;     [-7 -3 0] {:id :tapestry :comp [] :rotate [90 -90 0] :width 3 :height 3 :transition [0 0 0]}
+;     [-7 0 0] {:id :tapestry :comp [] :rotate [90 -90 0] :width 3 :height 3 :transition [0 0 0]}
+;     [-7 3 0] {:id :tapestry :comp [] :rotate [90 -90 0] :width 3 :height 3 :transition [0 0 0]}
+;     [-7 6 0] {:id :tapestry :comp [] :rotate [90 -90 0] :width 3 :height 3 :transition [0 0 0]}
+;     [-7 9 0] {:id :tapestry :comp [] :rotate [90 -90 0] :width 3 :height 3 :transition [0 0 0]}
      }))
 
 (def cards-state 
@@ -256,23 +256,11 @@
 (defn time-handler [t]
                  (do
                    (action-handler t)
-                   (Thread/sleep 200)
+                   (Thread/sleep 250)
                    (action-handler t)
-                   (Thread/sleep 200)
+                   (Thread/sleep 250)
                    (action-handler t)
-                   (Thread/sleep 200)
-                   (action-handler t)
-                   (Thread/sleep 200)
-                   (action-handler t)
-                   (Thread/sleep 200)
-                   (action-handler t)
-                   (Thread/sleep 200)
-                   (action-handler t)
-                   (Thread/sleep 200)
-                   (action-handler t)
-                   (Thread/sleep 200)
-                   (action-handler t)
-                   (Thread/sleep 200)
+                   (Thread/sleep 250)
                    (action-handler t)
                    ))
 
